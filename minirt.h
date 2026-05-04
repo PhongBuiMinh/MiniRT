@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/03 16:48:27 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/04 18:26:42 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,13 @@
 # include <stdio.h>
 # include <math.h>
 # include <stdbool.h>
+
+typedef struct s_tuple
+{
+	float	x;
+	float	y;
+	float	z;
+	float	w;
+}	t_tuple;
 
 #endif
