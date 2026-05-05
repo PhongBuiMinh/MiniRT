@@ -6,11 +6,11 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/05 21:25:04 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/05 22:03:25 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../includes/minirt.h"
 
 bool	equal(float a, float b)
 {
@@ -43,11 +43,6 @@ void	tick(t_environment environment, t_projectile projectile)
 {
 	projectile.position = add(projectile.position, projectile.velocity);
 	projectile.velocity = add(projectile.velocity, add(environment.gravity, environment.wind));
-}
-
-t_tuple color(float r, float g, float b)
-{
-	return (vector(r, g, b));
 }
 
 int	main(void)

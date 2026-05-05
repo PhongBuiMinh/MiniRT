@@ -1,37 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   canvas.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/05 21:23:14 by bpetrovi         ###   ########.fr       */
+/*   Created: 2026/05/05 22:04:04 by bpetrovi          #+#    #+#             */
+/*   Updated: 2026/05/05 22:04:57 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
-# define EPSILON 0.0001
-# define VECTOR 0
-# define POINT 1
-
-# include <stdlib.h>
-# include <stdio.h>
-# include <math.h>
-# include <stdbool.h>
+#ifndef CANVAS_H
+# define CANVAS_H
 # include "tuple.h"
 
-typedef struct s_projectile
-{
-	t_tuple	position;
-	t_tuple	velocity;
-}	t_projectile;
-
-typedef struct environment
-{
-	t_tuple	gravity;
-	t_tuple	wind;
-}	t_environment;
+t_tuple	color(float r, float g, float b);
 
 #endif
