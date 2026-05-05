@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/04 18:26:42 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/05 19:14:02 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,17 @@ typedef struct s_tuple
 	float	z;
 	float	w;
 }	t_tuple;
+
+typedef struct s_projectile
+{
+	t_tuple	*position;
+	t_tuple	*velocity;
+}	t_projectile;
+
+typedef struct environment
+{
+	t_tuple	*gravity;
+	t_tuple	*wind;
+}	t_environment;
 
 #endif

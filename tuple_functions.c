@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 17:03:36 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/04 19:46:55 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/05 20:03:33 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	print_tuple(t_tuple *tuple)
 	printf("x: %f, ", tuple->x);
 	printf("y: %f, ", tuple->y);
 	printf("z: %f, ", tuple->z);
-	printf("w: %f,\n", tuple->w);
+	printf("w: %f\n", tuple->w);
 }
 
 void	check_tuple(t_tuple *tuple)
@@ -149,18 +149,74 @@ bool	equal(float a, float b)
 		return (false);
 }
 
+t_projectile *init_projectile(t_tuple *position, t_tuple *velocity)
+{
+	t_projectile	*projectile;
+
+	projectile = malloc(sizeof(t_projectile));
+	if (!projectile)
+		return (NULL);
+	projectile->position = position;
+	//normalize(velocity);
+	projectile->velocity = velocity;
+	return (projectile);
+}
+
+t_environment *init_environment(t_tuple *gravity, t_tuple *wind)
+{
+	t_environment	*environment;
+
+	environment = malloc(sizeof(t_environment));
+	if (!environment)
+		return (NULL);
+	environment->gravity = gravity;
+	environment->wind = wind;
+	return (environment);
+}
+
+void	deconstruct_projectile(t_projectile *projectile)
+{
+	if (!projectile)
+		return ;
+	free(projectile->position);
+	free(projectile->velocity);
+	free(projectile);
+}
+
+void	deconstruct_environment(t_environment *environment)
+{
+	if (!environment)
+		return ;
+	free(environment->gravity);
+	free(environment->wind);
+	free(environment);
+}
+
+void	tick(t_environment *environment, t_projectile *projectile)
+{
+	projectile->position = add(projectile->position, projectile->velocity);
+	projectile->velocity = add(projectile->velocity, add(environment->gravity, environment->wind));
+}
+
 int	main(void)
 {
-	t_tuple	*a;
-	//t_tuple	*b;
-	//float	magn;
+	int				number_of_ticks;
+	t_projectile	*projectile;
+	t_environment	*environment;
 
-	a = vector(1, 2, 3);
-	//b = point(1, 2, 3);
-	print_tuple(a);
-	//print_tuple(b);
-	//magn = magnitude(a);
-	normalize(a);
-	print_tuple(a);
+	projectile = init_projectile(point(0, 1, 0), vector(1, 1, 0));
+	environment = init_environment(vector(0, -0.01, 0), vector(-0.01, 0, 0));
+	if (!projectile || !environment)
+		return (deconstruct_projectile(projectile), deconstruct_environment(environment), 1);
+	number_of_ticks = 0;
+	while (projectile->position->y > 0)
+	{
+		tick(environment, projectile);
+		number_of_ticks++;
+		printf("ticks: %i\n", number_of_ticks);
+		print_tuple(projectile->position);
+	}
+	deconstruct_projectile(projectile);
+	deconstruct_environment(environment);
 	return (0);
 }
