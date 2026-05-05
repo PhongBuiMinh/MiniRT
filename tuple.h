@@ -6,13 +6,20 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:01:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/05 21:17:28 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/05 21:21:10 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TUPLE_H
 # define TUPLE_H
-# include "minirt.h"
+
+typedef struct s_tuple
+{
+	float	x;
+	float	y;
+	float	z;
+	float	w;
+}	t_tuple;
 
 t_tuple	vector(float x, float y, float z);
 t_tuple	point(float x, float y, float z);

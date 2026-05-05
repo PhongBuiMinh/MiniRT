@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/05 21:14:09 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/05 21:25:04 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,71 +20,44 @@ bool	equal(float a, float b)
 		return (false);
 }
 
-t_projectile	*init_projectile(t_tuple *position, t_tuple *velocity)
+t_projectile	init_projectile(t_tuple position, t_tuple velocity)
 {
-	t_projectile	*projectile;
+	t_projectile	projectile;
 
-	projectile = malloc(sizeof(t_projectile));
-	if (!projectile)
-		return (NULL);
-	projectile->position = position;
-	normalize(velocity);
-	projectile->velocity = velocity;
+	projectile.position = position;
+	projectile.velocity = velocity;
+	normalize(&projectile.velocity);
 	return (projectile);
 }
 
-t_environment	*init_environment(t_tuple *gravity, t_tuple *wind)
+t_environment	init_environment(t_tuple gravity, t_tuple wind)
 {
-	t_environment	*environment;
+	t_environment	environment;
 
-	environment = malloc(sizeof(t_environment));
-	if (!environment)
-		return (NULL);
-	environment->gravity = gravity;
-	environment->wind = wind;
+	environment.gravity = gravity;
+	environment.wind = wind;
 	return (environment);
 }
 
-void	deconstruct_projectile(t_projectile *projectile)
+void	tick(t_environment environment, t_projectile projectile)
 {
-	if (!projectile)
-		return ;
-	free(projectile->position);
-	free(projectile->velocity);
-	free(projectile);
+	projectile.position = add(projectile.position, projectile.velocity);
+	projectile.velocity = add(projectile.velocity, add(environment.gravity, environment.wind));
 }
 
-void	deconstruct_environment(t_environment *environment)
-{
-	if (!environment)
-		return ;
-	free(environment->gravity);
-	free(environment->wind);
-	free(environment);
-}
-
-void	tick(t_environment *environment, t_projectile *projectile)
-{
-	projectile->position = add(projectile->position, projectile->velocity);
-	projectile->velocity = add(projectile->velocity, add(environment->gravity, environment->wind));
-}
-
-t_tuple *color(float r, float g, float b)
+t_tuple color(float r, float g, float b)
 {
 	return (vector(r, g, b));
 }
 
 int	main(void)
 {
-	t_tuple	*a;
-	t_tuple	*b;
-	t_tuple	*c;
+	t_tuple	a;
+	t_tuple	b;
+	t_tuple	c;
 
 	a = color(0.9, 0.6, 0.7);
 	b = color(0.7, 0.1, 0.25);
 	c = substract(a, b);
 	print_tuple(c);
-	free(a);
-	free(b);
-	free(c);
 }
