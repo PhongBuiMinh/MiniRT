@@ -6,12 +6,13 @@
 #    By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/05 21:36:59 by bpetrovi          #+#    #+#              #
-#    Updated: 2026/05/05 22:11:46 by bpetrovi         ###   ########.fr        #
+#    Updated: 2026/05/05 22:51:52 by bpetrovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minirt
 CFLAGS = -Wall -Wextra -Werror
+DEBUG = -fsanitize=address -g
 SRCS_DIR = srcs
 OBJS_DIR = objs
 SRCS =	main.c \
@@ -20,6 +21,9 @@ SRCS =	main.c \
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 all: ${NAME}
+
+debug: CFLAGS += ${DEBUG}
+debug: re
 
 ${NAME}: ${OBJS}
 	gcc $(CFLAGS) $^ -o $@ -lm

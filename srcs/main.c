@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/05 22:03:25 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/05 22:51:30 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,37 @@ void	tick(t_environment environment, t_projectile projectile)
 
 int	main(void)
 {
-	t_tuple	a;
-	t_tuple	b;
-	t_tuple	c;
+	int		x;
+	int		y;
+	t_tuple	**canvas;
 
-	a = color(0.9, 0.6, 0.7);
-	b = color(0.7, 0.1, 0.25);
-	c = substract(a, b);
-	print_tuple(c);
+	x = 10;
+	y = 20;
+	int	i = 0;
+	int	d;
+	canvas = malloc(y * sizeof(t_tuple *));
+	while (i < y)
+	{
+		d = 0;
+		canvas[i] = malloc(x * sizeof(t_tuple));
+		while (d < x)
+		{
+			canvas[i][d] = color(0, 0, 0);
+			d++;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < y)
+	{
+		d = 0;
+		while (d < x)
+		{
+			printf("pixel at coordination y: %i, x: %i   ", i, d);
+			print_tuple(canvas[i][d]);
+			printf("\n");
+			d++;
+		}
+		i++;
+	}
 }
