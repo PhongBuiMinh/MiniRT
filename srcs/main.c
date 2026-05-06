@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/05 22:51:30 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/06 10:48:28 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,19 @@ int	main(void)
 	int		y;
 	t_tuple	**canvas;
 
-	x = 10;
-	y = 20;
-	int	i = 0;
-	int	d;
-	canvas = malloc(y * sizeof(t_tuple *));
-	while (i < y)
+	x = 0;
+	y = 0;
+	canvas = init_canvas(10, 20);
+	while (canvas[y])
 	{
-		d = 0;
-		canvas[i] = malloc(x * sizeof(t_tuple));
-		while (d < x)
+		x = 0;
+		while (x < 10)
 		{
-			canvas[i][d] = color(0, 0, 0);
-			d++;
+			printf("coordinates y: %i, x: %i ", y, x);
+			print_tuple(canvas[y][x]);
+			x++;
 		}
-		i++;
+		y++;
 	}
-	i = 0;
-	while (i < y)
-	{
-		d = 0;
-		while (d < x)
-		{
-			printf("pixel at coordination y: %i, x: %i   ", i, d);
-			print_tuple(canvas[i][d]);
-			printf("\n");
-			d++;
-		}
-		i++;
-	}
+	free_canvas(canvas);
 }
