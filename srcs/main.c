@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/06 10:48:28 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/07 23:24:22 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,25 @@ void	tick(t_environment environment, t_projectile projectile)
 
 int	main(void)
 {
-	int		x;
-	int		y;
-	t_tuple	**canvas;
+	int				x;
+	int				y;
+	t_canvas		canvas;
 
 	x = 0;
 	y = 0;
-	canvas = init_canvas(10, 20);
-	while (canvas[y])
+	if (!init_canvas(&canvas, 10, 20))
+		return (1);
+	while (canvas.pixels[y])
 	{
 		x = 0;
 		while (x < 10)
 		{
 			printf("coordinates y: %i, x: %i ", y, x);
-			print_tuple(canvas[y][x]);
+			print_tuple(canvas.pixels[y][x]);
 			x++;
 		}
 		y++;
 	}
-	free_canvas(canvas);
+	free_pixels(canvas.pixels);
+	return (0);
 }
