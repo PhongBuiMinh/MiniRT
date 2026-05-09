@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 22:04:04 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/07 23:26:18 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/09 14:42:21 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_canvas
 
 t_tuple	color(float r, float g, float b);
 int		init_canvas(t_canvas *canvas, int x, int y);
+void	canvas_to_ppm(t_canvas *canvas);
+void	write_pixel(t_canvas *canvas, int x, int y, t_tuple color);
 void	free_pixels(t_tuple **pixels);
 
 #endif

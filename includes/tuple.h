@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:01:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/05 21:21:10 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/09 15:51:00 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ t_tuple	add(t_tuple tuple_a, t_tuple tuple_b);
 t_tuple	substract(t_tuple tuple_a, t_tuple tuple_b);
 t_tuple	cross(t_tuple a, t_tuple b);
 t_tuple	multiply_tuples(t_tuple a, t_tuple b);
+t_tuple	negate(t_tuple tuple);
+t_tuple	multiply(t_tuple tuple, float scalar);
+t_tuple	divide(t_tuple tuple, float divider);
+t_tuple	normalize(t_tuple tuple);
 float	magnitude(t_tuple	tuple);
 float	dot(t_tuple a, t_tuple b);
-void	negate(t_tuple *tuple);
-void	multiply(t_tuple *tuple, float scalar);
-void	divide(t_tuple *tuple, float divider);
-void	normalize(t_tuple *tuple);
 void	print_tuple(t_tuple tuple);
 void	check_tuple(t_tuple tuple);
 

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:35:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/09 12:50:36 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/09 17:02:47 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 t_tuple	color(float r, float g, float b)
 {
+	r *= 255;
+	g *= 255;
+	b *= 255;
 	return (vector(r, g, b));
 }
 
 void	write_pixel(t_canvas *canvas, int x, int y, t_tuple color)
 {
-	canvas->pixels[x][y] = color;
+	if (x > canvas->width - 1 || y > canvas->height - 1 || x < 0 || y < 0)
+		return ;
+	canvas->pixels[y][x] = color;
 }
 
 void	free_pixels(t_tuple **pixels)
@@ -83,18 +88,41 @@ int	clamp_color(int c)
 	return (c);
 }
 
-//int	ft_fprintf(char *string, )
-//{
+void	canvas_to_ppm(t_canvas *canvas)
+{
+	int	y;
+	int	x;
+	int	line;
 
-//}
-
-//int	canvas_to_ppm(t_canvas *canvas, char *file_name)
-//{
-//	int	fd;
-
-//	fd = open(file, O_RDWR);
-//	if (!fd)
-//		return (perror("Error: "), 0);
-//	write(fd, "P3\n", );
-//	return (1);
-//}
+	printf("P3\n%i %i\n255\n", canvas->width, canvas->height);
+	y = 0;
+	while (y < canvas->height)
+	{
+		x = 0;
+		line = 0;
+		while (x < canvas->width)
+		{
+			if (line + 4 > 70)
+			{
+				printf("\n");
+				line = 0;
+			}
+			line += printf("%i ", clamp_color(canvas->pixels[y][x].x));
+			if (line + 4 > 70)
+			{
+				printf("\n");
+				line = 0;
+			}
+			line += printf("%i ", clamp_color(canvas->pixels[y][x].y));
+			if (line + 4 > 70)
+			{
+				printf("\n");
+				line = 0;
+			}
+			line += printf("%i ", clamp_color(canvas->pixels[y][x].z));
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
+}

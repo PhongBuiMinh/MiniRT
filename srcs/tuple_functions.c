@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 17:03:36 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/05 22:03:37 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/09 15:49:14 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,33 +92,36 @@ t_tuple	multiply_tuples(t_tuple a, t_tuple b)
 	return (new_tuple);
 }
 
-void	negate(t_tuple *tuple)
+t_tuple	negate(t_tuple tuple)
 {
-	tuple->x = -tuple->x;
-	tuple->y = -tuple->y;
-	tuple->z = -tuple->z;
-	tuple->w = -tuple->w;
+	tuple.x = -tuple.x;
+	tuple.y = -tuple.y;
+	tuple.z = -tuple.z;
+	tuple.w = -tuple.w;
+	return (tuple);
 }
 
-void	multiply(t_tuple *tuple, float scalar)
+t_tuple	multiply(t_tuple tuple, float scalar)
 {
-	tuple->x = tuple->x * scalar;
-	tuple->y = tuple->y * scalar;
-	tuple->z = tuple->z * scalar;
-	tuple->w = tuple->w * scalar;
+	tuple.x = tuple.x * scalar;
+	tuple.y = tuple.y * scalar;
+	tuple.z = tuple.z * scalar;
+	tuple.w = tuple.w * scalar;
+	return (tuple);
 }
 
-void	divide(t_tuple *tuple, float divider)
+t_tuple	divide(t_tuple tuple, float divider)
 {
-	tuple->x = tuple->x / divider;
-	tuple->y = tuple->y / divider;
-	tuple->z = tuple->z / divider;
-	tuple->w = tuple->w / divider;
+	tuple.x = tuple.x / divider;
+	tuple.y = tuple.y / divider;
+	tuple.z = tuple.z / divider;
+	tuple.w = tuple.w / divider;
+	return (tuple);
 }
 
-void	normalize(t_tuple *tuple)
+t_tuple	normalize(t_tuple tuple)
 {
-	divide(tuple, magnitude(*tuple));
+	return (divide(tuple, magnitude(tuple)));
 }
 
 
@@ -140,26 +143,26 @@ void	check_tuple(t_tuple tuple)
 		printf("Tuple is neither\n");
 }
 
-// PROJECTILE FIRING DIAGONALLY UPWARDS
+//PROJECTILE FIRING DIAGONALLY UPWARDS
 //int	main(void)
 //{
-//	int				number_of_ticks;
-//	t_projectile	*projectile;
-//	t_environment	*environment;
+	//int				number_of_ticks;
+	//t_projectile	*projectile;
+	//t_environment	*environment;
 
-//	projectile = init_projectile(point(0, 1, 0), vector(1, 1, 0));
-//	environment = init_environment(vector(0, -0.01, 0), vector(-0.01, 0, 0));
-//	if (!projectile || !environment)
-//		return (deconstruct_projectile(projectile), deconstruct_environment(environment), 1);
-//	number_of_ticks = 0;
-//	while (projectile.position.y > 0)
-//	{
-//		tick(environment, projectile);
-//		number_of_ticks++;
-//		printf("ticks: %i\n", number_of_ticks);
-//		print_tuple(projectile.position);
-//	}
-//	deconstruct_projectile(projectile);
-//	deconstruct_environment(environment);
-//	return (0);
+	//projectile = init_projectile(point(0, 1, 0), vector(1, 1, 0));
+	//environment = init_environment(vector(0, -0.01, 0), vector(-0.01, 0, 0));
+	//if (!projectile || !environment)
+	//	return (deconstruct_projectile(projectile), deconstruct_environment(environment), 1);
+	//number_of_ticks = 0;
+	//while (projectile.position.y > 0)
+	//{
+	//	tick(environment, projectile);
+	//	number_of_ticks++;
+	//	printf("ticks: %i\n", number_of_ticks);
+	//	print_tuple(projectile.position);
+	//}
+	//deconstruct_projectile(projectile);
+	//deconstruct_environment(environment);
+	//return (0);
 //}
