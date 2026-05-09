@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 17:03:36 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/09 15:49:14 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/09 17:29:19 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,23 +146,25 @@ void	check_tuple(t_tuple tuple)
 //PROJECTILE FIRING DIAGONALLY UPWARDS
 //int	main(void)
 //{
-	//int				number_of_ticks;
-	//t_projectile	*projectile;
-	//t_environment	*environment;
+//	t_projectile	projectile;
+//	t_environment	environment;
+//	t_canvas		canvas;
+//	int				x;
+//	int				y;
 
-	//projectile = init_projectile(point(0, 1, 0), vector(1, 1, 0));
-	//environment = init_environment(vector(0, -0.01, 0), vector(-0.01, 0, 0));
-	//if (!projectile || !environment)
-	//	return (deconstruct_projectile(projectile), deconstruct_environment(environment), 1);
-	//number_of_ticks = 0;
-	//while (projectile.position.y > 0)
-	//{
-	//	tick(environment, projectile);
-	//	number_of_ticks++;
-	//	printf("ticks: %i\n", number_of_ticks);
-	//	print_tuple(projectile.position);
-	//}
-	//deconstruct_projectile(projectile);
-	//deconstruct_environment(environment);
-	//return (0);
+//	init_canvas(&canvas, 1000, 500);
+//	projectile = init_projectile(point(0, 1, 0), multiply(normalize(vector(1, 1.8, 0)), 11.25));
+//	environment = init_environment(vector(0, -0.1, 0), vector(-0.01, 0, 0));
+//	while (projectile.position.y > 0)
+//	{
+//		//printf("%f\n %f\n", projectile.position.y, projectile.position.x);
+//		tick(&environment, &projectile);
+//		x = (int)(projectile.position.x + 0.5);
+//		y = (int)(projectile.position.y + 0.5);
+//		y = canvas.height - y;
+//		write_pixel(&canvas, x, y, color(1, 0, 0));
+//	}
+//	canvas_to_ppm(&canvas);
+//	free_pixels(canvas.pixels);
+//	return (0);
 //}

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/09 12:58:21 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/09 17:52:42 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "../libft/libft.h"
 # include "tuple.h"
 # include "canvas.h"
+# include "matrices.h"
 
 typedef struct s_projectile
 {
