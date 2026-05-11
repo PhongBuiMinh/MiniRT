@@ -6,13 +6,13 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:35:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/09 17:02:47 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/11 21:41:22 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_tuple	color(float r, float g, float b)
+t_tuple	color(double r, double g, double b)
 {
 	r *= 255;
 	g *= 255;

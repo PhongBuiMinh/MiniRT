@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/09 19:19:16 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/11 21:38:27 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,21 @@ int	main(void)
 	t_matrix	matrix_a;
 	t_matrix	matrix_b;
 
-	if (!init_matrix(&matrix_a, 4, 4))
-		return (1);
-	if (!init_matrix(&matrix_b, 4, 4))
-		return (1);
+	init_matrix(&matrix_a, 4, 4);
+	int	i = 0;
+	while (i < 4)
+	{
+		int	a = 0;
+		while (a < 4)
+		{
+			set_matrix(&matrix_a, i, a, i + a);
+			a++;
+		}
+		i++;
+	}
 	print_matrix(matrix_a);
-	printf("\n---------------------------------------------------\n");
+	printf("\n--------------------------------------------------------------\n");
+	ind_matrix(&matrix_b, matrix_a);
 	print_matrix(matrix_b);
-	if (matrices_equal(matrix_a, matrix_b))
-		printf("\nmatrices are equal\n");
-	else
-		printf("\nmatries are not equal\n");
-	free_matrix(&matrix_a);
-	free_matrix(&matrix_b);
 	return (0);
 }

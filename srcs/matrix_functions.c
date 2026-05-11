@@ -6,26 +6,26 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/09 20:01:38 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/11 21:43:28 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-bool	equal(float a, float b)
+bool	equal(double a, double b)
 {
-	if (fabsf(a - b) < EPSILON)
+	if (fabs(a - b) < EPSILON)
 		return (true);
 	else
 		return (false);
 }
 
-float	get_matrix(t_matrix matrix, int row, int col)
+double	get_matrix(t_matrix matrix, int row, int col)
 {
 	return (matrix.data[row * matrix.cols + col]);
 }
 
-void	set_matrix(t_matrix *matrix, int row, int col, float value)
+void	set_matrix(t_matrix *matrix, int row, int col, double value)
 {
 	matrix->data[row * matrix->cols + col] = value;
 }
@@ -38,7 +38,7 @@ int	init_matrix(t_matrix *matrix, int rows, int cols)
 	x = 0;
 	matrix->rows = rows;
 	matrix->cols = cols;
-	matrix->data = malloc(rows * cols * sizeof(float));
+	matrix->data = malloc(rows * cols * sizeof(double));
 	if (!matrix->data)
 		return (-1);
 	while (x < rows)
@@ -74,13 +74,35 @@ void	print_matrix(t_matrix matrix)
 	}
 }
 
+// Still to be worked on
+
+int	ind_matrix(t_matrix *new_matrix, t_matrix matrix)
+{
+	t_matrix	indentitiy_matrix;
+	int			i;
+
+	i = 0;
+	if (!init_matrix(&indentitiy_matrix, 4, 4))
+		return (-1);
+	while (i < 4)
+	{
+		set_matrix(&indentitiy_matrix, i, i, 1);
+		i++;
+	}
+	multiply_matrices(new_matrix, matrix, indentitiy_matrix);
+	free_matrix(&indentitiy_matrix);
+	return (1);
+}
+
+// Still to be worked on
+
 int	multiply_matrices(t_matrix *new_matrix, t_matrix a,
 		t_matrix b)
 {
 	int		x;
 	int		y;
 	int		k;
-	float	value;
+	double	value;
 
 	if (a.cols != b.rows)
 		return (-1);

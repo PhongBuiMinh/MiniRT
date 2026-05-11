@@ -6,13 +6,13 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 17:03:36 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/09 17:29:19 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/11 21:41:22 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_tuple	vector(float x, float y, float z)
+t_tuple	vector(double x, double y, double z)
 {
 	t_tuple	tuple;
 
@@ -23,7 +23,7 @@ t_tuple	vector(float x, float y, float z)
 	return (tuple);
 }
 
-t_tuple	point(float x, float y, float z)
+t_tuple	point(double x, double y, double z)
 {
 	t_tuple	tuple;
 
@@ -56,9 +56,9 @@ t_tuple	substract(t_tuple tuple_a, t_tuple tuple_b)
 	return (new_tuple);
 }
 
-float	magnitude(t_tuple	tuple)
+double	magnitude(t_tuple	tuple)
 {
-	float	magnitude;
+	double	magnitude;
 
 	magnitude = 0;
 	magnitude += tuple.x * tuple.x;
@@ -68,7 +68,7 @@ float	magnitude(t_tuple	tuple)
 	return (sqrtf(magnitude));
 }
 
-float	dot(t_tuple a, t_tuple b)
+double	dot(t_tuple a, t_tuple b)
 {
 	return (a.x + b.x * a.y + b.y
 		* a.z + b.z * a.w + b.w);
@@ -101,7 +101,7 @@ t_tuple	negate(t_tuple tuple)
 	return (tuple);
 }
 
-t_tuple	multiply(t_tuple tuple, float scalar)
+t_tuple	multiply(t_tuple tuple, double scalar)
 {
 	tuple.x = tuple.x * scalar;
 	tuple.y = tuple.y * scalar;
@@ -110,7 +110,7 @@ t_tuple	multiply(t_tuple tuple, float scalar)
 	return (tuple);
 }
 
-t_tuple	divide(t_tuple tuple, float divider)
+t_tuple	divide(t_tuple tuple, double divider)
 {
 	tuple.x = tuple.x / divider;
 	tuple.y = tuple.y / divider;
