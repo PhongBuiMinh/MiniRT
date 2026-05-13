@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/11 21:43:28 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/13 19:11:37 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,7 @@ bool	equal(double a, double b)
 		return (false);
 }
 
-double	get_matrix(t_matrix matrix, int row, int col)
-{
-	return (matrix.data[row * matrix.cols + col]);
-}
-
-void	set_matrix(t_matrix *matrix, int row, int col, double value)
-{
-	matrix->data[row * matrix->cols + col] = value;
-}
-
-int	init_matrix(t_matrix *matrix, int rows, int cols)
+void	init_matrix(t_matrix *matrix, int rows, int cols)
 {
 	int	y;
 	int	x;
@@ -38,20 +28,16 @@ int	init_matrix(t_matrix *matrix, int rows, int cols)
 	x = 0;
 	matrix->rows = rows;
 	matrix->cols = cols;
-	matrix->data = malloc(rows * cols * sizeof(double));
-	if (!matrix->data)
-		return (-1);
 	while (x < rows)
 	{
 		y = 0;
 		while (y < cols)
 		{
-			set_matrix(matrix, x, y, 0);
+			matrix->data[x][y] = 0;
 			y++;
 		}
 		x++;
 	}
-	return (1);
 }
 
 void	print_matrix(t_matrix matrix)
@@ -66,7 +52,7 @@ void	print_matrix(t_matrix matrix)
 		printf("|");
 		while (y < matrix.cols)
 		{
-			printf(" %f |", get_matrix(matrix, x, y));
+			printf(" %f |", matrix.data[x][y]);
 			y++;
 		}
 		printf("\n");
@@ -76,28 +62,42 @@ void	print_matrix(t_matrix matrix)
 
 // Still to be worked on
 
+void	init_ind_matrix(t_matrix *indentitiy_matrix, int rows, int cols)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	indentitiy_matrix->rows = rows;
+	indentitiy_matrix->cols = cols;
+	while (x < rows)
+	{
+		y = 0;
+		while (y < cols)
+		{
+			if (y == x)
+				indentitiy_matrix->data[x][y] = 1;
+			else
+				indentitiy_matrix->data[x][y] = 0;
+			y++;
+		}
+		x++;
+	}
+}
+
 int	ind_matrix(t_matrix *new_matrix, t_matrix matrix)
 {
-	t_matrix	indentitiy_matrix;
-	int			i;
+	t_matrix	indentity_matrix;
 
-	i = 0;
-	if (!init_matrix(&indentitiy_matrix, 4, 4))
-		return (-1);
-	while (i < 4)
-	{
-		set_matrix(&indentitiy_matrix, i, i, 1);
-		i++;
-	}
-	multiply_matrices(new_matrix, matrix, indentitiy_matrix);
-	free_matrix(&indentitiy_matrix);
+	init_ind_matrix(&indentity_matrix, matrix.rows, matrix.cols);
+	if (!multiply_matrices(new_matrix, matrix, indentity_matrix))
+		return (0);
 	return (1);
 }
 
 // Still to be worked on
 
-int	multiply_matrices(t_matrix *new_matrix, t_matrix a,
-		t_matrix b)
+int	multiply_matrices(t_matrix *new_matrix, t_matrix a, t_matrix b)
 {
 	int		x;
 	int		y;
@@ -105,23 +105,21 @@ int	multiply_matrices(t_matrix *new_matrix, t_matrix a,
 	double	value;
 
 	if (a.cols != b.rows)
-		return (-1);
-	if (!init_matrix(new_matrix, a.rows, b.cols))
-		return (-1);
+		return (0);
 	x = 0;
-	while (x < new_matrix->rows)
+	while (x < a.rows)
 	{
 		y = 0;
-		while (y < new_matrix->cols)
+		while (y < b.cols)
 		{
 			k = 0;
 			value = 0;
 			while (k < a.cols)
 			{
-				value += get_matrix(a, x, k) * get_matrix(b, k, y);
+				value += a.data[x][k] * b.data[k][y];
 				k++;
 			}
-			set_matrix(new_matrix, x, y, value);
+			new_matrix->data[x][y] = value;
 			y++;
 		}
 		x++;
@@ -140,7 +138,7 @@ int	matrices_equal(t_matrix matrix_a, t_matrix matrix_b)
 		y = 0;
 		while (y < matrix_a.cols)
 		{
-			if (!equal(get_matrix(matrix_a, x, y), get_matrix(matrix_b, x, y)))
+			if (!equal(matrix_a.data[x][y], matrix_b.data[x][y]))
 				return (0);
 			y++;
 		}
@@ -149,7 +147,62 @@ int	matrices_equal(t_matrix matrix_a, t_matrix matrix_b)
 	return (1);
 }
 
-void	free_matrix(t_matrix *matrix)
+void	transpose_matrix(t_matrix *matrix_a)
 {
-	free(matrix->data);
+	t_matrix	copy;
+	int			x;
+	int			y;
+
+	copy = *matrix_a;
+	x = 0;
+	while (x < matrix_a->rows)
+	{
+		y = 0;
+		while (y < matrix_a->cols)
+		{
+			matrix_a->data[x][y] = copy.data[y][x];
+			y++;
+		}
+		x++;
+	}
+}
+
+int	determinant(t_matrix matrix)
+{
+	return (matrix.data[0][0] * matrix.data[1][1] - matrix.data[0][1] * matrix.data[1][0]);
+}
+
+void	submatrix(t_matrix *submatrix, t_matrix matrix, int row, int col)
+{
+	int			i;
+	int			j;
+	int			x;
+	int			y;
+
+	init_matrix(submatrix, matrix.rows - 1, matrix.cols - 1);
+	x = 0;
+	i = 0;
+	while (i < matrix.rows)
+	{
+		if (i == row)
+		{
+			i++;
+			continue ;
+		}
+		j = 0;
+		y = 0;
+		while (j < matrix.cols)
+		{
+			if (j == col)
+			{
+				j++;
+				continue ;
+			}
+			submatrix->data[x][y] = matrix.data[i][j];
+			j++;
+			y++;
+		}
+		x++;
+		i++;
+	}
 }

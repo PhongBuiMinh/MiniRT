@@ -6,19 +6,23 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:01:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/11 21:41:22 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/13 14:16:35 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TUPLE_H
 # define TUPLE_H
 
-typedef struct s_tuple
+typedef union s_tuple
 {
-	double	x;
-	double	y;
-	double	z;
-	double	w;
+	struct
+	{
+		double	x;
+		double	y;
+		double	z;
+		double	w;
+	};
+	double	data[4];
 }	t_tuple;
 
 t_tuple	vector(double x, double y, double z);
