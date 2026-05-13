@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/13 19:12:12 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/13 19:43:53 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,26 @@ void	tick(t_environment *environment, t_projectile *projectile)
 
 //RAND NOT ALLOWED (JUST FOR TESTING)
 
-int	randomize_matrix(t_matrix *matrix, int rows, int cols)
+t_matrix	randomize_matrix(int rows, int cols)
 {
-	int	y;
-	int	x;
+	t_matrix	randomized_matrix;
+	int			y;
+	int			x;
 
 	x = 0;
-	matrix->rows = rows;
-	matrix->cols = cols;
+	randomized_matrix.rows = rows;
+	randomized_matrix.cols = cols;
 	while (x < rows)
 	{
 		y = 0;
 		while (y < cols)
 		{
-			matrix->data[x][y] = rand() % 1349;
+			randomized_matrix.data[x][y] = rand() % 1349;
 			y++;
 		}
 		x++;
 	}
-	return (1);
+	return (randomized_matrix);
 }
 
 int	main(void)
@@ -64,10 +65,10 @@ int	main(void)
 	t_matrix	matrix_a;
 	t_matrix	matrix_b;
 
-	randomize_matrix(&matrix_a, 4, 4);
+	matrix_a = randomize_matrix(4, 4);
 	print_matrix(matrix_a);
 	printf("\n--------------------------------------\n");
-	submatrix(&matrix_b, matrix_a, 3, 1);
+	matrix_b = submatrix(matrix_a, 3, 1);
 	print_matrix(matrix_b);
 	return (0);
 }

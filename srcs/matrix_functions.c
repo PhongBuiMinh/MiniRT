@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/13 19:11:37 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/13 19:44:48 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,26 @@ bool	equal(double a, double b)
 		return (false);
 }
 
-void	init_matrix(t_matrix *matrix, int rows, int cols)
+t_matrix	init_matrix(int rows, int cols)
 {
-	int	y;
-	int	x;
+	t_matrix	new_matrix;
+	int			y;
+	int			x;
 
 	x = 0;
-	matrix->rows = rows;
-	matrix->cols = cols;
+	new_matrix.rows = rows;
+	new_matrix.cols = cols;
 	while (x < rows)
 	{
 		y = 0;
 		while (y < cols)
 		{
-			matrix->data[x][y] = 0;
+			new_matrix.data[x][y] = 0;
 			y++;
 		}
 		x++;
 	}
+	return (new_matrix);
 }
 
 void	print_matrix(t_matrix matrix)
@@ -62,50 +64,53 @@ void	print_matrix(t_matrix matrix)
 
 // Still to be worked on
 
-void	init_ind_matrix(t_matrix *indentitiy_matrix, int rows, int cols)
+t_matrix	init_ind_matrix(int rows, int cols)
 {
-	int	x;
-	int	y;
+	t_matrix	indentity_matrix;
+	int			x;
+	int			y;
 
 	x = 0;
-	indentitiy_matrix->rows = rows;
-	indentitiy_matrix->cols = cols;
+	indentity_matrix.rows = rows;
+	indentity_matrix.cols = cols;
 	while (x < rows)
 	{
 		y = 0;
 		while (y < cols)
 		{
 			if (y == x)
-				indentitiy_matrix->data[x][y] = 1;
+				indentity_matrix.data[x][y] = 1;
 			else
-				indentitiy_matrix->data[x][y] = 0;
+				indentity_matrix.data[x][y] = 0;
 			y++;
 		}
 		x++;
 	}
+	return (indentity_matrix);
 }
 
-int	ind_matrix(t_matrix *new_matrix, t_matrix matrix)
+t_matrix	ind_matrix(t_matrix matrix)
 {
 	t_matrix	indentity_matrix;
 
-	init_ind_matrix(&indentity_matrix, matrix.rows, matrix.cols);
-	if (!multiply_matrices(new_matrix, matrix, indentity_matrix))
-		return (0);
-	return (1);
+	indentity_matrix = init_ind_matrix(matrix.rows, matrix.cols);
+	return (multiply_matrices(matrix, indentity_matrix));
 }
 
 // Still to be worked on
 
-int	multiply_matrices(t_matrix *new_matrix, t_matrix a, t_matrix b)
+t_matrix	multiply_matrices(t_matrix a, t_matrix b)
 {
-	int		x;
-	int		y;
-	int		k;
-	double	value;
+	t_matrix	product_matrix;
+	int			x;
+	int			y;
+	int			k;
+	double		value;
 
+	product_matrix = init_matrix(a.rows, b.cols);
 	if (a.cols != b.rows)
-		return (0);
+		return (printf("these 2 matrices cannot be multiplied"),
+			product_matrix);
 	x = 0;
 	while (x < a.rows)
 	{
@@ -119,12 +124,12 @@ int	multiply_matrices(t_matrix *new_matrix, t_matrix a, t_matrix b)
 				value += a.data[x][k] * b.data[k][y];
 				k++;
 			}
-			new_matrix->data[x][y] = value;
+			product_matrix.data[x][y] = value;
 			y++;
 		}
 		x++;
 	}
-	return (1);
+	return (product_matrix);
 }
 
 int	matrices_equal(t_matrix matrix_a, t_matrix matrix_b)
@@ -147,24 +152,24 @@ int	matrices_equal(t_matrix matrix_a, t_matrix matrix_b)
 	return (1);
 }
 
-void	transpose_matrix(t_matrix *matrix_a)
+t_matrix	transpose_matrix(t_matrix matrix)
 {
-	t_matrix	copy;
+	t_matrix	transposed_matrix;
 	int			x;
 	int			y;
 
-	copy = *matrix_a;
 	x = 0;
-	while (x < matrix_a->rows)
+	while (x < matrix.rows)
 	{
 		y = 0;
-		while (y < matrix_a->cols)
+		while (y < matrix.cols)
 		{
-			matrix_a->data[x][y] = copy.data[y][x];
+			transposed_matrix.data[x][y] = matrix.data[y][x];
 			y++;
 		}
 		x++;
 	}
+	return (transposed_matrix);
 }
 
 int	determinant(t_matrix matrix)
@@ -172,14 +177,15 @@ int	determinant(t_matrix matrix)
 	return (matrix.data[0][0] * matrix.data[1][1] - matrix.data[0][1] * matrix.data[1][0]);
 }
 
-void	submatrix(t_matrix *submatrix, t_matrix matrix, int row, int col)
+t_matrix	submatrix(t_matrix matrix, int row, int col)
 {
+	t_matrix	submatrix;
 	int			i;
 	int			j;
 	int			x;
 	int			y;
 
-	init_matrix(submatrix, matrix.rows - 1, matrix.cols - 1);
+	submatrix = init_matrix(matrix.rows - 1, matrix.cols - 1);
 	x = 0;
 	i = 0;
 	while (i < matrix.rows)
@@ -198,11 +204,12 @@ void	submatrix(t_matrix *submatrix, t_matrix matrix, int row, int col)
 				j++;
 				continue ;
 			}
-			submatrix->data[x][y] = matrix.data[i][j];
+			submatrix.data[x][y] = matrix.data[i][j];
 			j++;
 			y++;
 		}
 		x++;
 		i++;
 	}
+	return (submatrix);
 }
