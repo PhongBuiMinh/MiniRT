@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/13 19:52:20 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/14 20:37:02 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,11 +172,6 @@ t_matrix	transpose_matrix(t_matrix matrix)
 	return (transposed_matrix);
 }
 
-double	determinant(t_matrix matrix)
-{
-	return (matrix.data[0][0] * matrix.data[1][1] - matrix.data[0][1] * matrix.data[1][0]);
-}
-
 t_matrix	submatrix(t_matrix matrix, int row, int col)
 {
 	t_matrix	submatrix;
@@ -214,7 +209,61 @@ t_matrix	submatrix(t_matrix matrix, int row, int col)
 	return (submatrix);
 }
 
+double	cofactor(t_matrix matrix, int row, int col)
+{
+	double	minor_value;
+
+	minor_value = minor(matrix, row, col);
+	if ((row + col) % 2 == 1)
+		return (-minor_value);
+	return (minor_value);
+}
+
+double	determinant(t_matrix matrix)
+{
+	double	determinant;
+	int		i;
+
+	i = 0;
+	determinant = 0;
+	if (matrix.rows == 2 && matrix.cols == 2)
+		return (matrix.data[0][0] * matrix.data[1][1]
+			- matrix.data[0][1] * matrix.data[1][0]);
+	while (i < matrix.rows)
+	{
+		determinant += cofactor(matrix, 0, i) * matrix.data[0][i];
+		i++;
+	}
+	return (determinant);
+}
+
 double	minor(t_matrix matrix, int row, int col)
 {
 	return (determinant(submatrix(matrix, row, col)));
+}
+
+t_matrix	inversion(t_matrix matrix)
+{
+	t_matrix	inverted_matrix;
+	double		det;
+	int			x;
+	int			y;
+
+	x = 0;
+	det = determinant(matrix);
+	inverted_matrix.rows = matrix.rows;
+	inverted_matrix.cols = matrix.cols;
+	if (equal(det, 0))
+		return (inverted_matrix.rows = -1, inverted_matrix);
+	while (x < matrix.rows)
+	{
+		y = 0;
+		while (y < matrix.cols)
+		{
+			inverted_matrix.data[y][x] = cofactor(matrix, x, y) / det;
+			y++;
+		}
+		x++;
+	}
+	return (inverted_matrix);
 }
