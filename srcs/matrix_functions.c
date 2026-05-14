@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/13 19:44:48 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/13 19:52:20 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ t_matrix	transpose_matrix(t_matrix matrix)
 	return (transposed_matrix);
 }
 
-int	determinant(t_matrix matrix)
+double	determinant(t_matrix matrix)
 {
 	return (matrix.data[0][0] * matrix.data[1][1] - matrix.data[0][1] * matrix.data[1][0]);
 }
@@ -212,4 +212,9 @@ t_matrix	submatrix(t_matrix matrix, int row, int col)
 		i++;
 	}
 	return (submatrix);
+}
+
+double	minor(t_matrix matrix, int row, int col)
+{
+	return (determinant(submatrix(matrix, row, col)));
 }

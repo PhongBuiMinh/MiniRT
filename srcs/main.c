@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/13 19:43:53 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/13 19:58:29 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,10 @@ t_matrix	randomize_matrix(int rows, int cols)
 int	main(void)
 {
 	t_matrix	matrix_a;
-	t_matrix	matrix_b;
 
-	matrix_a = randomize_matrix(4, 4);
+	matrix_a = randomize_matrix(3, 3);
 	print_matrix(matrix_a);
 	printf("\n--------------------------------------\n");
-	matrix_b = submatrix(matrix_a, 3, 1);
-	print_matrix(matrix_b);
+	printf("minor: %f", minor(matrix_a, 1, 0));
 	return (0);
 }

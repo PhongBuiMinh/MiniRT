@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/13 19:41:00 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/13 19:52:10 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_matrix	submatrix(t_matrix matrix, int row, int col);
 t_matrix	multiply_matrices(t_matrix a, t_matrix b);
 t_matrix	transpose_matrix(t_matrix matrix);
 t_matrix	init_ind_matrix(int rows, int cols);
-int			determinant(t_matrix matrix);
+double		determinant(t_matrix matrix);
+double		minor(t_matrix matrix, int row, int col);
 int			matrices_equal(t_matrix matrix_a, t_matrix matrix_b);
 void		print_matrix(t_matrix matrix);
 
