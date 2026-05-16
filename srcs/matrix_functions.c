@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/14 20:37:02 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/14 20:51:44 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ void	print_matrix(t_matrix matrix)
 	int	y;
 
 	x = 0;
+	if (matrix.rows <= 0 || matrix.cols <= 0)
+	{
+		printf("dont work");
+		return ;
+	}
 	while (x < matrix.rows)
 	{
 		y = 0;
@@ -159,6 +164,8 @@ t_matrix	transpose_matrix(t_matrix matrix)
 	int			y;
 
 	x = 0;
+	transposed_matrix.rows = matrix.rows;
+	transposed_matrix.cols = matrix.cols;
 	while (x < matrix.rows)
 	{
 		y = 0;
@@ -254,7 +261,7 @@ t_matrix	inversion(t_matrix matrix)
 	inverted_matrix.rows = matrix.rows;
 	inverted_matrix.cols = matrix.cols;
 	if (equal(det, 0))
-		return (inverted_matrix.rows = -1, inverted_matrix);
+		return (printf("cannot invert matrix"), inverted_matrix.rows = -1, inverted_matrix);
 	while (x < matrix.rows)
 	{
 		y = 0;

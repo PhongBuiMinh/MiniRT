@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/14 20:31:10 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/14 20:47:59 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,18 +101,9 @@ t_matrix	randomize_matrix(int rows, int cols)
 int	main(void)
 {
 	t_matrix	matrix_a;
-	t_matrix	matrix_b;
-	t_matrix	matrix_c;
 
-	matrix_a = parse_matrix("| 3 | -9 | 7 | 3 | 3 | -8 | 2 | -9 || -4 | 4 | 4 | 1 || -6 | 5 | -1 | 1 |", 4, 4);
-	matrix_b = parse_matrix("8 | 2 | 2 | 2 | 3 | -1 | 7 | 0 | 7 | 0 | 5 | 4 | 6 | -2 | 0 | 5 |", 4, 4);
-	print_matrix(matrix_a);
-	printf("\n--------------------------------------\n");
-	print_matrix(matrix_b);
-	printf("\n--------------------------------------\n");
-	matrix_c = multiply_matrices(matrix_a, matrix_b);
-	print_matrix(matrix_c);
-	printf("should be matrix A again: \n");
-	print_matrix(multiply_matrices(matrix_c, inversion(matrix_b)));
-	return (0);
+	matrix_a = parse_matrix("| 3 | -9 | 7 | 3 || 3 | -8 | 2 | -9 || -4 | 4 | 4 | 1 | -6 | 5 | -1 | 1 |", 4, 4);
+	print_matrix(transpose_matrix(inversion(matrix_a)));
+	printf("-----------------------------------\n");
+	print_matrix(inversion(transpose_matrix(matrix_a)));
 }
