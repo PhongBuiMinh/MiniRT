@@ -6,12 +6,11 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/10 20:41:52 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/05/22 20:48:46 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/05/22 20:56:53 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-#include "transform.h"
+#include "./transform.h"
 
 t_matrix4	translation(double x, double y, double z)
 {

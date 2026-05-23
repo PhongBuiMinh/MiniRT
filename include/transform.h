@@ -3,6 +3,7 @@
 
 #include "matrix.h"
 #include "tuple.h"
+#include <math.h>
 
 t_matrix4	translation(double x, double y, double z);
 t_matrix4	scaling(double x, double y, double z);
