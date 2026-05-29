@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/14 20:47:59 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/17 19:39:50 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,13 @@ t_matrix	randomize_matrix(int rows, int cols)
 
 int	main(void)
 {
-	t_matrix	matrix_a;
+	t_matrix	transform;
+	t_tuple		p;
 
-	matrix_a = parse_matrix("| 3 | -9 | 7 | 3 || 3 | -8 | 2 | -9 || -4 | 4 | 4 | 1 | -6 | 5 | -1 | 1 |", 4, 4);
-	print_matrix(transpose_matrix(inversion(matrix_a)));
-	printf("-----------------------------------\n");
-	print_matrix(inversion(transpose_matrix(matrix_a)));
+	p = point(-4, 6, 8);
+	print_tuple(p);
+	transform = scaling(-1, -1, -1);
+	print_matrix(transform);
+	printf("-----------------------------\n");
+	print_tuple(matrix_tuple_multiply(transform, p));
 }

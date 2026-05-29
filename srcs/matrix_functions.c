@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/14 20:51:44 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/17 20:20:02 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,4 +273,64 @@ t_matrix	inversion(t_matrix matrix)
 		x++;
 	}
 	return (inverted_matrix);
+}
+
+t_matrix	translation(double x, double y, double z)
+{
+	t_matrix	translation_matrix;
+
+	translation_matrix = init_ind_matrix(4, 4);
+	translation_matrix.data[0][3] = x;
+	translation_matrix.data[1][3] = y;
+	translation_matrix.data[2][3] = z;
+	return (translation_matrix);
+}
+
+t_matrix	scaling(double x, double y, double z)
+{
+	t_matrix	scaling_matrix;
+
+	scaling_matrix = init_ind_matrix(4, 4);
+	scaling_matrix.data[0][0] = x;
+	scaling_matrix.data[1][1] = y;
+	scaling_matrix.data[2][2] = z;
+	return (scaling_matrix);
+}
+
+t_tuple	matrix_tuple_multiply(t_matrix matrix, t_tuple tuple)
+{
+	t_tuple	product_tuple;
+	int		x;
+	int		y;
+
+	x = 0;
+	while (x < 4)
+	{
+		y = 0;
+		product_tuple.data[x] = 0;
+		while (y < 4)
+		{
+			product_tuple.data[x] += matrix.data[x][y] * tuple.data[y];
+			y++;
+		}
+		x++;
+	}
+	return (product_tuple);
+}
+
+double	radians(double degrees)
+{
+	return (degrees / 180 * M_PI());
+}
+
+t_matrix	rotation_x(double radiants)
+{
+	t_matrix	rotation_matrix;
+
+	rotation_matrix = init_ind_matrix(4, 4);
+	rotation_matrix.data[1][1] = cos(radiants);
+	rotation_matrix.data[1][2] = -sin(radiants);
+	rotation_matrix.data[2][1] = sin(radiants);
+	rotation_matrix.data[2][2] = cos(radiants);
+	return (rotation_matrix);
 }
