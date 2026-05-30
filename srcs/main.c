@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/17 19:39:50 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/30 17:07:03 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,21 @@ t_matrix	randomize_matrix(int rows, int cols)
 
 int	main(void)
 {
-	t_matrix	transform;
+	t_canvas	canvas;
 	t_tuple		p;
+	int			i = 12;
 
-	p = point(-4, 6, 8);
-	print_tuple(p);
-	transform = scaling(-1, -1, -1);
-	print_matrix(transform);
-	printf("-----------------------------\n");
-	print_tuple(matrix_tuple_multiply(transform, p));
+	init_canvas(&canvas, 1000, 1000);
+	p = point(0, 0, 0);
+	p = matrix_tuple_multiply(translation(0, 300, 0), p);
+	while (i > 0)
+	{
+		//print_tuple(p);
+		write_star(&canvas, p.x + canvas.width / 2, p.y + canvas.height / 2, color(1, 0, 0));
+		p = matrix_tuple_multiply(rotation_z(M_PI / 6), p);
+		i--;
+	}
+	canvas_to_ppm(&canvas);
 }
+// 	const struct s_shear	
+// params = {.xy = 0, .xz = 0, .yx = 0, .yz = 0, .zx = 0, .zy = 2};

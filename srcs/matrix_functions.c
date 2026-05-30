@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/17 20:20:02 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/30 15:44:15 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,7 +320,7 @@ t_tuple	matrix_tuple_multiply(t_matrix matrix, t_tuple tuple)
 
 double	radians(double degrees)
 {
-	return (degrees / 180 * M_PI());
+	return (degrees / 180 * M_PI);
 }
 
 t_matrix	rotation_x(double radiants)
@@ -333,4 +333,42 @@ t_matrix	rotation_x(double radiants)
 	rotation_matrix.data[2][1] = sin(radiants);
 	rotation_matrix.data[2][2] = cos(radiants);
 	return (rotation_matrix);
+}
+
+t_matrix	rotation_y(double radiants)
+{
+	t_matrix	rotation_matrix;
+
+	rotation_matrix = init_ind_matrix(4, 4);
+	rotation_matrix.data[0][0] = cos(radiants);
+	rotation_matrix.data[0][2] = sin(radiants);
+	rotation_matrix.data[2][0] = -sin(radiants);
+	rotation_matrix.data[2][2] = cos(radiants);
+	return (rotation_matrix);
+}
+
+t_matrix	rotation_z(double radiants)
+{
+	t_matrix	rotation_matrix;
+
+	rotation_matrix = init_ind_matrix(4, 4);
+	rotation_matrix.data[0][0] = cos(radiants);
+	rotation_matrix.data[0][1] = -sin(radiants);
+	rotation_matrix.data[1][0] = sin(radiants);
+	rotation_matrix.data[1][1] = cos(radiants);
+	return (rotation_matrix);
+}
+
+t_matrix	shearing(struct s_shear params)
+{
+	t_matrix	shear_matrix;
+
+	shear_matrix = init_ind_matrix(4, 4);
+	shear_matrix.data[0][1] = params.xy;
+	shear_matrix.data[0][2] = params.xz;
+	shear_matrix.data[1][0] = params.yx;
+	shear_matrix.data[1][2] = params.yz;
+	shear_matrix.data[2][0] = params.zx;
+	shear_matrix.data[2][1] = params.zy;
+	return (shear_matrix);
 }

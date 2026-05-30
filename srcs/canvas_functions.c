@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:35:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/11 21:41:22 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/30 16:51:56 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,31 @@ int	clamp_color(int c)
 	if (c > 255)
 		return (255);
 	return (c);
+}
+
+void	write_star(t_canvas *canvas, int x, int y, t_tuple color)
+{
+	int	i;
+	int	d;
+
+	i = 0;
+	while (i < 10)
+	{
+		d = 10;
+		while (d > 0)
+		{
+			write_pixel(canvas, x + d, y, color);
+			write_pixel(canvas, x, y + d, color);
+			write_pixel(canvas, x - d, y, color);
+			write_pixel(canvas, x, y - d, color);
+			write_pixel(canvas, x + d, y + d, color);
+			write_pixel(canvas, x - d, y - d, color);
+			write_pixel(canvas, x - d, y + d, color);
+			write_pixel(canvas, x + d, y - d, color);
+			d--;
+		}
+		i++;
+	}
 }
 
 void	canvas_to_ppm(t_canvas *canvas)

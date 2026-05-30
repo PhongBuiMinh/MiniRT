@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/17 19:36:08 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/30 15:41:00 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ typedef struct s_matrix
 	int		cols;
 	double	data[4][4];
 }	t_matrix;
+
+struct s_shear
+{
+	double	xy;
+	double	xz;
+	double	yx;
+	double	yz;
+	double	zx;
+	double	zy;
+};
 
 t_matrix	inversion(t_matrix matrix);
 t_matrix	init_matrix(int rows, int cols);
@@ -35,5 +45,9 @@ void		print_matrix(t_matrix matrix);
 t_matrix	translation(double x, double y, double z);
 t_tuple		matrix_tuple_multiply(t_matrix matrix, t_tuple tuple);
 t_matrix	scaling(double x, double y, double z);
+t_matrix	rotation_x(double radiants);
+t_matrix	rotation_y(double radiants);
+t_matrix	rotation_z(double radiants);
+t_matrix	shearing(struct s_shear params);
 
 #endif
