@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/30 15:44:15 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/30 18:59:41 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,7 +320,7 @@ t_tuple	matrix_tuple_multiply(t_matrix matrix, t_tuple tuple)
 
 double	radians(double degrees)
 {
-	return (degrees / 180 * M_PI);
+	return (degrees / 180 * PI);
 }
 
 t_matrix	rotation_x(double radiants)

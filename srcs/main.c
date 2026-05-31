@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/30 17:07:03 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/31 17:23:12 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,23 +98,17 @@ t_matrix	randomize_matrix(int rows, int cols)
 	return (randomized_matrix);
 }
 
+//t_canvas	canvas;
+//init_canvas(&canvas, 1000, 1000);
+//canvas_to_ppm(&canvas);
 int	main(void)
 {
-	t_canvas	canvas;
-	t_tuple		p;
-	int			i = 12;
+	t_ray			r = ray(point(0, 0, -5), vector(0, 0, 1));
+	t_sphere		s = sphere(5);
+	t_intersection	xs;
 
-	init_canvas(&canvas, 1000, 1000);
-	p = point(0, 0, 0);
-	p = matrix_tuple_multiply(translation(0, 300, 0), p);
-	while (i > 0)
-	{
-		//print_tuple(p);
-		write_star(&canvas, p.x + canvas.width / 2, p.y + canvas.height / 2, color(1, 0, 0));
-		p = matrix_tuple_multiply(rotation_z(M_PI / 6), p);
-		i--;
-	}
-	canvas_to_ppm(&canvas);
+	xs = intersect(s, r);
+	printf("count: %i, t1: %f, t2: %f\n", xs.count, xs.t1, xs.t2);
 }
 // 	const struct s_shear	
 // params = {.xy = 0, .xz = 0, .yx = 0, .yz = 0, .zx = 0, .zy = 2};

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 17:03:36 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/30 17:08:49 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/31 16:35:17 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ double	magnitude(t_tuple	tuple)
 
 double	dot(t_tuple a, t_tuple b)
 {
-	return (a.x + b.x * a.y + b.y
-		* a.z + b.z * a.w + b.w);
+	return (a.x * b.x
+		+ a.y * b.y
+		+ a.z * b.z
+		+ a.w * b.w);
 }
 
 t_tuple	cross(t_tuple a, t_tuple b)
@@ -184,7 +186,7 @@ void	check_tuple(t_tuple tuple)
 //	{
 //		//print_tuple(p);
 //		write_star(&canvas, p.x + canvas.width / 2, p.y + canvas.height / 2, color(1, 0, 0));
-//		p = matrix_tuple_multiply(rotation_z(M_PI / 6), p);
+//		p = matrix_tuple_multiply(rotation_z(PI / 6), p);
 //		i--;
 //	}
 //	canvas_to_ppm(&canvas);

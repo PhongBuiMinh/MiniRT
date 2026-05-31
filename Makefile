@@ -6,7 +6,7 @@
 #    By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/05 21:36:59 by bpetrovi          #+#    #+#              #
-#    Updated: 2026/05/09 17:50:59 by bpetrovi         ###   ########.fr        #
+#    Updated: 2026/05/31 16:23:14 by bpetrovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ OBJS_DIR = objs
 SRCS =	main.c \
 	canvas_functions.c \
 	tuple_functions.c \
-	matrix_functions.c
+	matrix_functions.c \
+	rays.c \
+	intersections.c
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 all: ${NAME} ${LIBFT}
