@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/31 18:42:08 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/31 20:10:25 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,26 @@ t_matrix	randomize_matrix(int rows, int cols)
 int	main(void)
 {
 	t_ray			r = ray(point(0, 0, -5), vector(0, 0, 1));
+	t_ray			r2 = ray(point(0, 0, 0), vector(0, 0, 1));
 	t_sphere		s = sphere(5);
 	t_intersections	xs;
+	t_intersection	h;
 
-	xs = intersect(s, r);
-	printf("xs count: %i, t1: %f, t2; %f2, t1 object: %i, t2 object: %i\n", xs.count, xs.intersections[0].t, xs.intersections[1].t, xs.intersections[0].object, xs.intersections[1].object);
+	xs = xs_init();
+	xs_append(&xs, intersect(s, r));
+	xs_append(&xs, intersect(s, r2));
+	if (xs.count < 0)
+		return (1);
+	int	i = 0;
+	while (i < xs.count)
+	{
+		printf("t%i : %f\n", i, xs.intersections[i].t);
+		i++;
+	}
+	h = hit(xs);
+	printf("hit_t: %f", h.t);
+	free(xs.intersections);
+	return (0);
 }
 // 	const struct s_shear	
 // params = {.xy = 0, .xz = 0, .yx = 0, .yz = 0, .zx = 0, .zy = 2};
