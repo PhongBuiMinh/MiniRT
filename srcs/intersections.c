@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/31 17:19:57 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/31 18:39:44 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ double	discriminant(t_ray ray)
 	return (b * b - 4 * a * c);
 }
 
-t_intersection	intersect(t_sphere sphere, t_ray ray)
+t_intersections	intersect(t_sphere sphere, t_ray ray)
 {
-	t_intersection	xs;
+	t_intersections	xs;
 	t_tuple			sphere_to_ray;
 	double			d;
 	double			a;
@@ -43,7 +43,9 @@ t_intersection	intersect(t_sphere sphere, t_ray ray)
 	sphere_to_ray = substract(ray.origin, point(0, 0, 0));
 	a = dot(ray.direction, ray.direction);
 	b = 2 * dot(ray.direction, sphere_to_ray);
-	xs.t1 = (-b - sqrt(d)) / (2 * a);
-	xs.t2 = (-b + sqrt(d)) / (2 * a);
+	xs.intersections[0].t = (-b - sqrt(d)) / (2 * a);
+	xs.intersections[1].t = (-b + sqrt(d)) / (2 * a);
+	xs.intersections[0].object = sphere.id;
+	xs.intersections[1].object = sphere.id;
 	return (xs);
 }

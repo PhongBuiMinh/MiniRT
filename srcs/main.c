@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/31 17:23:12 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/05/31 18:42:08 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,10 @@ int	main(void)
 {
 	t_ray			r = ray(point(0, 0, -5), vector(0, 0, 1));
 	t_sphere		s = sphere(5);
-	t_intersection	xs;
+	t_intersections	xs;
 
 	xs = intersect(s, r);
-	printf("count: %i, t1: %f, t2: %f\n", xs.count, xs.t1, xs.t2);
+	printf("xs count: %i, t1: %f, t2; %f2, t1 object: %i, t2 object: %i\n", xs.count, xs.intersections[0].t, xs.intersections[1].t, xs.intersections[0].object, xs.intersections[1].object);
 }
 // 	const struct s_shear	
 // params = {.xy = 0, .xz = 0, .yx = 0, .yz = 0, .zx = 0, .zy = 2};
