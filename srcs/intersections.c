@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/01 15:54:55 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/01 16:28:28 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ t_intersections	intersect(t_sphere sphere, t_ray ray)
 	double			a;
 	double			b;
 
-	(void)sphere;
 	xs.intersections = NULL;
+	ray = ray_transform(ray, inversion(sphere.transformation));
 	d = discriminant(ray);
 	if (d < -EPSILON)
 		return (xs.count = 0, xs);

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/01 15:54:23 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/01 21:13:25 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,36 +103,42 @@ t_matrix	randomize_matrix(int rows, int cols)
 //canvas_to_ppm(&canvas);
 int	main(void)
 {
-	t_ray			r = ray(point(0, 0, -5), vector(0, 0, 1));
-	t_ray			r2 = ray(point(0, 0, 0), vector(0, 0, 1));
-	t_sphere		s = sphere(5);
+	t_sphere		s;
+	t_canvas		canvas;
 	t_intersections	xs;
-	t_intersection	h;
+	t_tuple			origin;
+	int				y;
+	double			half;
+	double			wall_size;
+	double			pixel_size;
 
-	xs = xs_init();
-	xs_append(&xs, intersect(s, r));
-	xs_append(&xs, intersect(s, r2));
-	if (xs.count < 0)
-		return (1);
-	int	i = 0;
-	while (i < xs.count)
+	init_canvas(&canvas, 100, 100);
+	y = 0;
+	wall_size = 7;
+	pixel_size = wall_size / canvas.width;
+	half = wall_size / 2;
+	origin = point(0, 0, -5);
+	s = sphere(5);
+	while (y < canvas.height)
 	{
-		printf("t%i : %f\n", i, xs.intersections[i].t);
-		i++;
+		int x = 0;
+		double world_y = half - pixel_size * y;
+		while (x < canvas.width)
+		{
+			double world_x = -half + pixel_size * x;
+			t_tuple pos = point(world_x, world_y, 10);
+			t_ray r = ray(origin, normalize(substract(pos, origin)));
+			xs = intersect(s, r);
+			if (xs.count != 0)
+				write_pixel(&canvas, x, y, color(1, 0, 0));
+			else
+				write_pixel(&canvas, x, y, color(0, 0, 0));
+			x++;
+		}
+		y++;
 	}
-	h = hit(xs);
-	printf("hit_t: %f\nP", h.t);
-	printf("------------------------------------------------\n");
-	t_ray new_ray = ray_transform(ray(point(1, 2, 3), vector(0, 1, 0)), translation(3, 4, 5));
-	print_tuple(new_ray.origin);
-	print_tuple(new_ray.direction);
-	printf("------------------------------------------------------------");
-	new_ray = ray_transform(ray(point(1, 2, 3), vector(0, 1, 0)), scaling(3, 4, 5));
-	print_tuple(new_ray.origin);
-	print_tuple(new_ray.direction);
-	set_transformation(&s, init_ind_matrix(4, 4));
-	print_matrix(s.transformation);
-	free(xs.intersections);
+	canvas_to_ppm(&canvas);
+	free_pixels(canvas.pixels);
 	return (0);
 }
 // 	const struct s_shear	

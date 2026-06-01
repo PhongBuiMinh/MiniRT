@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:55:37 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/01 15:42:19 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/01 16:05:01 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_sphere	sphere(int id)
 	t_sphere	new_sphere;
 
 	new_sphere.id = id;
+	new_sphere.transformation = init_ind_matrix(4, 4);
 	return (new_sphere);
 }
 
