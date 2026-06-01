@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/31 20:10:25 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/01 15:54:23 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,17 @@ int	main(void)
 		i++;
 	}
 	h = hit(xs);
-	printf("hit_t: %f", h.t);
+	printf("hit_t: %f\nP", h.t);
+	printf("------------------------------------------------\n");
+	t_ray new_ray = ray_transform(ray(point(1, 2, 3), vector(0, 1, 0)), translation(3, 4, 5));
+	print_tuple(new_ray.origin);
+	print_tuple(new_ray.direction);
+	printf("------------------------------------------------------------");
+	new_ray = ray_transform(ray(point(1, 2, 3), vector(0, 1, 0)), scaling(3, 4, 5));
+	print_tuple(new_ray.origin);
+	print_tuple(new_ray.direction);
+	set_transformation(&s, init_ind_matrix(4, 4));
+	print_matrix(s.transformation);
 	free(xs.intersections);
 	return (0);
 }
