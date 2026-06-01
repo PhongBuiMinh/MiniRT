@@ -3,107 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/14 20:47:59 by bpetrovi         ###   ########.fr       */
+/*   Created: 2026/05/19 19:19:43 by fbui-min          #+#    #+#             */
+/*   Updated: 2026/05/23 19:23:36 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include <stdio.h>
+#include "tuple.h"
+#include "color.h"
 
-t_projectile	init_projectile(t_tuple position, t_tuple velocity)
+typedef struct s_projectile
 {
-	t_projectile	projectile;
+	t_tuple	position;  // point
+	t_tuple	velocity;  // vector
+}	t_projectile;
 
-	projectile.position = position;
-	projectile.velocity = velocity;
-	return (projectile);
+typedef struct s_environment
+{
+	t_tuple	gravity;   // vector
+	t_tuple	wind;      // vector
+}	t_environment;
+
+t_projectile	tick(t_environment env, t_projectile proj)
+{
+	t_projectile	next;
+
+	next.position = add_tuple(proj.position, proj.velocity);
+	next.velocity = add_tuple(add_tuple(proj.velocity, env.gravity), env.wind);
+	return (next);
 }
 
-t_environment	init_environment(t_tuple gravity, t_tuple wind)
+// Canvas settings from book example
+int main(void)
 {
-	t_environment	environment;
+	int				width = 900;
+	int				height = 550;
+	t_canvas		canvas;
+	t_color			red = color(1, 0, 0);
+	t_projectile	proj;
+	t_environment	env;
+	int				steps = 0;
 
-	environment.gravity = gravity;
-	environment.wind = wind;
-	return (environment);
-}
-
-void	tick(t_environment *environment, t_projectile *projectile)
-{
-	projectile->position = add(projectile->position, projectile->velocity);
-	projectile->velocity = add(projectile->velocity, add(environment->gravity, environment->wind));
-}
-
-// FUNCTION FOR FILLING MATRICES FOR TESTING
-
-t_matrix	parse_matrix(char *str, int rows, int cols)
-{
-	t_matrix	matrix;
-	int			x;
-	int			y;
-
-	matrix.rows = rows;
-	matrix.cols = cols;
-
-	x = 0;
-	y = 0;
-	while (*str && x < rows)
+	canvas = canvas_new(width, height);
+	if (!canvas.pixels)
+		return (1);
+	proj.position = point(0, 1, 0);
+	proj.velocity = vector(1, 1.8, 0);
+	proj.velocity = normalize(proj.velocity);
+	proj.velocity = mul_tuple_scalar(proj.velocity, 11.25);
+	env.gravity = vector(0, -0.1, 0);
+	env.wind = vector(-0.01, 0, 0);
+	while (proj.position.y > 0.0)
 	{
-		if ((*str >= '0' && *str <= '9') || *str == '-')
-		{
-			matrix.data[x][y] = atof(str);
-
-			while ((*str >= '0' && *str <= '9')
-				|| *str == '-'
-				|| *str == '.')
-				str++;
-
-			y++;
-			if (y >= cols)
-			{
-				y = 0;
-				x++;
-			}
-		}
-		else
-			str++;
+		int x = (int)(proj.position.x + 0.5);
+		int y = height - 1 - (int)(proj.position.y + 0.5);
+		if (x >= 0 && x < width && y >= 0 && y < height)
+			write_pixel(&canvas, x, y, red);
+		proj = tick(env, proj);
+		steps++;
+		if (steps > 10000)
+			break;
 	}
-
-	return (matrix);
-}
-
-//RAND NOT ALLOWED (JUST FOR TESTING)
-
-t_matrix	randomize_matrix(int rows, int cols)
-{
-	t_matrix	randomized_matrix;
-	int			y;
-	int			x;
-
-	x = 0;
-	randomized_matrix.rows = rows;
-	randomized_matrix.cols = cols;
-	while (x < rows)
-	{
-		y = 0;
-		while (y < cols)
-		{
-			randomized_matrix.data[x][y] = rand() % 1349;
-			y++;
-		}
-		x++;
-	}
-	return (randomized_matrix);
-}
-
-int	main(void)
-{
-	t_matrix	matrix_a;
-
-	matrix_a = parse_matrix("| 3 | -9 | 7 | 3 || 3 | -8 | 2 | -9 || -4 | 4 | 4 | 1 | -6 | 5 | -1 | 1 |", 4, 4);
-	print_matrix(transpose_matrix(inversion(matrix_a)));
-	printf("-----------------------------------\n");
-	print_matrix(inversion(transpose_matrix(matrix_a)));
+	canvas_to_ppm(&canvas, "projectile.ppm");
+	canvas_destroy(&canvas);
+	printf("Wrote projectile.ppm\n");
+	return (0);
 }

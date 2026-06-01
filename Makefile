@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/05 21:36:59 by bpetrovi          #+#    #+#              #
-#    Updated: 2026/05/09 17:50:59 by bpetrovi         ###   ########.fr        #
+#    Updated: 2026/06/01 14:43:01 by fbui-min         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ LIBFT = ${LIBFT_DIR}/libft.a
 SRCS_DIR = srcs
 OBJS_DIR = objs
 SRCS =	main.c \
-	canvas_functions.c \
-	tuple_functions.c \
-	matrix_functions.c
+	color.c \
+	transform.c tuple.c \
+	matrix.c
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 all: ${NAME} ${LIBFT}
@@ -36,7 +36,7 @@ $(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $^ -L$(LIBFT_DIR) -lft -o $@ -lm
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
-	gcc $(CFLAGS) -c $< -o $@
+	gcc $(CFLAGS) -Iincludes -c $< -o $@
 
 ${OBJS_DIR}:
 	mkdir -p ${OBJS_DIR}
