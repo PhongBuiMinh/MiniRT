@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/30 18:59:41 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/04 19:47:27 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ int	matrices_equal(t_matrix matrix_a, t_matrix matrix_b)
 	return (1);
 }
 
-t_matrix	transpose_matrix(t_matrix matrix)
+t_matrix	transpose(t_matrix matrix)
 {
 	t_matrix	transposed_matrix;
 	int			x;
@@ -297,7 +297,7 @@ t_matrix	scaling(double x, double y, double z)
 	return (scaling_matrix);
 }
 
-t_tuple	matrix_tuple_multiply(t_matrix matrix, t_tuple tuple)
+t_tuple	mat_apply(t_matrix matrix, t_tuple tuple)
 {
 	t_tuple	product_tuple;
 	int		x;

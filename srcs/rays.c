@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:55:37 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/01 16:05:01 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/04 21:21:34 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_sphere	sphere(int id)
 
 	new_sphere.id = id;
 	new_sphere.transformation = init_ind_matrix(4, 4);
+	new_sphere.material = material();
 	return (new_sphere);
 }
 
@@ -44,8 +45,8 @@ t_ray	ray_transform(t_ray ray, t_matrix transformation)
 {
 	t_ray	transformed_ray;
 
-	transformed_ray.origin = matrix_tuple_multiply(transformation, ray.origin);
-	transformed_ray.direction = matrix_tuple_multiply(transformation,
+	transformed_ray.origin = mat_apply(transformation, ray.origin);
+	transformed_ray.direction = mat_apply(transformation,
 			ray.direction);
 	return (transformed_ray);
 }

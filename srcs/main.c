@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/01 21:13:25 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/04 21:22:18 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,37 +98,53 @@ t_matrix	randomize_matrix(int rows, int cols)
 	return (randomized_matrix);
 }
 
-//t_canvas	canvas;
-//init_canvas(&canvas, 1000, 1000);
-//canvas_to_ppm(&canvas);
 int	main(void)
 {
-	t_sphere		s;
+	t_light		light;
+	t_sphere	s;
+
+	s = sphere(5);
+	print_tuple(s.material.color);
+	light = point_light(point(0, 0, 0), color(1, 1, 1));
+	print_tuple(light.pos);
+	print_tuple(light.intensity);
+	return (0);
+}
+/*
+DRAWING A SPHERE BY CASTING RAYS AT IT
+int	main(void)
+{
 	t_canvas		canvas;
-	t_intersections	xs;
+	t_sphere		s;
 	t_tuple			origin;
+	t_tuple			position;
+	t_intersections	xs;
+	int				x;
 	int				y;
-	double			half;
 	double			wall_size;
+	double			world_x;
+	double			world_y;
+	double			half;
 	double			pixel_size;
 
-	init_canvas(&canvas, 100, 100);
-	y = 0;
-	wall_size = 7;
-	pixel_size = wall_size / canvas.width;
-	half = wall_size / 2;
+	wall_size = 10;
 	origin = point(0, 0, -5);
+	half = wall_size / 2;
+	init_canvas(&canvas, 200, 200);
+	pixel_size = wall_size / canvas.height;
 	s = sphere(5);
+	struct s_shear shear = {1, 0, 0, 0, 0, 0};
+	s.transformation = multiply_matrices(shearing(shear), rotation_z(PI / 4));
+	y = 0;
 	while (y < canvas.height)
 	{
-		int x = 0;
-		double world_y = half - pixel_size * y;
+		world_y = half - pixel_size * y;
+		x = 0;
 		while (x < canvas.width)
 		{
-			double world_x = -half + pixel_size * x;
-			t_tuple pos = point(world_x, world_y, 10);
-			t_ray r = ray(origin, normalize(substract(pos, origin)));
-			xs = intersect(s, r);
+			world_x = -half + pixel_size * x;
+			position = point(world_x, world_y, 10);
+			xs = intersect(s, ray(origin, normalize(substract(position, origin))));
 			if (xs.count != 0)
 				write_pixel(&canvas, x, y, color(1, 0, 0));
 			else
@@ -139,7 +155,5 @@ int	main(void)
 	}
 	canvas_to_ppm(&canvas);
 	free_pixels(canvas.pixels);
-	return (0);
 }
-// 	const struct s_shear	
-// params = {.xy = 0, .xz = 0, .yx = 0, .yz = 0, .zx = 0, .zy = 2};
+*/

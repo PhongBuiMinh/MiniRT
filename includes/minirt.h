@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/31 15:46:33 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/04 21:04:45 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "matrices.h"
 # include "rays.h"
 # include "intersections.h"
+# include "light.h"
 
 typedef struct s_projectile
 {

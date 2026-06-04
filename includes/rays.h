@@ -6,13 +6,14 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:56:37 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/01 15:42:38 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/04 21:13:01 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYS_H
 # define RAYS_H
 # include "tuple.h"
+# include "light.h"
 
 typedef struct s_ray
 {
@@ -24,6 +25,7 @@ typedef struct s_sphere
 {
 	t_matrix	transformation;
 	t_tuple		origin;	
+	t_material	material;
 	int			id;
 }	t_sphere;
 
