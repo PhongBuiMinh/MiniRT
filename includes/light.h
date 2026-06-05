@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:01:53 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/04 21:21:28 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/05 21:10:16 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ typedef struct s_material
 	double	shininess;
 }	t_material;
 
+typedef struct t_shade
+{
+	t_material	m;
+	t_light		light;
+	t_tuple		p;
+	t_tuple		eyev;
+	t_tuple		normalv;
+}	t_shade;
+
+t_tuple		lighting(t_shade shade);
 t_light		point_light(t_tuple pos, t_tuple intensity);
 t_material	material(void);
 

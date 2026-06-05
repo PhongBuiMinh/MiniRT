@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:01:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/13 14:16:35 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/05 20:25:03 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_tuple	substract(t_tuple tuple_a, t_tuple tuple_b);
 t_tuple	cross(t_tuple a, t_tuple b);
 t_tuple	multiply_tuples(t_tuple a, t_tuple b);
 t_tuple	negate(t_tuple tuple);
-t_tuple	multiply(t_tuple tuple, double scalar);
+t_tuple	scalar(t_tuple tuple, double scalar);
 t_tuple	divide(t_tuple tuple, double divider);
 t_tuple	normalize(t_tuple tuple);
 double	magnitude(t_tuple	tuple);

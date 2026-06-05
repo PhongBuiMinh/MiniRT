@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/04 21:22:18 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/05 21:15:02 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,23 @@ t_matrix	randomize_matrix(int rows, int cols)
 	return (randomized_matrix);
 }
 
+
+/*	t_tuple	eyev;
+	t_tuple	normalv;
+	t_light	light;
+	t_shade	shade;
+
+	eyev = vector(0, 0, -1);
+	normalv = vector(0, 0, -1);
+	shade.m = material();
+	shade.light = light;
+	shade.p = point();
+	shade.eyev = eyev;
+	shade.normalv = normalv;
+	light = point_light(point(0, 10, -10), color(1, 1, 1));
+	eyev = vector(0, 0, -1);
+	print_tuple(lighting())
+	return (0);*/
 int	main(void)
 {
 	t_light		light;

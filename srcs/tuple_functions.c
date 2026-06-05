@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 17:03:36 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/04 19:47:27 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/05 20:25:03 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_tuple	negate(t_tuple tuple)
 	return (tuple);
 }
 
-t_tuple	multiply(t_tuple tuple, double scalar)
+t_tuple	scalar(t_tuple tuple, double scalar)
 {
 	tuple.x = tuple.x * scalar;
 	tuple.y = tuple.y * scalar;
@@ -155,7 +155,7 @@ void	check_tuple(t_tuple tuple)
 //	int				y;
 
 //	init_canvas(&canvas, 1000, 500);
-//	projectile = init_projectile(point(0, 1, 0), multiply(normalize(vector(1, 1.8, 0)), 11.25));
+//	projectile = init_projectile(point(0, 1, 0), scalar(normalize(vector(1, 1.8, 0)), 11.25));
 //	environment = init_environment(vector(0, -0.1, 0), vector(-0.01, 0, 0));
 //	while (projectile.position.y > 0)
 //	{

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:55:37 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/04 21:21:34 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/05 20:25:03 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_ray	ray(t_tuple origin, t_tuple direction)
 
 t_tuple	position(t_ray ray, int time)
 {
-	return (add(ray.origin, multiply(ray.direction, time)));
+	return (add(ray.origin, scalar(ray.direction, time)));
 }
 
 t_sphere	sphere(int id)

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/04 20:48:07 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/05 20:25:05 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,6 @@ t_tuple	normal_at(t_sphere sphere, t_tuple world_p)
 t_tuple	reflect(t_tuple in, t_tuple normal)
 {
 	return (substract(in,
-			multiply
-			(multiply(normal, 2), dot(in, normal))));
+			scalar
+			(scalar(normal, 2), dot(in, normal))));
 }
