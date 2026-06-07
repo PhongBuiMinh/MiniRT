@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/04 21:04:45 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/07 23:15:14 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,16 @@ typedef struct environment
 	t_tuple	gravity;
 	t_tuple	wind;
 }	t_environment;
+
+typedef struct s_scene
+{
+	t_canvas	canvas;
+	t_tuple		origin;
+	t_sphere	sphere;
+	t_light		light;
+	double		half;
+	double		pixel_size;
+	double		wall_z;
+}	t_scene;
 
 #endif

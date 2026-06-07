@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:35:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/05/30 16:51:56 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/07 20:16:49 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 t_tuple	color(double r, double g, double b)
 {
-	r *= 255;
-	g *= 255;
-	b *= 255;
-	return (vector(r, g, b));
+	return ((t_tuple){.x = r, .y = g, .z = b, .w = 0});
 }
 
 void	write_pixel(t_canvas *canvas, int x, int y, t_tuple color)
@@ -88,6 +85,11 @@ int	clamp_color(int c)
 	return (c);
 }
 
+int	scale_color(float c)
+{
+	return (clamp_color((int)round(c * 255)));
+}
+
 void	write_star(t_canvas *canvas, int x, int y, t_tuple color)
 {
 	int	i;
@@ -132,19 +134,19 @@ void	canvas_to_ppm(t_canvas *canvas)
 				printf("\n");
 				line = 0;
 			}
-			line += printf("%i ", clamp_color(canvas->pixels[y][x].x));
+			line += printf("%i ", scale_color(canvas->pixels[y][x].x));
 			if (line + 4 > 70)
 			{
 				printf("\n");
 				line = 0;
 			}
-			line += printf("%i ", clamp_color(canvas->pixels[y][x].y));
+			line += printf("%i ", scale_color(canvas->pixels[y][x].y));
 			if (line + 4 > 70)
 			{
 				printf("\n");
 				line = 0;
 			}
-			line += printf("%i ", clamp_color(canvas->pixels[y][x].z));
+			line += printf("%i ", scale_color(canvas->pixels[y][x].z));
 			x++;
 		}
 		printf("\n");

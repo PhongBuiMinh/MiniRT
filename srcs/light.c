@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:03:25 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/05 21:15:47 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/07 20:01:12 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,14 @@ t_material	material(void)
 	return (m);
 }
 
-
 // POOR ATTEMPTS
 t_tuple	lighting(t_shade shade)
 {
 	t_tuple	effective_color;
 	t_tuple	lightv;
 	t_tuple	ambient;
-	t_tuple	dif;
-	t_tuple	spec;
+	t_tuple	diffuse;
+	t_tuple	specular;
 	t_tuple	reflectv;
 	double	light_dot_normal;
 	double	reflect_dot_eye;
@@ -51,21 +50,23 @@ t_tuple	lighting(t_shade shade)
 	lightv = normalize(substract(shade.light.pos, shade.p));
 	ambient = scalar(effective_color, shade.m.ambient);
 	light_dot_normal = dot(lightv, shade.normalv);
-	if (light_dot_normal > 0)
+	if (light_dot_normal < 0)
 	{
-		dif = color(0, 0, 0);
-		spec = color(0, 0, 0);
+		diffuse = color(0, 0, 0);
+		specular = color(0, 0, 0);
 	}
 	else
-		dif = scalar(effective_color, shade.m.diffuse * light_dot_normal);
-	reflectv = reflect(scalar(lightv, -1), shade.normalv);
-	reflect_dot_eye = dot(reflectv, shade.eyev);
-	if (reflect_dot_eye <= 0)
-		spec = color(1, 1, 1);
-	else
 	{
-		factor = pow(reflect_dot_eye, shade.m.shininess);
-		spec = scalar(shade.light.intensity, shade.m.specular * factor);
+		diffuse = scalar(effective_color, shade.m.diffuse * light_dot_normal);
+		reflectv = reflect(scalar(lightv, -1), shade.normalv);
+		reflect_dot_eye = dot(reflectv, shade.eyev);
+		if (reflect_dot_eye <= 0)
+			specular = color(0, 0, 0);
+		else
+		{
+			factor = pow(reflect_dot_eye, shade.m.shininess);
+			specular = scalar(shade.light.intensity, shade.m.specular * factor);
+		}
 	}
-	return (add(add(ambient, dif), spec));
+	return (add(specular, add(diffuse, ambient)));
 }

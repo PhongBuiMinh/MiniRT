@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/05 21:15:02 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/07 23:36:24 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,34 +99,68 @@ t_matrix	randomize_matrix(int rows, int cols)
 }
 
 
-/*	t_tuple	eyev;
-	t_tuple	normalv;
-	t_light	light;
-	t_shade	shade;
+//int	main(void)
+//{
+//	t_shade			shade;
+//	t_ray			r;
+//	t_light			light_src;
+//	t_canvas		canvas;
+//	t_sphere		s;
+//	t_tuple			origin;
+//	t_tuple			pos;
+//	t_tuple			dir;
+//	t_tuple			xs_p;
+//	t_intersections	xs;
+//	t_intersection	h;
+//	int				x;
+//	int				y;
+//	double			wall_size;
+//	double			world_x;
+//	double			world_y;
+//	double			half;
+//	double			pixel_size;
 
-	eyev = vector(0, 0, -1);
-	normalv = vector(0, 0, -1);
-	shade.m = material();
-	shade.light = light;
-	shade.p = point();
-	shade.eyev = eyev;
-	shade.normalv = normalv;
-	light = point_light(point(0, 10, -10), color(1, 1, 1));
-	eyev = vector(0, 0, -1);
-	print_tuple(lighting())
-	return (0);*/
-int	main(void)
-{
-	t_light		light;
-	t_sphere	s;
+//	wall_size = 10;
+//	origin = point(0, 0, -5);
+//	half = wall_size / 2;
+//	init_canvas(&canvas, 200, 200);
+//	pixel_size = wall_size / canvas.height;
+//	s = sphere(5);
+//	s.material = material();
+//	s.material.color = color(1, 0.2, 1);
+//	light_src = point_light(point(-10, 10, -10), color(1, 1, 1));
+//	y = 0;
+//	while (y < canvas.height)
+//	{
+//		world_y = half - pixel_size * y;
+//		x = 0;
+//		while (x < canvas.width)
+//		{
+//			world_x = -half + pixel_size * x;
+//			pos = point(world_x, world_y, 10);
+//			dir = normalize(substract(pos, origin));
+//			r = ray(origin, dir);
+//			xs = intersect(s, r);
+//			if (xs.count == -1)
+//				continue ;
+//			else
+//			{
+//				h = hit(xs);
+//				xs_p = position(r, h.t);
+//				shade.normalv = normal_at(s, xs_p);
+//				shade.eyev = negate(dir);
+//				shade.m = s.material;
+//				shade.light = light_src;
+//				write_pixel(&canvas, x, y, lighting(shade));
+//			}
 
-	s = sphere(5);
-	print_tuple(s.material.color);
-	light = point_light(point(0, 0, 0), color(1, 1, 1));
-	print_tuple(light.pos);
-	print_tuple(light.intensity);
-	return (0);
-}
+//			x++;
+//		}
+//		y++;
+//	}
+//	canvas_to_ppm(&canvas);
+//	free_pixels(canvas.pixels);
+//}
 /*
 DRAWING A SPHERE BY CASTING RAYS AT IT
 int	main(void)

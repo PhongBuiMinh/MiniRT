@@ -6,7 +6,7 @@
 #    By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/05 21:36:59 by bpetrovi          #+#    #+#              #
-#    Updated: 2026/06/04 21:02:58 by bpetrovi         ###   ########.fr        #
+#    Updated: 2026/06/07 23:36:44 by bpetrovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBFT_DIR = libft
 LIBFT = ${LIBFT_DIR}/libft.a
 SRCS_DIR = srcs
 OBJS_DIR = objs
-SRCS =	main.c \
+SRCS =	render_scene.c \
 	canvas_functions.c \
 	tuple_functions.c \
 	matrix_functions.c \
