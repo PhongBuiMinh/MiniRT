@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/05 20:25:05 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/08 14:43:02 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,14 +140,15 @@ t_intersection	hit(t_intersections xs)
 // WORLD_P = POINT IN WORLD SPACE, AND OBJECT_P = POINT IN OBJECT SPACE
 t_tuple	normal_at(t_sphere sphere, t_tuple world_p)
 {
-	t_tuple	object_p;
-	t_tuple	object_normal;
-	t_tuple	world_normal;
+	t_tuple		object_p;
+	t_tuple		object_normal;
+	t_tuple		world_normal;
+	t_matrix	inverse_transpose;
 
 	object_p = mat_apply(inversion(sphere.transformation), world_p);
 	object_normal = substract(object_p, point(0, 0, 0));
-	world_normal = mat_apply(transpose(inversion
-				(sphere.transformation)), object_normal);
+	inverse_transpose = transpose(inversion(sphere.transformation));
+	world_normal = mat_apply(inverse_transpose, object_normal);
 	world_normal.w = 0;
 	return (normalize(world_normal));
 }

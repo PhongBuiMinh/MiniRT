@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:48:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/07 23:58:41 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/08 14:56:27 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,21 @@
 int	init_scene(t_scene *scene)
 {
 	t_canvas	canvas;
-	double		wall;
+	double		wall_size;
 
-	wall = 7;
-	if (!init_canvas(&canvas, 200, 200))
+	wall_size = 5;
+	if (!init_canvas(&canvas, 400, 400))
 		return (0);
 	scene->canvas = canvas;
 	scene->origin = point(0, 0, -5);
 	scene->sphere = sphere(5);
 	scene->sphere.material = material();
 	scene->sphere.material.color = color(1, 0.2, 1);
-	scene->light = point_light(point(-10, 10, -10), color(1, 1, 1));
-	scene->half = wall / 2;
-	scene->pixel_size = wall / canvas.width;
-	scene->wall_z = 10;
+	scene->sphere.transformation = scaling(0.5, 0.5, 0.5);
+	scene->light = point_light(point(10, 10, -10), color(1, 1, 1));
+	scene->half = wall_size / 2;
+	scene->pixel_size = wall_size / canvas.width;
+	scene->wall_z = 5;
 	return (1);
 }
 
@@ -54,11 +55,9 @@ void	render_pixel(t_scene *scene, int x, int y)
 	t_ray			r;
 
 	r = find_ray(scene, x, y);
-
 	shade.m = scene->sphere.material;
 	shade.light = scene->light;
 	shade.eyev = negate(r.direction);
-
 	xs = intersect(scene->sphere, r);
 	if (xs.count == 0)
 		return ;
@@ -66,6 +65,7 @@ void	render_pixel(t_scene *scene, int x, int y)
 	shade.p = position(r, h.t);
 	shade.normalv = normal_at(scene->sphere, shade.p);
 	write_pixel(&scene->canvas, x, y, lighting(shade));
+	free(xs.intersections);
 }
 
 void	render_row(t_scene *scene, int y)

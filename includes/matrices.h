@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/04 19:47:27 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/08 15:03:25 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ t_matrix	rotation_x(double radiants);
 t_matrix	rotation_y(double radiants);
 t_matrix	rotation_z(double radiants);
 t_matrix	shearing(struct s_shear params);
+bool		equal(double a, double b);
 
 #endif

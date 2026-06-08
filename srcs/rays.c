@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:55:37 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/05 20:25:03 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/08 14:55:06 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_ray	ray(t_tuple origin, t_tuple direction)
 	return (new_ray);
 }
 
-t_tuple	position(t_ray ray, int time)
+t_tuple	position(t_ray ray, float time)
 {
 	return (add(ray.origin, scalar(ray.direction, time)));
 }
