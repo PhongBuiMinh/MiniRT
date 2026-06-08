@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/04 19:47:27 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/07 10:55:54 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,3 +372,5 @@ t_matrix	shearing(struct s_shear params)
 	shear_matrix.data[2][1] = params.zy;
 	return (shear_matrix);
 }
+
+
