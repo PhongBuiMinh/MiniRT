@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 22:58:41 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 23:22:12 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,18 @@ int	render_scene(t_scene *scene)
 		y++;
 	}
 	return (1);
+}
+
+t_tuple	color_at(t_world world, t_ray ray)
+{
+	t_intersections	xs;
+	t_phong			phong;
+
+	xs = world_intersect(world, ray);
+	if (xs.count > 0)
+		phong = phong_computations(hit(xs), ray);
+	else
+		return (color(0, 0, 0));
+	phong.light = world.light;
+	return (phong_lightning(phong));
 }

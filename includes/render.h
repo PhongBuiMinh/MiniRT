@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:17:46 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 22:58:40 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 23:21:08 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_scene
 	double		wall_z;
 }	t_scene;
 
+t_tuple	color_at(t_world world, t_ray ray);
 int		render_scene(t_scene *scene);
 void	render_pixel(t_scene *scene, int x, int y);
 
