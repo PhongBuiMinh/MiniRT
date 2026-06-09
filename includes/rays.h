@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:56:37 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/08 14:55:39 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:14:08 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_ray
 typedef struct s_sphere
 {
 	t_matrix	transformation;
-	t_tuple		origin;	
 	t_material	material;
 	int			id;
 }	t_sphere;

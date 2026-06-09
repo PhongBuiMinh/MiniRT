@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/08 14:43:02 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/08 18:26:28 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ t_intersections	xs_init(void)
 
 	new_xs.capacity = 4;
 	new_xs.count = 0;
+	new_xs.err = false;
 	new_xs.intersections = malloc(sizeof(t_intersection) * new_xs.capacity);
 	if (new_xs.intersections == NULL)
-		return (new_xs.count = -1, new_xs);
+		return (new_xs.err = true, new_xs);
 	return (new_xs);
 }
 
@@ -41,27 +42,27 @@ double	discriminant(t_ray ray)
 t_intersections	intersect(t_sphere sphere, t_ray ray)
 {
 	t_intersections	xs;
+	t_intersection	is;
 	t_tuple			sphere_to_ray;
 	double			d;
 	double			a;
 	double			b;
 
-	xs.intersections = NULL;
+	xs = xs_init();
+	if (xs.err == true)
+		return (xs);
 	ray = ray_transform(ray, inversion(sphere.transformation));
 	d = discriminant(ray);
-	if (d < -EPSILON)
+	if (d < EPSILON)
 		return (xs.count = 0, xs);
-	xs.count = 2;
-	xs.intersections = malloc(sizeof(t_intersection) * 2);
-	if (!xs.intersections)
-		return (xs.count = -1, xs);
 	sphere_to_ray = substract(ray.origin, point(0, 0, 0));
 	a = dot(ray.direction, ray.direction);
 	b = 2 * dot(ray.direction, sphere_to_ray);
-	xs.intersections[0].t = (-b - sqrt(d)) / (2 * a);
-	xs.intersections[1].t = (-b + sqrt(d)) / (2 * a);
-	xs.intersections[0].object = sphere.id;
-	xs.intersections[1].object = sphere.id;
+	is.object = sphere.id;
+	is.t = (-b - sqrt(d)) / (2 * a);
+	xs_push(&xs, is);
+	is.t = (-b + sqrt(d)) / (2 * a);
+	xs_push(&xs, is);
 	return (xs);
 }
 

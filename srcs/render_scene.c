@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:48:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/08 14:56:27 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:56:29 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	init_scene(t_scene *scene)
 	scene->sphere = sphere(5);
 	scene->sphere.material = material();
 	scene->sphere.material.color = color(1, 0.2, 1);
-	scene->sphere.transformation = scaling(0.5, 0.5, 0.5);
 	scene->light = point_light(point(10, 10, -10), color(1, 1, 1));
 	scene->half = wall_size / 2;
 	scene->pixel_size = wall_size / canvas.width;
@@ -93,15 +92,38 @@ int	render_scene(t_scene *scene)
 	return (1);
 }
 
-int	main(void)
+int	main()
 {
-	t_scene	scene;
+	t_world			world;
+	t_intersections	xs;
+	t_ray			r;
 
-	if (!init_scene(&scene))
-		return (1);
-	if (!render_scene(&scene))
-		return (1);
-	canvas_to_ppm(&scene.canvas);
-	free_pixels(scene.canvas.pixels);
+	world = default_world();
+	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	xs = intersect_world(r, world);
+	if (xs.err == true)
+		return (free(world.spheres), 1);
+	printf("%i\n", xs.count);
+	int	i;
+
+	i = 0;
+	while (i < xs.count)
+	{
+		printf("%f\n", xs.intersections[i].t);
+		i++;
+	}
 	return (0);
 }
+
+//int	main(void)
+//{
+//	t_scene	scene;
+
+//	if (!init_scene(&scene))
+//		return (1);
+//	if (!render_scene(&scene))
+//		return (1);
+//	canvas_to_ppm(&scene.canvas);
+//	free_pixels(scene.canvas.pixels);
+//	return (0);
+//}

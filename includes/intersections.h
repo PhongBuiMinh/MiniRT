@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:13:15 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/07 22:28:57 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:47:13 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_intersection
 typedef struct s_intersections
 {
 	t_intersection	*intersections;
+	bool			err;
 	int				capacity;
 	int				count;
 }	t_intersections;

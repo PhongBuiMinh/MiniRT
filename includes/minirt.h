@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/07 23:15:14 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:14:38 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,16 @@ typedef struct s_scene
 	double		pixel_size;
 	double		wall_z;
 }	t_scene;
+
+typedef struct s_world
+{
+	t_light		light;
+	t_sphere	*spheres;
+	int			obj_c;
+}	t_world;
+
+
+t_world			default_world(void);
+t_intersections	intersect_world(t_ray ray, t_world world);
 
 #endif
