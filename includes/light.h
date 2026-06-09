@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:01:53 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 21:20:35 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 22:26:31 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,17 @@ typedef struct s_light
 	t_tuple	pos;
 }	t_light;
 
-typedef struct t_shade
+typedef struct s_phong
 {
-	t_material	m;
+	t_sphere	object;
 	t_light		light;
-	t_tuple		p;
+	t_tuple		point;
 	t_tuple		eyev;
 	t_tuple		normalv;
-}	t_shade;
+	bool		inside_obj;
+}	t_phong;
 
-t_tuple		l_find(t_shade shade);
-t_light		l_init(t_tuple pos, t_tuple intensity);
+t_tuple		phong_lightning(t_phong shade);
+t_light		light_init(t_tuple pos, t_tuple intensity);
 
 #endif

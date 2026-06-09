@@ -6,30 +6,18 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:58:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 21:20:03 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 22:25:00 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_comps	prepare_computations(t_intersection is, t_ray r)
-{
-	t_comps	computations;
-	t_tuple	is_pos;
-
-	is_pos = r_pos(r, is.t);
-	computations.sphere = is.object;
-	computations.point = is_pos;
-	computations.eyev = t_negate(r.direction);
-	computations.normalv = normal_at(is.object, is_pos);
-	return (computations);
-}
 
 t_world	world_default(void)
 {
 	t_world	new_world;
 
-	new_world.light = l_init(point(-10, 10, -10), color(1, 1, 1));
+	new_world.light = light_init(point(-10, 10, -10), color(1, 1, 1));
 	new_world.spheres = malloc(sizeof(t_sphere) * 2);
 	if (!new_world.spheres)
 		return (new_world.obj_c = -1, new_world);

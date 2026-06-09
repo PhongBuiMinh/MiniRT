@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:55:37 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 21:24:27 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 22:29:51 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,3 @@ t_ray	r_transform(t_ray ray, t_matrix transformation)
 	return (transformed_ray);
 }
 
-t_ray	r_find(t_scene *scene, int x, int y)
-{
-	t_tuple	direction;
-	float	world_x;
-	float	world_y;
-
-	world_y = scene->half - y * scene->pixel_size;
-	world_x = -scene->half + x * scene->pixel_size;
-	direction = t_substract(point(world_x, world_y, scene->wall_z),
-			scene->origin);
-	direction = normalize(direction);
-	return (r_init(scene->origin, direction));
-}

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 21:20:35 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 22:23:07 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@
 
 ////int	main(void)
 ////{
-////	t_shade			shade;
+////	t_phong			shade;
 ////	t_ray			r;
 ////	t_light			light_src;
 ////	t_canvas		canvas;
@@ -128,7 +128,7 @@
 ////	s = sphere(5);
 ////	s.material = material();
 ////	s.material.color = color(1, 0.2, 1);
-////	light_src = l_init(point(-10, 10, -10), color(1, 1, 1));
+////	light_src = light_init(point(-10, 10, -10), color(1, 1, 1));
 ////	y = 0;
 ////	while (y < canvas.height)
 ////	{
@@ -151,7 +151,7 @@
 ////				shade.eyev = t_negate(dir);
 ////				shade.m = s.material;
 ////				shade.light = light_src;
-////				write_pixel(&canvas, x, y, l_find(shade));
+////				write_pixel(&canvas, x, y, phong_lightning(shade));
 ////			}
 
 ////			x++;

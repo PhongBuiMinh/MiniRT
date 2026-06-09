@@ -6,13 +6,13 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:03:25 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 21:20:35 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 22:24:00 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_light	l_init(t_tuple pos, t_tuple intensity)
+t_light	light_init(t_tuple pos, t_tuple intensity)
 {
 	t_light	light;
 
@@ -22,7 +22,7 @@ t_light	l_init(t_tuple pos, t_tuple intensity)
 }
 
 // POOR ATTEMPTS
-t_tuple	l_find(t_shade shade)
+t_tuple	phong_lightning(t_phong phong)
 {
 	t_tuple	effective_color;
 	t_tuple	lightv;
@@ -34,10 +34,10 @@ t_tuple	l_find(t_shade shade)
 	double	reflect_dot_eye;
 	double	factor;
 
-	effective_color = t_multiply(shade.m.color, shade.light.intensity);
-	lightv = normalize(t_substract(shade.light.pos, shade.p));
-	ambient = t_scale(effective_color, shade.m.ambient);
-	light_dot_normal = dot(lightv, shade.normalv);
+	effective_color = t_multiply(phong.object.material.color, phong.light.intensity);
+	lightv = normalize(t_substract(phong.light.pos, phong.point));
+	ambient = t_scale(effective_color, phong.object.material.ambient);
+	light_dot_normal = dot(lightv, phong.normalv);
 	if (light_dot_normal < 0)
 	{
 		diffuse = color(0, 0, 0);
@@ -45,15 +45,15 @@ t_tuple	l_find(t_shade shade)
 	}
 	else
 	{
-		diffuse = t_scale(effective_color, shade.m.diffuse * light_dot_normal);
-		reflectv = reflect(t_scale(lightv, -1), shade.normalv);
-		reflect_dot_eye = dot(reflectv, shade.eyev);
+		diffuse = t_scale(effective_color, phong.object.material.diffuse * light_dot_normal);
+		reflectv = reflect(t_scale(lightv, -1), phong.normalv);
+		reflect_dot_eye = dot(reflectv, phong.eyev);
 		if (reflect_dot_eye <= 0)
 			specular = color(0, 0, 0);
 		else
 		{
-			factor = pow(reflect_dot_eye, shade.m.shininess);
-			specular = t_scale(shade.light.intensity, shade.m.specular * factor);
+			factor = pow(reflect_dot_eye, phong.object.material.shininess);
+			specular = t_scale(phong.light.intensity, phong.object.material.specular * factor);
 		}
 	}
 	return (t_add(specular, t_add(diffuse, ambient)));

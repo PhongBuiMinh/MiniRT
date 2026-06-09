@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/* */
-/* :::      ::::::::   */
-/* tests.h                                            :+:      :+:    :+:   */
-/* +:+ +:+         +:+     */
-/* By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
-/* +#+#+#+#+#+   +#+           */
-/* Created: 2026/06/08 15:15:00 by bpetrovi          #+#    #+#             */
-/* Updated: 2026/06/08 15:15:00 by bpetrovi         ###   ########.fr       */
-/* */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tests.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/09 22:17:56 by bpetrovi          #+#    #+#             */
+/*   Updated: 2026/06/09 22:22:44 by bpetrovi         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TESTS_H
@@ -64,7 +64,7 @@ int	test_normal_translated_sphere(void);
 int	test_normal_scaled_rotated_sphere(void);
 
 /* ===========================
-** l_find Tests
+** phong_lightning Tests
 ** =========================== */
 int	test_lighting_eye_between_light_and_surface(void);
 int	test_lighting_eye_offset_45(void);
