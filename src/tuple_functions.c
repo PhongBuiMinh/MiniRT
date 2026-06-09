@@ -6,11 +6,11 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 17:03:36 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/08 14:47:36 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:06:05 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "minirt.h"
 
 t_tuple	vector(double x, double y, double z)
 {
@@ -135,15 +135,6 @@ void	print_tuple(t_tuple tuple)
 	printf("w: %f\n", tuple.w);
 }
 
-void	check_tuple(t_tuple tuple)
-{
-	if (tuple.w == VECTOR)
-		printf("Tuple is a vector\n");
-	else if (tuple.w == POINT)
-		printf("Tuple is a point\n");
-	else
-		printf("Tuple is neither\n");
-}
 
 //PROJECTILE FIRING DIAGONALLY UPWARDS
 //int	main(void)

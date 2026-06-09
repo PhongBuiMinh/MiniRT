@@ -6,11 +6,24 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:58:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 19:44:34 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 19:58:58 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "minirt.h"
+
+t_comps	prepare_computations(t_intersection is, t_ray r)
+{
+	t_comps	computations;
+	t_tuple	is_pos;
+
+	is_pos = position(r, is.t);
+	computations.sphere = is.object;
+	computations.point = is_pos;
+	computations.eyev = negate(r.direction);
+	computations.normalv = normal_at(is.object, is_pos);
+	return (computations);
+}
 
 t_world	default_world(void)
 {

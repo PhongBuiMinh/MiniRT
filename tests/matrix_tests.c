@@ -10,7 +10,7 @@
 /* */
 /* ************************************************************************** */
 
-#include "../../includes/tests.h"
+#include "tests.h"
 
 int	test_identity_matrix(void)
 {

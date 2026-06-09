@@ -6,18 +6,20 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:13:15 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 19:17:33 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:10:18 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INTERSECTIONS_H
 # define INTERSECTIONS_H
 # include "tuple.h"
+# include "rays.h"
+# include "objects.h"
 
 typedef struct s_intersection
 {
-	double	t;
-	int		object;
+	double		t;
+	t_sphere	object;
 }	t_intersection;
 
 typedef struct s_intersections

@@ -1,45 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.h                                            :+:      :+:    :+:   */
+/*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/04 21:01:53 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:00:07 by bpetrovi         ###   ########.fr       */
+/*   Created: 2026/06/09 20:45:00 by bpetrovi          #+#    #+#             */
+/*   Updated: 2026/06/09 20:45:00 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIGHT_H
-# define LIGHT_H
-# include "tuple.h"
+#ifndef WORLD_H
+# define WORLD_H
 
-typedef struct s_light
-{
-	t_tuple	intensity;
-	t_tuple	pos;
-}	t_light;
+# include "light.h"
+# include "objects.h"
+# include "rays.h"
+# include "intersections.h"
 
-typedef struct s_material
+typedef struct s_world
 {
-	t_tuple	color;
-	double	ambient;
-	double	diffuse;
-	double	specular;
-	double	shininess;
-}	t_material;
-
-typedef struct t_shade
-{
-	t_material	m;
 	t_light		light;
-	t_tuple		p;
+	t_sphere	*spheres;
+	int		obj_c;
+}t_world;
+
+typedef struct s_comps
+{
+	t_sphere	sphere;
+	t_tuple		point;
 	t_tuple		eyev;
 	t_tuple		normalv;
-}	t_shade;
+}t_comps;
 
-t_tuple		lighting(t_shade shade);
-t_light		point_light(t_tuple pos, t_tuple intensity);
-t_material	material(void);
+t_comps		prepare_computations(t_intersection is, t_ray r);
+
+t_world		default_world(void);
+
+t_intersections	intersect_world(t_ray ray, t_world world);
 
 #endif

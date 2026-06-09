@@ -6,13 +6,13 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/08 17:14:38 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:09:47 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
-# define PI 3.14159265358979323846
 # define MINIRT_H
+# define PI 3.14159265358979323846
 # define EPSILON 0.0001
 # define VECTOR 0
 # define POINT 1
@@ -22,13 +22,15 @@
 # include <math.h>
 # include <stdbool.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+# include "libft.h"
 # include "tuple.h"
 # include "canvas.h"
 # include "matrices.h"
 # include "rays.h"
 # include "intersections.h"
 # include "light.h"
+# include "objects.h"
+# include "world.h"
 
 typedef struct s_projectile
 {
@@ -53,15 +55,6 @@ typedef struct s_scene
 	double		wall_z;
 }	t_scene;
 
-typedef struct s_world
-{
-	t_light		light;
-	t_sphere	*spheres;
-	int			obj_c;
-}	t_world;
 
-
-t_world			default_world(void);
-t_intersections	intersect_world(t_ray ray, t_world world);
 
 #endif

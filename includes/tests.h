@@ -15,7 +15,7 @@
 
 # include <stdio.h>
 # include <math.h>
-# include "../includes/minirt.h"
+# include "minirt.h"
 
 # define GREEN "\033[32m"
 # define RED "\033[31m"

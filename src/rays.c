@@ -6,11 +6,11 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:55:37 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/08 14:55:06 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:05:17 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minirt.h"
+#include "minirt.h"
 
 t_ray	ray(t_tuple origin, t_tuple direction)
 {
@@ -24,21 +24,6 @@ t_ray	ray(t_tuple origin, t_tuple direction)
 t_tuple	position(t_ray ray, float time)
 {
 	return (add(ray.origin, scalar(ray.direction, time)));
-}
-
-t_sphere	sphere(int id)
-{
-	t_sphere	new_sphere;
-
-	new_sphere.id = id;
-	new_sphere.transformation = init_ind_matrix(4, 4);
-	new_sphere.material = material();
-	return (new_sphere);
-}
-
-void	set_transformation(t_sphere *sphere, t_matrix transformation)
-{
-	sphere->transformation = transformation;
 }
 
 t_ray	ray_transform(t_ray ray, t_matrix transformation)

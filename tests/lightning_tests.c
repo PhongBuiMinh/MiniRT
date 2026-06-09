@@ -10,7 +10,7 @@
 /* */
 /* ************************************************************************** */
 
-#include "../../includes/tests.h"
+#include "tests.h"
 
 int	test_lighting_eye_between_light_and_surface(void)
 {

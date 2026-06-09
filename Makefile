@@ -11,16 +11,18 @@
 # **************************************************************************** #
 
 NAME = minirt
-CFLAGS = -Wall -Wextra -Werror
+INCLUDES = -Iincludes -Ilibft
+CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
 DEBUG = -fsanitize=address -g
 LIBFT_DIR = libft
 LIBFT = ${LIBFT_DIR}/libft.a
-SRCS_DIR = srcs
-OBJS_DIR = objs
+SRCS_DIR = src
+OBJS_DIR = build
 CORE_SRCS = canvas_functions.c \
             tuple_functions.c \
             matrix_functions.c \
             rays.c \
+            objects.c \
             intersections.c \
             light.c \
 			world.c
@@ -46,8 +48,15 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
 	@mkdir -p $(dir $@)
 	gcc $(CFLAGS) -c $< -o $@
 
+$(OBJS_DIR)/tests/%.o: tests/%.c | $(OBJS_DIR)/tests
+	@mkdir -p $(dir $@)
+	gcc $(CFLAGS) -c $< -o $@
+
 ${OBJS_DIR}:
 	mkdir -p ${OBJS_DIR}
+
+${OBJS_DIR}/tests:
+	mkdir -p ${OBJS_DIR}/tests
 
 clean:
 	@make -s -C ${LIBFT_DIR} clean
