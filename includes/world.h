@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:45:00 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 23:18:06 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 23:50:20 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,9 @@ typedef struct s_world
 {
 	t_light		light;
 	t_sphere	*spheres;
-	int			obj_c;
+	int			object_cnt;
 }	t_world;
 
-typedef struct s_comps
-{
-	t_sphere	sphere;
-	t_tuple		point;
-	t_tuple		eyev;
-	t_tuple		normalv;
-}	t_comps;
-
-t_comps			prepare_computations(t_intersection is, t_ray r);
 t_world			world_default(void);
 t_intersections	world_intersect(t_world world, t_ray ray);
 

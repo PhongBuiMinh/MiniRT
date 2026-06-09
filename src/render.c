@@ -34,11 +34,14 @@ void	render_pixel(t_scene *scene, int x, int y)
 	t_phong			phong;
 	t_ray			ray;
 
+	ray = find_direction(scene, x, y);
 	xs = xs_find(scene->sphere, ray);
 	if (xs.count == 0)
+	{
+		free(xs.intersections);
 		return ;
+	}
 	is = hit(xs);
-	ray = find_direction(scene, x, y);
 	phong = phong_computations(is, ray);
 	phong.light = scene->light;
 	write_pixel(&scene->canvas, x, y, phong_lightning(phong));
