@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:58:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/08 17:56:25 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 19:44:34 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_intersections	intersect_world(t_ray ray, t_world world)
 	int				i;
 
 	i = 0;
-	all.intersections = NULL;
 	all = xs_init();
 	if (all.err)
 		return (all);
@@ -47,6 +46,7 @@ t_intersections	intersect_world(t_ray ray, t_world world)
 			return (free(all.intersections), all.err = true, all);
 		if (!xs_append(&all, xs))
 			return (free(all.intersections), all.err = true, all);
+		xs_sort(&all);
 		i++;
 	}
 	return (all);

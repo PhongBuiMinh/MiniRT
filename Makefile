@@ -6,7 +6,7 @@
 #    By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/05 21:36:59 by bpetrovi          #+#    #+#              #
-#    Updated: 2026/06/08 17:11:10 by bpetrovi         ###   ########.fr        #
+#    Updated: 2026/06/09 19:46:35 by bpetrovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CORE_SRCS = canvas_functions.c \
             intersections.c \
             light.c \
 			world.c
-SRCS = render_scene.c $(CORE_SRCS)
+SRCS = main.c $(CORE_SRCS)
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 all: ${NAME} ${LIBFT}

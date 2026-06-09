@@ -5,206 +5,125 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/07 23:36:24 by bpetrovi         ###   ########.fr       */
+/*   Created: 2026/06/07 22:48:42 by bpetrovi          #+#    #+#             */
+/*   Updated: 2026/06/09 19:46:18 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
 
-t_projectile	init_projectile(t_tuple position, t_tuple velocity)
-{
-	t_projectile	projectile;
+//int	init_scene(t_scene *scene)
+//{
+//	t_canvas	canvas;
+//	double		wall_size;
 
-	projectile.position = position;
-	projectile.velocity = velocity;
-	return (projectile);
+//	wall_size = 5;
+//	if (!init_canvas(&canvas, 400, 400))
+//		return (0);
+//	scene->canvas = canvas;
+//	scene->origin = point(0, 0, -5);
+//	scene->sphere = sphere(5);
+//	scene->sphere.material = material();
+//	scene->sphere.material.color = color(1, 0.2, 1);
+//	scene->light = point_light(point(10, 10, -10), color(1, 1, 1));
+//	scene->half = wall_size / 2;
+//	scene->pixel_size = wall_size / canvas.width;
+//	scene->wall_z = 5;
+//	return (1);
+//}
+
+t_ray	find_ray(t_scene *scene, int x, int y)
+{
+	t_tuple	direction;
+	float	world_x;
+	float	world_y;
+
+	world_y = scene->half - y * scene->pixel_size;
+	world_x = -scene->half + x * scene->pixel_size;
+	direction = substract(point(world_x, world_y, scene->wall_z),
+			scene->origin);
+	direction = normalize(direction);
+	return (ray(scene->origin, direction));
 }
 
-t_environment	init_environment(t_tuple gravity, t_tuple wind)
+void	render_pixel(t_scene *scene, int x, int y)
 {
-	t_environment	environment;
+	t_intersections	xs;
+	t_intersection	h;
+	t_shade			shade;
+	t_ray			r;
 
-	environment.gravity = gravity;
-	environment.wind = wind;
-	return (environment);
+	r = find_ray(scene, x, y);
+	shade.m = scene->sphere.material;
+	shade.light = scene->light;
+	shade.eyev = negate(r.direction);
+	xs = intersect(scene->sphere, r);
+	if (xs.count == 0)
+		return ;
+	h = hit(xs);
+	shade.p = position(r, h.t);
+	shade.normalv = normal_at(scene->sphere, shade.p);
+	write_pixel(&scene->canvas, x, y, lighting(shade));
+	free(xs.intersections);
 }
 
-void	tick(t_environment *environment, t_projectile *projectile)
+void	render_row(t_scene *scene, int y)
 {
-	projectile->position = add(projectile->position, projectile->velocity);
-	projectile->velocity = add(projectile->velocity, add(environment->gravity, environment->wind));
-}
-
-// FUNCTION FOR FILLING MATRICES FOR TESTING
-
-t_matrix	parse_matrix(char *str, int rows, int cols)
-{
-	t_matrix	matrix;
-	int			x;
-	int			y;
-
-	matrix.rows = rows;
-	matrix.cols = cols;
+	int		x;
 
 	x = 0;
-	y = 0;
-	while (*str && x < rows)
+	while (x < scene->canvas.width)
 	{
-		if ((*str >= '0' && *str <= '9') || *str == '-')
-		{
-			matrix.data[x][y] = atof(str);
-
-			while ((*str >= '0' && *str <= '9')
-				|| *str == '-'
-				|| *str == '.')
-				str++;
-
-			y++;
-			if (y >= cols)
-			{
-				y = 0;
-				x++;
-			}
-		}
-		else
-			str++;
-	}
-
-	return (matrix);
-}
-
-//RAND NOT ALLOWED (JUST FOR TESTING)
-
-t_matrix	randomize_matrix(int rows, int cols)
-{
-	t_matrix	randomized_matrix;
-	int			y;
-	int			x;
-
-	x = 0;
-	randomized_matrix.rows = rows;
-	randomized_matrix.cols = cols;
-	while (x < rows)
-	{
-		y = 0;
-		while (y < cols)
-		{
-			randomized_matrix.data[x][y] = rand() % 1349;
-			y++;
-		}
+		render_pixel(scene, x, y);
 		x++;
 	}
-	return (randomized_matrix);
 }
 
+int	render_scene(t_scene *scene)
+{
+	int		y;
+
+	y = 0;
+	while (y < scene->canvas.height)
+	{
+		render_row(scene, y);
+		y++;
+	}
+	return (1);
+}
+
+int	main(void)
+{
+	t_world			world;
+	t_intersections	xs;
+	t_ray			r;
+
+	world = default_world();
+	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	xs = intersect_world(r, world);
+	if (xs.err == true)
+		return (free(world.spheres), 1);
+	printf("%i\n", xs.count);
+	int	i;
+
+	i = 0;
+	while (i < xs.count)
+	{
+		printf("%f\n", xs.intersections[i].t);
+		i++;
+	}
+	return (0);
+}
 
 //int	main(void)
 //{
-//	t_shade			shade;
-//	t_ray			r;
-//	t_light			light_src;
-//	t_canvas		canvas;
-//	t_sphere		s;
-//	t_tuple			origin;
-//	t_tuple			pos;
-//	t_tuple			dir;
-//	t_tuple			xs_p;
-//	t_intersections	xs;
-//	t_intersection	h;
-//	int				x;
-//	int				y;
-//	double			wall_size;
-//	double			world_x;
-//	double			world_y;
-//	double			half;
-//	double			pixel_size;
+//	t_scene	scene;
 
-//	wall_size = 10;
-//	origin = point(0, 0, -5);
-//	half = wall_size / 2;
-//	init_canvas(&canvas, 200, 200);
-//	pixel_size = wall_size / canvas.height;
-//	s = sphere(5);
-//	s.material = material();
-//	s.material.color = color(1, 0.2, 1);
-//	light_src = point_light(point(-10, 10, -10), color(1, 1, 1));
-//	y = 0;
-//	while (y < canvas.height)
-//	{
-//		world_y = half - pixel_size * y;
-//		x = 0;
-//		while (x < canvas.width)
-//		{
-//			world_x = -half + pixel_size * x;
-//			pos = point(world_x, world_y, 10);
-//			dir = normalize(substract(pos, origin));
-//			r = ray(origin, dir);
-//			xs = intersect(s, r);
-//			if (xs.count == -1)
-//				continue ;
-//			else
-//			{
-//				h = hit(xs);
-//				xs_p = position(r, h.t);
-//				shade.normalv = normal_at(s, xs_p);
-//				shade.eyev = negate(dir);
-//				shade.m = s.material;
-//				shade.light = light_src;
-//				write_pixel(&canvas, x, y, lighting(shade));
-//			}
-
-//			x++;
-//		}
-//		y++;
-//	}
-//	canvas_to_ppm(&canvas);
-//	free_pixels(canvas.pixels);
+//	if (!init_scene(&scene))
+//		return (1);
+//	if (!render_scene(&scene))
+//		return (1);
+//	canvas_to_ppm(&scene.canvas);
+//	free_pixels(scene.canvas.pixels);
+//	return (0);
 //}
-/*
-DRAWING A SPHERE BY CASTING RAYS AT IT
-int	main(void)
-{
-	t_canvas		canvas;
-	t_sphere		s;
-	t_tuple			origin;
-	t_tuple			position;
-	t_intersections	xs;
-	int				x;
-	int				y;
-	double			wall_size;
-	double			world_x;
-	double			world_y;
-	double			half;
-	double			pixel_size;
-
-	wall_size = 10;
-	origin = point(0, 0, -5);
-	half = wall_size / 2;
-	init_canvas(&canvas, 200, 200);
-	pixel_size = wall_size / canvas.height;
-	s = sphere(5);
-	struct s_shear shear = {1, 0, 0, 0, 0, 0};
-	s.transformation = multiply_matrices(shearing(shear), rotation_z(PI / 4));
-	y = 0;
-	while (y < canvas.height)
-	{
-		world_y = half - pixel_size * y;
-		x = 0;
-		while (x < canvas.width)
-		{
-			world_x = -half + pixel_size * x;
-			position = point(world_x, world_y, 10);
-			xs = intersect(s, ray(origin, normalize(substract(position, origin))));
-			if (xs.count != 0)
-				write_pixel(&canvas, x, y, color(1, 0, 0));
-			else
-				write_pixel(&canvas, x, y, color(0, 0, 0));
-			x++;
-		}
-		y++;
-	}
-	canvas_to_ppm(&canvas);
-	free_pixels(canvas.pixels);
-}
-*/

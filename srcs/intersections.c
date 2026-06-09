@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 19:13:39 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 19:44:55 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ double	discriminant(t_ray ray)
 	return (b * b - 4 * a * c);
 }
 
+// TOO MANY VARIABLES + XS_PUSH FAILURE CAN BE HANDLED BETTER
 t_intersections	intersect(t_sphere sphere, t_ray ray)
 {
 	t_intersections	xs;
@@ -53,7 +54,7 @@ t_intersections	intersect(t_sphere sphere, t_ray ray)
 		return (xs);
 	ray = ray_transform(ray, inversion(sphere.transformation));
 	d = discriminant(ray);
-	if (d < EPSILON)
+	if (d < -EPSILON)
 		return (xs.count = 0, xs);
 	sphere_to_ray = substract(ray.origin, point(0, 0, 0));
 	a = dot(ray.direction, ray.direction);
@@ -109,7 +110,7 @@ void	quick_sort(t_intersections *xs, int left, int right)
 	j = left;
 	while (j < right)
 	{
-		if (xs.intersections[j].t < xs.intersections[right].t)
+		if (xs->intersections[j].t < xs->intersections[right].t)
 		{
 			xs_swap(xs, j, i);
 			i++;
@@ -121,9 +122,9 @@ void	quick_sort(t_intersections *xs, int left, int right)
 	quick_sort(xs, i + 1, right);
 }
 
-void	xs_sort(t_intersections xs)
+void	xs_sort(t_intersections *xs)
 {
-	quick_sort(&xs, 0, xs.count - 1);
+	quick_sort(xs, 0, xs->count - 1);
 }
 
 bool	xs_push(t_intersections *xs, t_intersection i)
@@ -131,7 +132,7 @@ bool	xs_push(t_intersections *xs, t_intersection i)
 	if (xs->count == xs->capacity)
 	{
 		if (!xs_grow(xs))
-			return (false);
+			return (xs->err = true, false);
 	}
 	xs->intersections[xs->count] = i;
 	xs->count++;
@@ -146,7 +147,7 @@ bool	xs_append(t_intersections *dst, t_intersections src)
 	while (i < src.count)
 	{
 		if (!xs_push(dst, src.intersections[i]))
-			return (false);
+			return (free(src.intersections), free(dst->intersections), false);
 		i++;
 	}
 	free(src.intersections);
