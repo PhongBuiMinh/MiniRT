@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/08 18:26:28 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 19:13:39 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,46 @@ bool	xs_grow(t_intersections *xs)
 	xs->intersections = new_array;
 	xs->capacity *= 2;
 	return (true);
+}
+
+void	xs_swap(t_intersections *xs, int i, int j)
+{
+	t_intersection	temp;
+
+	temp = xs->intersections[i];
+	xs->intersections[i] = xs->intersections[j];
+	xs->intersections[j] = temp;
+}
+
+void	quick_sort(t_intersections *xs, int left, int right)
+{
+	int				pivot;
+	int				i;
+	int				j;
+
+	if (left >= right)
+		return ;
+	pivot = (left + right) / 2;
+	xs_swap(xs, pivot, right);
+	i = left;
+	j = left;
+	while (j < right)
+	{
+		if (xs.intersections[j].t < xs.intersections[right].t)
+		{
+			xs_swap(xs, j, i);
+			i++;
+		}
+		j++;
+	}
+	xs_swap(xs, i, right);
+	quick_sort(xs, left, i - 1);
+	quick_sort(xs, i + 1, right);
+}
+
+void	xs_sort(t_intersections xs)
+{
+	quick_sort(&xs, 0, xs.count - 1);
 }
 
 bool	xs_push(t_intersections *xs, t_intersection i)
