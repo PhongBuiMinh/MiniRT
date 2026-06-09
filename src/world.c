@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:58:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:59:33 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 21:11:35 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_intersections	intersect_world(t_ray ray, t_world world)
 		return (all);
 	while (i < world.obj_c)
 	{
-		xs = intersect(world.spheres[i], ray);
+		xs = xs_find(world.spheres[i], ray);
 		if (xs.err == true)
 			return (free(all.intersections), all.err = true, all);
 		if (!xs_append(&all, xs))

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:48:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:59:33 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 21:16:24 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	render_pixel(t_scene *scene, int x, int y)
 	shade.m = scene->sphere.material;
 	shade.light = scene->light;
 	shade.eyev = t_negate(r.direction);
-	xs = intersect(scene->sphere, r);
+	xs = xs_find(scene->sphere, r);
 	if (xs.count == 0)
 		return ;
-	h = hit(xs);
+	h = xs_hit(xs);
 	shade.p = r_pos(r, h.t);
 	shade.normalv = normal_at(scene->sphere, shade.p);
 	write_pixel(&scene->canvas, x, y, lighting(shade));

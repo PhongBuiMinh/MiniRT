@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:59:01 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 21:16:26 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ t_intersections	xs_init(void)
 	return (new_xs);
 }
 
-
-
 // TOO MANY VARIABLES + XS_PUSH FAILURE CAN BE HANDLED BETTER
-t_intersections	intersect(t_sphere sphere, t_ray ray)
+t_intersections	xs_find(t_sphere sphere, t_ray ray)
 {
 	t_intersections	xs;
 	t_intersection	is;
@@ -142,7 +140,7 @@ bool	xs_append(t_intersections *dst, t_intersections src)
 	return (true);
 }
 
-t_intersection	hit(t_intersections xs)
+t_intersection	xs_hit(t_intersections xs)
 {
 	t_intersection	closest;
 	int				i;
@@ -165,27 +163,4 @@ t_intersection	hit(t_intersections xs)
 	if (!found)
 		closest.t = -1;
 	return (closest);
-}
-
-// WORLD_P = POINT IN WORLD SPACE, AND OBJECT_P = POINT IN OBJECT SPACE
-t_tuple	normal_at(t_sphere sphere, t_tuple world_p)
-{
-	t_tuple		object_p;
-	t_tuple		object_normal;
-	t_tuple		world_normal;
-	t_matrix	inverse_transpose;
-
-	object_p = m_apply(inversion(sphere.transformation), world_p);
-	object_normal = t_substract(object_p, point(0, 0, 0));
-	inverse_transpose = transpose(inversion(sphere.transformation));
-	world_normal = m_apply(inverse_transpose, object_normal);
-	world_normal.w = 0;
-	return (normalize(world_normal));
-}
-
-t_tuple	reflect(t_tuple in, t_tuple normal)
-{
-	return (t_substract(in,
-			t_scale
-			(t_scale(normal, 2), dot(in, normal))));
 }

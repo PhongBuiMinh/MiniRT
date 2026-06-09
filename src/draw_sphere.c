@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:59:33 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 21:16:24 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,12 +140,12 @@
 ////			pos = point(world_x, world_y, 10);
 ////			dir = normalize(t_substract(pos, origin));
 ////			r = r_init(origin, dir);
-////			xs = intersect(s, r);
+////			xs = xs_find(s, r);
 ////			if (xs.count == -1)
 ////				continue ;
 ////			else
 ////			{
-////				h = hit(xs);
+////				h = xs_hit(xs);
 ////				xs_p = r_pos(r, h.t);
 ////				shade.normalv = normal_at(s, xs_p);
 ////				shade.eyev = t_negate(dir);
@@ -195,7 +195,7 @@
 //		{
 //			world_x = -half + pixel_size * x;
 //			position = point(world_x, world_y, 10);
-//			xs = intersect(s, r_init(origin, normalize(t_substract(position, origin))));
+//			xs = xs_find(s, r_init(origin, normalize(t_substract(position, origin))));
 //			if (xs.count != 0)
 //				write_pixel(&canvas, x, y, color(1, 0, 0));
 //			else

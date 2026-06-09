@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:47:36 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:48:56 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 21:16:40 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@
 # define GEOMETRY_H
 # include "tuple.h"
 
-double	magnitude(t_tuple	tuple);
-double	dot(t_tuple a, t_tuple b);
-t_tuple	cross(t_tuple a, t_tuple b);
-t_tuple	normalize(t_tuple tuple);
+t_tuple			cross(t_tuple a, t_tuple b);
+t_tuple			normalize(t_tuple tuple);
+t_tuple			normal_at(t_sphere sphere, t_tuple world_p);
+t_tuple			reflect(t_tuple in, t_tuple normal);
+double			magnitude(t_tuple	tuple);
+double			dot(t_tuple a, t_tuple b);
 
 #endif
