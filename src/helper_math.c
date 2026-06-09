@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:29:53 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:53:01 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 21:22:57 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ double	discriminant(t_ray ray)
 	b = 2 * dot(ray.direction, sphere_to_ray);
 	c = dot(sphere_to_ray, sphere_to_ray) - 1;
 	return (b * b - 4 * a * c);
-}
-
-bool	equal(double a, double b)
-{
-	if (fabs(a - b) < EPSILON)
-		return (true);
-	else
-		return (false);
 }
 
 double	cofactor(t_matrix matrix, int row, int col)
@@ -70,4 +62,12 @@ double	minor(t_matrix matrix, int row, int col)
 double	radians(double degrees)
 {
 	return (degrees / 180 * PI);
+}
+
+bool	equal(double a, double b)
+{
+	if (fabs(a - b) < EPSILON)
+		return (true);
+	else
+		return (false);
 }

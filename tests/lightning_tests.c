@@ -21,8 +21,8 @@ int	test_lighting_eye_between_light_and_surface(void)
 	shade.p = point(0, 0, 0);
 	shade.eyev = vector(0, 0, -1);
 	shade.normalv = vector(0, 0, -1);
-	shade.light = point_light(point(0, 0, -10), color(1, 1, 1));
-	result = lighting(shade);
+	shade.light = l_init(point(0, 0, -10), color(1, 1, 1));
+	result = l_find(shade);
 	return (assert_tuple("lighting_eye_between_light_and_surface", result,
 			color(1.9, 1.9, 1.9)));
 }
@@ -36,8 +36,8 @@ int	test_lighting_eye_offset_45(void)
 	shade.p = point(0, 0, 0);
 	shade.eyev = vector(0, sqrt(2) / 2, -sqrt(2) / 2);
 	shade.normalv = vector(0, 0, -1);
-	shade.light = point_light(point(0, 0, -10), color(1, 1, 1));
-	result = lighting(shade);
+	shade.light = l_init(point(0, 0, -10), color(1, 1, 1));
+	result = l_find(shade);
 	return (assert_tuple("lighting_eye_offset_45", result, color(1, 1, 1)));
 }
 
@@ -50,8 +50,8 @@ int	test_lighting_light_offset_45(void)
 	shade.p = point(0, 0, 0);
 	shade.eyev = vector(0, 0, -1);
 	shade.normalv = vector(0, 0, -1);
-	shade.light = point_light(point(0, 10, -10), color(1, 1, 1));
-	result = lighting(shade);
+	shade.light = l_init(point(0, 10, -10), color(1, 1, 1));
+	result = l_find(shade);
 	return (assert_tuple("lighting_light_offset_45", result, color(0.7364,
 				0.7364, 0.7364)));
 }
@@ -65,8 +65,8 @@ int	test_lighting_eye_in_reflection_path(void)
 	shade.p = point(0, 0, 0);
 	shade.eyev = vector(0, -sqrt(2) / 2, -sqrt(2) / 2);
 	shade.normalv = vector(0, 0, -1);
-	shade.light = point_light(point(0, 10, -10), color(1, 1, 1));
-	result = lighting(shade);
+	shade.light = l_init(point(0, 10, -10), color(1, 1, 1));
+	result = l_find(shade);
 	return (assert_tuple("lighting_eye_in_reflection_path", result,
 			color(1.6364, 1.6364, 1.6364)));
 }
@@ -80,8 +80,8 @@ int	test_lighting_light_behind_surface(void)
 	shade.p = point(0, 0, 0);
 	shade.eyev = vector(0, 0, -1);
 	shade.normalv = vector(0, 0, -1);
-	shade.light = point_light(point(0, 0, 10), color(1, 1, 1));
-	result = lighting(shade);
+	shade.light = l_init(point(0, 0, 10), color(1, 1, 1));
+	result = l_find(shade);
 	return (assert_tuple("lighting_light_behind_surface", result, color(0.1,
 				0.1, 0.1)));
 }

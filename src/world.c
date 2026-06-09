@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:58:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 21:11:35 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 21:20:03 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ t_comps	prepare_computations(t_intersection is, t_ray r)
 	return (computations);
 }
 
-t_world	default_world(void)
+t_world	world_default(void)
 {
 	t_world	new_world;
 
-	new_world.light = point_light(point(-10, 10, -10), color(1, 1, 1));
+	new_world.light = l_init(point(-10, 10, -10), color(1, 1, 1));
 	new_world.spheres = malloc(sizeof(t_sphere) * 2);
 	if (!new_world.spheres)
 		return (new_world.obj_c = -1, new_world);
@@ -42,7 +42,7 @@ t_world	default_world(void)
 	return (new_world);
 }
 
-t_intersections	intersect_world(t_ray ray, t_world world)
+t_intersections	world_intersect(t_ray ray, t_world world)
 {
 	t_intersections	all;
 	t_intersections	xs;

@@ -6,13 +6,13 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:03:25 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:54:25 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 21:20:35 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_light	point_light(t_tuple pos, t_tuple intensity)
+t_light	l_init(t_tuple pos, t_tuple intensity)
 {
 	t_light	light;
 
@@ -22,7 +22,7 @@ t_light	point_light(t_tuple pos, t_tuple intensity)
 }
 
 // POOR ATTEMPTS
-t_tuple	lighting(t_shade shade)
+t_tuple	l_find(t_shade shade)
 {
 	t_tuple	effective_color;
 	t_tuple	lightv;

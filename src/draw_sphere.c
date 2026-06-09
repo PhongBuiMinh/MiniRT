@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 21:16:24 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 21:20:35 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@
 ////	s = sphere(5);
 ////	s.material = material();
 ////	s.material.color = color(1, 0.2, 1);
-////	light_src = point_light(point(-10, 10, -10), color(1, 1, 1));
+////	light_src = l_init(point(-10, 10, -10), color(1, 1, 1));
 ////	y = 0;
 ////	while (y < canvas.height)
 ////	{
@@ -151,7 +151,7 @@
 ////				shade.eyev = t_negate(dir);
 ////				shade.m = s.material;
 ////				shade.light = light_src;
-////				write_pixel(&canvas, x, y, lighting(shade));
+////				write_pixel(&canvas, x, y, l_find(shade));
 ////			}
 
 ////			x++;

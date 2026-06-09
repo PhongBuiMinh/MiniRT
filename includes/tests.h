@@ -64,7 +64,7 @@ int	test_normal_translated_sphere(void);
 int	test_normal_scaled_rotated_sphere(void);
 
 /* ===========================
-** Lighting Tests
+** l_find Tests
 ** =========================== */
 int	test_lighting_eye_between_light_and_surface(void);
 int	test_lighting_eye_offset_45(void);
