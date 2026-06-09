@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:09:47 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:49:17 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # include "light.h"
 # include "objects.h"
 # include "world.h"
+# include "helper_math.h"
+# include "transformations.h"
+# include "geometry.h"
 
 typedef struct s_projectile
 {
@@ -54,7 +57,5 @@ typedef struct s_scene
 	double		pixel_size;
 	double		wall_z;
 }	t_scene;
-
-
 
 #endif

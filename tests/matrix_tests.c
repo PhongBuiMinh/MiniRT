@@ -17,7 +17,7 @@ int	test_identity_matrix(void)
 	t_matrix	a;
 	t_matrix	id;
 
-	a = init_ind_matrix(4, 4);
+	a = init_id_matrix(4, 4);
 	id = init_matrix(4, 4);
 	id.data[0][0] = 1;
 	id.data[1][1] = 1;
@@ -194,7 +194,7 @@ int	test_matrix_inverse(void)
 	m.data[3][3] = -4;
 	inv = inversion(m);
 	id = multiply_matrices(m, inv);
-	return (assert_matrix("matrix_inverse_identity", id, init_ind_matrix(4,
+	return (assert_matrix("matrix_inverse_identity", id, init_id_matrix(4,
 				4)));
 }
 

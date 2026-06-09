@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   draw_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 19:45:38 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:42:57 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 
 //void	tick(t_environment *environment, t_projectile *projectile)
 //{
-//	projectile->position = add(projectile->position, projectile->velocity);
-//	projectile->velocity = add(projectile->velocity, add(environment->gravity, environment->wind));
+//	projectile->position = t_add(projectile->position, projectile->velocity);
+//	projectile->velocity = t_add(projectile->velocity, t_add(environment->gravity, environment->wind));
 //}
 
 //// FUNCTION FOR FILLING MATRICES FOR TESTING
@@ -138,7 +138,7 @@
 ////		{
 ////			world_x = -half + pixel_size * x;
 ////			pos = point(world_x, world_y, 10);
-////			dir = normalize(substract(pos, origin));
+////			dir = normalize(t_substract(pos, origin));
 ////			r = ray(origin, dir);
 ////			xs = intersect(s, r);
 ////			if (xs.count == -1)
@@ -148,7 +148,7 @@
 ////				h = hit(xs);
 ////				xs_p = position(r, h.t);
 ////				shade.normalv = normal_at(s, xs_p);
-////				shade.eyev = negate(dir);
+////				shade.eyev = t_negate(dir);
 ////				shade.m = s.material;
 ////				shade.light = light_src;
 ////				write_pixel(&canvas, x, y, lighting(shade));
@@ -195,7 +195,7 @@
 //		{
 //			world_x = -half + pixel_size * x;
 //			position = point(world_x, world_y, 10);
-//			xs = intersect(s, ray(origin, normalize(substract(position, origin))));
+//			xs = intersect(s, ray(origin, normalize(t_substract(position, origin))));
 //			if (xs.count != 0)
 //				write_pixel(&canvas, x, y, color(1, 0, 0));
 //			else

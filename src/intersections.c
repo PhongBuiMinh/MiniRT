@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:02:57 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:42:57 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,7 @@ t_intersections	xs_init(void)
 	return (new_xs);
 }
 
-double	discriminant(t_ray ray)
-{
-	t_tuple	sphere_to_ray;
-	double	a;
-	double	b;
-	double	c;
 
-	sphere_to_ray = substract(ray.origin, point(0, 0, 0));
-	a = dot(ray.direction, ray.direction);
-	b = 2 * dot(ray.direction, sphere_to_ray);
-	c = dot(sphere_to_ray, sphere_to_ray) - 1;
-	return (b * b - 4 * a * c);
-}
 
 // TOO MANY VARIABLES + XS_PUSH FAILURE CAN BE HANDLED BETTER
 t_intersections	intersect(t_sphere sphere, t_ray ray)
@@ -56,7 +44,7 @@ t_intersections	intersect(t_sphere sphere, t_ray ray)
 	d = discriminant(ray);
 	if (d < -EPSILON)
 		return (xs.count = 0, xs);
-	sphere_to_ray = substract(ray.origin, point(0, 0, 0));
+	sphere_to_ray = t_substract(ray.origin, point(0, 0, 0));
 	a = dot(ray.direction, ray.direction);
 	b = 2 * dot(ray.direction, sphere_to_ray);
 	is.object = sphere;
@@ -188,7 +176,7 @@ t_tuple	normal_at(t_sphere sphere, t_tuple world_p)
 	t_matrix	inverse_transpose;
 
 	object_p = mat_apply(inversion(sphere.transformation), world_p);
-	object_normal = substract(object_p, point(0, 0, 0));
+	object_normal = t_substract(object_p, point(0, 0, 0));
 	inverse_transpose = transpose(inversion(sphere.transformation));
 	world_normal = mat_apply(inverse_transpose, object_normal);
 	world_normal.w = 0;
@@ -197,7 +185,7 @@ t_tuple	normal_at(t_sphere sphere, t_tuple world_p)
 
 t_tuple	reflect(t_tuple in, t_tuple normal)
 {
-	return (substract(in,
-			scalar
-			(scalar(normal, 2), dot(in, normal))));
+	return (t_substract(in,
+			t_scale
+			(t_scale(normal, 2), dot(in, normal))));
 }

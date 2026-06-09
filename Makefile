@@ -6,7 +6,7 @@
 #    By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/05 21:36:59 by bpetrovi          #+#    #+#              #
-#    Updated: 2026/06/09 19:46:35 by bpetrovi         ###   ########.fr        #
+#    Updated: 2026/06/09 20:50:57 by bpetrovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,15 @@ LIBFT = ${LIBFT_DIR}/libft.a
 SRCS_DIR = src
 OBJS_DIR = build
 CORE_SRCS = canvas_functions.c \
-            tuple_functions.c \
-            matrix_functions.c \
+            tuples.c \
+            matrices.c \
             rays.c \
             objects.c \
             intersections.c \
             light.c \
+			helper_math.c \
+			geometry.c \
+			transformations.c \
 			world.c
 SRCS = main.c $(CORE_SRCS)
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

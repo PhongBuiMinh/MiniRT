@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:01:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/05 20:25:03 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:51:34 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,16 @@ typedef union s_tuple
 
 t_tuple	vector(double x, double y, double z);
 t_tuple	point(double x, double y, double z);
-t_tuple	add(t_tuple tuple_a, t_tuple tuple_b);
-t_tuple	substract(t_tuple tuple_a, t_tuple tuple_b);
+t_tuple	t_add(t_tuple tuple_a, t_tuple tuple_b);
+t_tuple	t_substract(t_tuple tuple_a, t_tuple tuple_b);
 t_tuple	cross(t_tuple a, t_tuple b);
-t_tuple	multiply_tuples(t_tuple a, t_tuple b);
-t_tuple	negate(t_tuple tuple);
-t_tuple	scalar(t_tuple tuple, double scalar);
-t_tuple	divide(t_tuple tuple, double divider);
+t_tuple	t_multiply(t_tuple a, t_tuple b);
+t_tuple	t_negate(t_tuple tuple);
+t_tuple	t_scale(t_tuple tuple, double t_scale);
+t_tuple	t_divide(t_tuple tuple, double divider);
 t_tuple	normalize(t_tuple tuple);
 double	magnitude(t_tuple	tuple);
 double	dot(t_tuple a, t_tuple b);
-void	print_tuple(t_tuple tuple);
-void	check_tuple(t_tuple tuple);
+void	t_print(t_tuple tuple);
 
 #endif

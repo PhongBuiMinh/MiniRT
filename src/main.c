@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:48:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 19:54:21 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:42:57 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_ray	find_ray(t_scene *scene, int x, int y)
 
 	world_y = scene->half - y * scene->pixel_size;
 	world_x = -scene->half + x * scene->pixel_size;
-	direction = substract(point(world_x, world_y, scene->wall_z),
+	direction = t_substract(point(world_x, world_y, scene->wall_z),
 			scene->origin);
 	direction = normalize(direction);
 	return (ray(scene->origin, direction));
@@ -56,7 +56,7 @@ void	render_pixel(t_scene *scene, int x, int y)
 	r = find_ray(scene, x, y);
 	shade.m = scene->sphere.material;
 	shade.light = scene->light;
-	shade.eyev = negate(r.direction);
+	shade.eyev = t_negate(r.direction);
 	xs = intersect(scene->sphere, r);
 	if (xs.count == 0)
 		return ;

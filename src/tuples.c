@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple_functions.c                                  :+:      :+:    :+:   */
+/*   tuples.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 17:03:36 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:06:05 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:43:11 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_tuple	point(double x, double y, double z)
 	return (tuple);
 }
 
-t_tuple	add(t_tuple tuple_a, t_tuple tuple_b)
+t_tuple	t_add(t_tuple tuple_a, t_tuple tuple_b)
 {
 	t_tuple	new_tuple;
 
@@ -45,7 +45,7 @@ t_tuple	add(t_tuple tuple_a, t_tuple tuple_b)
 	return (new_tuple);
 }
 
-t_tuple	substract(t_tuple tuple_a, t_tuple tuple_b)
+t_tuple	t_substract(t_tuple tuple_a, t_tuple tuple_b)
 {
 	t_tuple	new_tuple;
 
@@ -56,34 +56,7 @@ t_tuple	substract(t_tuple tuple_a, t_tuple tuple_b)
 	return (new_tuple);
 }
 
-double	magnitude(t_tuple	tuple)
-{
-	double	magnitude;
-
-	magnitude = 0;
-	magnitude += tuple.x * tuple.x;
-	magnitude += tuple.y * tuple.y;
-	magnitude += tuple.z * tuple.z;
-	magnitude += tuple.w * tuple.w;
-	return (sqrtf(magnitude));
-}
-
-double	dot(t_tuple a, t_tuple b)
-{
-	return (a.x * b.x
-		+ a.y * b.y
-		+ a.z * b.z
-		+ a.w * b.w);
-}
-
-t_tuple	cross(t_tuple a, t_tuple b)
-{
-	return (vector(a.y * b.z - a.z * b.y,
-			a.z * b.x - a.x * b.z,
-			a.x * b.y - a.y * b.x));
-}
-
-t_tuple	multiply_tuples(t_tuple a, t_tuple b)
+t_tuple	t_multiply(t_tuple a, t_tuple b)
 {
 	t_tuple	new_tuple;
 
@@ -94,7 +67,7 @@ t_tuple	multiply_tuples(t_tuple a, t_tuple b)
 	return (new_tuple);
 }
 
-t_tuple	negate(t_tuple tuple)
+t_tuple	t_negate(t_tuple tuple)
 {
 	tuple.x = -tuple.x;
 	tuple.y = -tuple.y;
@@ -103,16 +76,16 @@ t_tuple	negate(t_tuple tuple)
 	return (tuple);
 }
 
-t_tuple	scalar(t_tuple tuple, double scalar)
+t_tuple	t_scale(t_tuple tuple, double t_scale)
 {
-	tuple.x = tuple.x * scalar;
-	tuple.y = tuple.y * scalar;
-	tuple.z = tuple.z * scalar;
-	tuple.w = tuple.w * scalar;
+	tuple.x = tuple.x * t_scale;
+	tuple.y = tuple.y * t_scale;
+	tuple.z = tuple.z * t_scale;
+	tuple.w = tuple.w * t_scale;
 	return (tuple);
 }
 
-t_tuple	divide(t_tuple tuple, double divider)
+t_tuple	t_divide(t_tuple tuple, double divider)
 {
 	tuple.x = tuple.x / divider;
 	tuple.y = tuple.y / divider;
@@ -121,13 +94,7 @@ t_tuple	divide(t_tuple tuple, double divider)
 	return (tuple);
 }
 
-t_tuple	normalize(t_tuple tuple)
-{
-	return (divide(tuple, magnitude(tuple)));
-}
-
-
-void	print_tuple(t_tuple tuple)
+void	t_print(t_tuple tuple)
 {
 	printf("x: %f, ", tuple.x);
 	printf("y: %f, ", tuple.y);
@@ -146,7 +113,7 @@ void	print_tuple(t_tuple tuple)
 //	int				y;
 
 //	init_canvas(&canvas, 1000, 500);
-//	projectile = init_projectile(point(0, 1, 0), scalar(normalize(vector(1, 1.8, 0)), 11.25));
+//	projectile = init_projectile(point(0, 1, 0), t_scale(normalize(vector(1, 1.8, 0)), 11.25));
 //	environment = init_environment(vector(0, -0.1, 0), vector(-0.01, 0, 0));
 //	while (projectile.position.y > 0)
 //	{
@@ -175,7 +142,7 @@ void	print_tuple(t_tuple tuple)
 //	p = mat_apply(translation(0, 300, 0), p);
 //	while (i > 0)
 //	{
-//		//print_tuple(p);
+//		//t_print(p);
 //		write_star(&canvas, p.x + canvas.width / 2, p.y + canvas.height / 2, color(1, 0, 0));
 //		p = mat_apply(rotation_z(PI / 6), p);
 //		i--;

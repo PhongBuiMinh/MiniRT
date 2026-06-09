@@ -22,26 +22,6 @@ int	tuple_equal(t_tuple a, t_tuple b)
 		&& equal(a.w, b.w));
 }
 
-int	matrix_equal(t_matrix a, t_matrix b)
-{
-	int	r;
-	int	c;
-
-	r = 0;
-	while (r < a.rows)
-	{
-		c = 0;
-		while (c < a.cols)
-		{
-			if (!equal(a.data[r][c], b.data[r][c]))
-				return (0);
-			c++;
-		}
-		r++;
-	}
-	return (1);
-}
-
 /* ===========================
 ** assertion helpers
 ** =========================== */
@@ -52,9 +32,9 @@ int	assert_tuple(char *name, t_tuple actual, t_tuple expected)
 		return (1);
 	printf(RED "[FAIL] " RESET "%s\n", name);
 	printf("Expected: ");
-	print_tuple(expected);
+	t_print(expected);
 	printf("Actual:   ");
-	print_tuple(actual);
+	t_print(actual);
 	return (0);
 }
 
@@ -63,7 +43,7 @@ int	assert_matrix(char *name, t_matrix actual, t_matrix expected)
 	int	r;
 	int	c;
 
-	if (matrix_equal(actual, expected))
+	if (matrices_equal(actual, expected))
 		return (1);
 	printf(RED "[FAIL] " RESET "%s\n", name);
 	printf("Expected:\n");
