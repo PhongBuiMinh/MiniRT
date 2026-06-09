@@ -6,7 +6,7 @@
 #    By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/05 21:36:59 by bpetrovi          #+#    #+#              #
-#    Updated: 2026/06/09 20:50:57 by bpetrovi         ###   ########.fr        #
+#    Updated: 2026/06/09 22:41:43 by bpetrovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ CORE_SRCS = canvas_functions.c \
 			helper_math.c \
 			geometry.c \
 			transformations.c \
+			render.c \
 			world.c
 SRCS = main.c $(CORE_SRCS)
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

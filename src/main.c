@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:48:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 22:31:20 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 23:00:44 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,23 @@
 
 int	main(void)
 {
+	t_phong			phong;
 	t_world			world;
 	t_intersections	xs;
 	t_ray			ray;
 
 	world = world_default();
 	ray = r_init(point(0, 0, -5), vector(0, 0, 1));
-	xs = world_intersect(ray, world);
+	xs = xs_find(world.spheres[0], ray);
+	printf("%f\n", xs.intersections[0].t);
 	if (xs.err == true)
 		return (free(world.spheres), 1);
+	phong = phong_computations(hit(xs), ray);
+	t_print(phong.point);
+	t_print(phong.normalv);
+	t_print(phong.eyev);
+	phong.light = world.light;
+	t_print(phong_lightning(phong));
 	return (0);
 }
 

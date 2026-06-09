@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 22:30:57 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 22:58:41 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,37 +26,22 @@ t_ray	find_direction(t_scene *scene, int x, int y)
 	return (r_init(scene->origin, direction));
 }
 
-t_phong	phong_computations(t_intersection is, t_ray ray)
-{
-	t_phong	phong;
-
-	phong.inside_obj = false;
-	phong.object = is.object;
-	phong.point = r_pos(ray, is.t);
-	phong.eyev = t_negate(ray.direction);
-	phong.normalv = normal_at(is.object, phong.point);
-	if (dot(phong.eyev, phong.normalv))
-	{
-		phong.inside_obj = true;
-		phong.normalv = t_negate(phong.normalv);
-	}
-	return (phong);
-}
 
 void	render_pixel(t_scene *scene, int x, int y)
 {
 	t_intersections	xs;
 	t_intersection	is;
-	t_phong			shade;
+	t_phong			phong;
 	t_ray			ray;
 
 	xs = xs_find(scene->sphere, ray);
 	if (xs.count == 0)
 		return ;
-	is = xs_hit(xs);
+	is = hit(xs);
 	ray = find_direction(scene, x, y);
-	shade.light = scene->light;
-	write_pixel(&scene->canvas, x, y, phong_lightning(shade));
+	phong = phong_computations(is, ray);
+	phong.light = scene->light;
+	write_pixel(&scene->canvas, x, y, phong_lightning(phong));
 	free(xs.intersections);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:58:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 22:25:00 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 23:04:02 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_world	world_default(void)
 		return (new_world.obj_c = -1, new_world);
 	new_world.spheres[0] = sphere(1);
 	new_world.spheres[1] = sphere(2);
+	new_world.spheres[0].material.color = color(0.8, 1, 0.6);
 	new_world.spheres[0].material.diffuse = 0.7;
 	new_world.spheres[0].material.specular = 0.2;
 	new_world.spheres[1].transformation = scaling(0.5, 0.5, 0.5);

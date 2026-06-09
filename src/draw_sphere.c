@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 22:23:07 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 23:05:15 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@
 
 ////int	main(void)
 ////{
-////	t_phong			shade;
+////	t_phong			phong;
 ////	t_ray			r;
 ////	t_light			light_src;
 ////	t_canvas		canvas;
@@ -145,13 +145,13 @@
 ////				continue ;
 ////			else
 ////			{
-////				h = xs_hit(xs);
+////				h = hit(xs);
 ////				xs_p = r_pos(r, h.t);
-////				shade.normalv = normal_at(s, xs_p);
-////				shade.eyev = t_negate(dir);
-////				shade.m = s.material;
-////				shade.light = light_src;
-////				write_pixel(&canvas, x, y, phong_lightning(shade));
+////				phong.normalv = normal_at(s, xs_p);
+////				phong.eyev = t_negate(dir);
+////				phong.m = s.material;
+////				phong.light = light_src;
+////				write_pixel(&canvas, x, y, phong_lightning(phong));
 ////			}
 
 ////			x++;

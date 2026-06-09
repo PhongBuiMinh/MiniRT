@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 21:16:26 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 22:48:47 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ bool	xs_append(t_intersections *dst, t_intersections src)
 	return (true);
 }
 
-t_intersection	xs_hit(t_intersections xs)
+t_intersection	hit(t_intersections xs)
 {
 	t_intersection	closest;
 	int				i;

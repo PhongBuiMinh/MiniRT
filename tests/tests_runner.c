@@ -101,6 +101,8 @@ int	main(void)
 	{"lighting_light_offset_45", test_lighting_light_offset_45},
 	{"lighting_eye_in_reflection_path", test_lighting_eye_in_reflection_path},
 	{"lighting_light_behind_surface", test_lighting_light_behind_surface},
+	{"test_shading_intersection", test_shading_intersection},
+	{"test_shading_intersection_inside", test_shading_intersection_inside},
 	{"normal_x_axis", test_normal_x_axis},
 	{"normal_nonaxial", test_normal_nonaxial},
 	{"normal_is_normalized", test_normal_is_normalized},
