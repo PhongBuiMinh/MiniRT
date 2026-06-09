@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:03:25 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:42:57 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:54:25 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,6 @@ t_light	point_light(t_tuple pos, t_tuple intensity)
 	light.pos = pos;
 	light.intensity = intensity;
 	return (light);
-}
-
-t_material	material(void)
-{
-	t_material	m;
-
-	m.color = color(1, 1, 1);
-	m.ambient = 0.1;
-	m.diffuse = 0.9;
-	m.specular = 0.9;
-	m.shininess = 200;
-	return (m);
 }
 
 // POOR ATTEMPTS

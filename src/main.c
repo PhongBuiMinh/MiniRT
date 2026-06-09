@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:48:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:42:57 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:59:33 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_ray	find_ray(t_scene *scene, int x, int y)
 	direction = t_substract(point(world_x, world_y, scene->wall_z),
 			scene->origin);
 	direction = normalize(direction);
-	return (ray(scene->origin, direction));
+	return (r_init(scene->origin, direction));
 }
 
 void	render_pixel(t_scene *scene, int x, int y)
@@ -61,7 +61,7 @@ void	render_pixel(t_scene *scene, int x, int y)
 	if (xs.count == 0)
 		return ;
 	h = hit(xs);
-	shade.p = position(r, h.t);
+	shade.p = r_pos(r, h.t);
 	shade.normalv = normal_at(scene->sphere, shade.p);
 	write_pixel(&scene->canvas, x, y, lighting(shade));
 	free(xs.intersections);
@@ -99,7 +99,7 @@ int	main(void)
 	t_ray			r;
 
 	world = default_world();
-	r = ray(point(0, 0, -5), vector(0, 0, 1));
+	r = r_init(point(0, 0, -5), vector(0, 0, 1));
 	xs = intersect_world(r, world);
 	if (xs.err == true)
 		return (free(world.spheres), 1);

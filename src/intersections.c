@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:42:57 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:59:01 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_intersections	intersect(t_sphere sphere, t_ray ray)
 	xs = xs_init();
 	if (xs.err == true)
 		return (xs);
-	ray = ray_transform(ray, inversion(sphere.transformation));
+	ray = r_transform(ray, inversion(sphere.transformation));
 	d = discriminant(ray);
 	if (d < -EPSILON)
 		return (xs.count = 0, xs);
@@ -175,10 +175,10 @@ t_tuple	normal_at(t_sphere sphere, t_tuple world_p)
 	t_tuple		world_normal;
 	t_matrix	inverse_transpose;
 
-	object_p = mat_apply(inversion(sphere.transformation), world_p);
+	object_p = m_apply(inversion(sphere.transformation), world_p);
 	object_normal = t_substract(object_p, point(0, 0, 0));
 	inverse_transpose = transpose(inversion(sphere.transformation));
-	world_normal = mat_apply(inverse_transpose, object_normal);
+	world_normal = m_apply(inverse_transpose, object_normal);
 	world_normal.w = 0;
 	return (normalize(world_normal));
 }

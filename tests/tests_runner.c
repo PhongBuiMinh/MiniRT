@@ -43,7 +43,7 @@ int	assert_matrix(char *name, t_matrix actual, t_matrix expected)
 	int	r;
 	int	c;
 
-	if (matrices_equal(actual, expected))
+	if (m_equal(actual, expected))
 		return (1);
 	printf(RED "[FAIL] " RESET "%s\n", name);
 	printf("Expected:\n");

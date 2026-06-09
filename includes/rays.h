@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:56:37 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:10:30 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:59:33 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ typedef struct s_ray
 	t_tuple	direction;
 }	t_ray;
 
-t_ray		ray(t_tuple origin, t_tuple direction);
-t_ray		ray_transform(t_ray ray, t_matrix transformation);
-t_tuple		position(t_ray ray, float time);
+t_ray		r_init(t_tuple origin, t_tuple direction);
+t_ray		r_transform(t_ray ray, t_matrix transformation);
+t_tuple		r_pos(t_ray ray, float time);
 
 #endif

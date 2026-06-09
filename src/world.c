@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:58:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:42:28 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:59:33 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_comps	prepare_computations(t_intersection is, t_ray r)
 	t_comps	computations;
 	t_tuple	is_pos;
 
-	is_pos = position(r, is.t);
+	is_pos = r_pos(r, is.t);
 	computations.sphere = is.object;
 	computations.point = is_pos;
 	computations.eyev = t_negate(r.direction);

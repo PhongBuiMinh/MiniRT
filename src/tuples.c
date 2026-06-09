@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 17:03:36 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:43:11 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:57:02 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,12 +139,12 @@ void	t_print(t_tuple tuple)
 
 //	init_canvas(&canvas, 1000, 1000);
 //	p = point(0, 0, 0);
-//	p = mat_apply(translation(0, 300, 0), p);
+//	p = m_apply(translation(0, 300, 0), p);
 //	while (i > 0)
 //	{
 //		//t_print(p);
 //		write_star(&canvas, p.x + canvas.width / 2, p.y + canvas.height / 2, color(1, 0, 0));
-//		p = mat_apply(rotation_z(PI / 6), p);
+//		p = m_apply(rotation_z(PI / 6), p);
 //		i--;
 //	}
 //	canvas_to_ppm(&canvas);

@@ -6,13 +6,13 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:46:53 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:57:14 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_matrix	init_matrix(int rows, int cols)
+t_matrix	m_init(int rows, int cols)
 {
 	t_matrix	new_matrix;
 	int			y;
@@ -34,7 +34,7 @@ t_matrix	init_matrix(int rows, int cols)
 	return (new_matrix);
 }
 
-void	print_matrix(t_matrix matrix)
+void	m_print(t_matrix matrix)
 {
 	int	x;
 	int	y;
@@ -61,7 +61,7 @@ void	print_matrix(t_matrix matrix)
 
 // Still to be worked on
 
-t_matrix	multiply_matrices(t_matrix a, t_matrix b)
+t_matrix	m_multiply(t_matrix a, t_matrix b)
 {
 	t_matrix	product_matrix;
 	int			x;
@@ -69,7 +69,7 @@ t_matrix	multiply_matrices(t_matrix a, t_matrix b)
 	int			k;
 	double		value;
 
-	product_matrix = init_matrix(a.rows, b.cols);
+	product_matrix = m_init(a.rows, b.cols);
 	if (a.cols != b.rows)
 		return (printf("these 2 matrices cannot be multiplied"),
 			product_matrix);
@@ -94,7 +94,7 @@ t_matrix	multiply_matrices(t_matrix a, t_matrix b)
 	return (product_matrix);
 }
 
-int	matrices_equal(t_matrix matrix_a, t_matrix matrix_b)
+int	m_equal(t_matrix matrix_a, t_matrix matrix_b)
 {
 	int	x;
 	int	y;
@@ -122,7 +122,7 @@ t_matrix	submatrix(t_matrix matrix, int row, int col)
 	int			x;
 	int			y;
 
-	submatrix = init_matrix(matrix.rows - 1, matrix.cols - 1);
+	submatrix = m_init(matrix.rows - 1, matrix.cols - 1);
 	x = 0;
 	i = 0;
 	while (i < matrix.rows)
@@ -151,10 +151,7 @@ t_matrix	submatrix(t_matrix matrix, int row, int col)
 	return (submatrix);
 }
 
-
-
-
-t_tuple	mat_apply(t_matrix matrix, t_tuple tuple)
+t_tuple	m_apply(t_matrix matrix, t_tuple tuple)
 {
 	t_tuple	product_tuple;
 	int		x;

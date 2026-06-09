@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:01:53 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:00:07 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:55:05 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,6 @@ typedef struct s_light
 	t_tuple	pos;
 }	t_light;
 
-typedef struct s_material
-{
-	t_tuple	color;
-	double	ambient;
-	double	diffuse;
-	double	specular;
-	double	shininess;
-}	t_material;
-
 typedef struct t_shade
 {
 	t_material	m;
@@ -40,6 +31,5 @@ typedef struct t_shade
 
 t_tuple		lighting(t_shade shade);
 t_light		point_light(t_tuple pos, t_tuple intensity);
-t_material	material(void);
 
 #endif

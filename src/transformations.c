@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:27:18 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:44:11 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:56:26 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_matrix	id_matrix(t_matrix matrix)
 	t_matrix	indentity_matrix;
 
 	indentity_matrix = init_id_matrix(matrix.rows, matrix.cols);
-	return (multiply_matrices(matrix, indentity_matrix));
+	return (m_multiply(matrix, indentity_matrix));
 }
 
 t_matrix	transpose(t_matrix matrix)

@@ -6,13 +6,13 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:55:37 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:42:37 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:59:33 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_ray	ray(t_tuple origin, t_tuple direction)
+t_ray	r_init(t_tuple origin, t_tuple direction)
 {
 	t_ray	new_ray;
 
@@ -21,17 +21,17 @@ t_ray	ray(t_tuple origin, t_tuple direction)
 	return (new_ray);
 }
 
-t_tuple	position(t_ray ray, float time)
+t_tuple	r_pos(t_ray ray, float time)
 {
 	return (t_add(ray.origin, t_scale(ray.direction, time)));
 }
 
-t_ray	ray_transform(t_ray ray, t_matrix transformation)
+t_ray	r_transform(t_ray ray, t_matrix transformation)
 {
 	t_ray	transformed_ray;
 
-	transformed_ray.origin = mat_apply(transformation, ray.origin);
-	transformed_ray.direction = mat_apply(transformation,
+	transformed_ray.origin = m_apply(transformation, ray.origin);
+	transformed_ray.direction = m_apply(transformation,
 			ray.direction);
 	return (transformed_ray);
 }

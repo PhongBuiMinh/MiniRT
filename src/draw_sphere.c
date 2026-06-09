@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:42:57 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:59:33 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,14 +139,14 @@
 ////			world_x = -half + pixel_size * x;
 ////			pos = point(world_x, world_y, 10);
 ////			dir = normalize(t_substract(pos, origin));
-////			r = ray(origin, dir);
+////			r = r_init(origin, dir);
 ////			xs = intersect(s, r);
 ////			if (xs.count == -1)
 ////				continue ;
 ////			else
 ////			{
 ////				h = hit(xs);
-////				xs_p = position(r, h.t);
+////				xs_p = r_pos(r, h.t);
 ////				shade.normalv = normal_at(s, xs_p);
 ////				shade.eyev = t_negate(dir);
 ////				shade.m = s.material;
@@ -185,7 +185,7 @@
 //	pixel_size = wall_size / canvas.height;
 //	s = sphere(5);
 //	struct s_shear shear = {1, 0, 0, 0, 0, 0};
-//	s.transformation = multiply_matrices(shearing(shear), rotation_z(PI / 4));
+//	s.transformation = m_multiply(shearing(shear), rotation_z(PI / 4));
 //	y = 0;
 //	while (y < canvas.height)
 //	{
@@ -195,7 +195,7 @@
 //		{
 //			world_x = -half + pixel_size * x;
 //			position = point(world_x, world_y, 10);
-//			xs = intersect(s, ray(origin, normalize(t_substract(position, origin))));
+//			xs = intersect(s, r_init(origin, normalize(t_substract(position, origin))));
 //			if (xs.count != 0)
 //				write_pixel(&canvas, x, y, color(1, 0, 0));
 //			else
