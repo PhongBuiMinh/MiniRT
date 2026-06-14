@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tuple.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/14 17:44:45 by fbui-min          #+#    #+#             */
+/*   Updated: 2026/06/14 17:44:53 by fbui-min         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef TUPLE_H
 # define TUPLE_H
 
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+# include <math.h>
+# include <stdio.h>
+# include <stdlib.h>
 
-typedef struct	s_tuple
+typedef struct s_tuple
 {
 	double	x;
 	double	y;

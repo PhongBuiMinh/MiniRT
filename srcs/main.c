@@ -17,17 +17,6 @@
 // #include "camera.h"
 #include "color.h"
 
-typedef struct	s_mlx
-{
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_mlx;
-
 typedef struct	s_program
 {
 	t_scene		scene;

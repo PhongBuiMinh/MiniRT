@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrix.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/14 17:45:12 by fbui-min          #+#    #+#             */
+/*   Updated: 2026/06/14 17:45:17 by fbui-min         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MATRIX_H
 # define MATRIX_H
 
-#include "tuple.h"
+# include "tuple.h"
 
 typedef struct s_matrix2
 {
@@ -18,10 +30,9 @@ typedef struct s_matrix4
 	double	m[4][4];
 }	t_matrix4;
 
-/* matrix.h */
-t_matrix4   matrix4_rows(t_tuple r0, t_tuple r1, t_tuple r2, t_tuple r3);
-t_matrix3   matrix3_rows(t_tuple r0, t_tuple r1, t_tuple r2);
-t_matrix2   matrix2_rows(t_tuple r0, t_tuple r1);
+t_matrix4	matrix4_rows(t_tuple r0, t_tuple r1, t_tuple r2, t_tuple r3);
+t_matrix3	matrix3_rows(t_tuple r0, t_tuple r1, t_tuple r2);
+t_matrix2	matrix2_rows(t_tuple r0, t_tuple r1);
 
 t_matrix4	matrix4_identity(void);
 
