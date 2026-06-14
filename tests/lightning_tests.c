@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 16:24:06 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 16:24:07 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 23:16:20 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	test_lighting_eye_between_light_and_surface(void)
 	t_phong	phong;
 	t_tuple	result;
 
+	phong.in_shadow = false;
 	phong.object.material = material();
 	phong.point = point(0, 0, 0);
 	phong.eyev = vector(0, 0, -1);
@@ -33,6 +34,7 @@ int	test_lighting_eye_offset_45(void)
 	t_phong	phong;
 	t_tuple	result;
 
+	phong.in_shadow = false;
 	phong.object.material = material();
 	phong.point = point(0, 0, 0);
 	phong.eyev = vector(0, sqrt(2) / 2, -sqrt(2) / 2);
@@ -47,6 +49,7 @@ int	test_lighting_light_offset_45(void)
 	t_phong	phong;
 	t_tuple	result;
 
+	phong.in_shadow = false;
 	phong.object.material = material();
 	phong.point = point(0, 0, 0);
 	phong.eyev = vector(0, 0, -1);
@@ -62,6 +65,7 @@ int	test_lighting_eye_in_reflection_path(void)
 	t_phong	phong;
 	t_tuple	result;
 
+	phong.in_shadow = false;
 	phong.object.material = material();
 	phong.point = point(0, 0, 0);
 	phong.eyev = vector(0, -sqrt(2) / 2, -sqrt(2) / 2);
@@ -77,6 +81,7 @@ int	test_lighting_light_behind_surface(void)
 	t_phong	phong;
 	t_tuple	result;
 
+	phong.in_shadow = false;
 	phong.object.material = material();
 	phong.point = point(0, 0, 0);
 	phong.eyev = vector(0, 0, -1);

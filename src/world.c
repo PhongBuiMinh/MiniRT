@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:58:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 21:35:55 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 22:53:42 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,27 @@ t_world	world_default(void)
 	new_world.spheres[1].transformation = scaling(0.5, 0.5, 0.5);
 	new_world.object_cnt = 2;
 	return (new_world);
+}
+
+// FIX ERROR HANDLING	
+
+bool	is_shadowed(t_world world, t_tuple point)
+{
+	t_intersections	xs;
+	t_intersection	h;
+	t_tuple			v_light;
+	double			distance;
+
+	v_light = t_substract(world.light.pos, point);
+	distance = magnitude(v_light);
+	xs = world_intersect(world, r_init(point, normalize(v_light)));
+	if (xs.err)
+		return (false);
+	h = hit(xs);
+	free(xs.intersections);
+	if (hit_exists(h) && h.t < distance)
+		return (true);
+	return (false);
 }
 
 // FIX ERROR HANDLING

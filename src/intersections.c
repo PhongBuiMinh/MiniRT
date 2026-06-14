@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/10 00:17:05 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 22:52:12 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,11 @@ bool	xs_append(t_intersections *dst, t_intersections src)
 	}
 	free(src.intersections);
 	return (true);
+}
+
+bool	hit_exists(t_intersection hit)
+{
+	return (hit.t >= 0);
 }
 
 t_intersection	hit(t_intersections xs)

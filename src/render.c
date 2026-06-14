@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 20:23:02 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 23:04:58 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_tuple	color_at(t_world world, t_ray ray)
 		phong = phong_computations(h, ray);
 	else
 		return (color(0, 0, 0));
+	phong.in_shadow = is_shadowed(world, phong.over_point);
 	phong.light = world.light;
 	return (phong_lightning(phong));
 }

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:17:56 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 19:27:52 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 22:23:20 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ typedef struct s_test
 /* ===========================
 ** Assertion & Comparison Helpers
 ** =========================== */
+int	assert_false(char *name, bool value);
+int	assert_true(char *name, bool value);
 int	tuple_equal(t_tuple a, t_tuple b);
-int	matrix_equal(t_matrix a, t_matrix b);
 int	assert_tuple(char *name, t_tuple actual, t_tuple expected);
 int	assert_matrix(char *name, t_matrix actual, t_matrix expected);
 
@@ -90,5 +91,15 @@ int	test_view_transform_arbitrary(void);
 int	test_ray_for_pixel_center(void);
 int	test_ray_for_pixel_corner(void);
 int	test_ray_for_pixel_transformed_camera(void);
+
+/* ===========================
+** Shadow tests
+** =========================== */
+
+int	test_no_shadow_nothing_collinear(void);
+int	test_shadow_object_between_point_and_light(void);
+int	test_no_shadow_object_behind_light(void);
+int	test_no_shadow_object_behind_point(void);
+
 
 #endif

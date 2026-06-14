@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:03:25 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 23:00:00 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 23:10:15 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_phong	phong_computations(t_intersection is, t_ray ray)
 {
 	t_phong	phong;
 
+	phong.in_shadow = false;
 	phong.inside_obj = false;
 	phong.object = is.object;
 	phong.point = r_pos(ray, is.t);
@@ -35,8 +36,11 @@ t_phong	phong_computations(t_intersection is, t_ray ray)
 		phong.inside_obj = true;
 		phong.normalv = t_negate(phong.normalv);
 	}
+	phong.over_point = t_add(phong.point, t_scale(phong.normalv, EPSILON));
 	return (phong);
 }
+
+
 // POOR ATTEMPTS
 t_tuple	phong_lightning(t_phong phong)
 {
@@ -72,5 +76,7 @@ t_tuple	phong_lightning(t_phong phong)
 			specular = t_scale(phong.light.intensity, phong.object.material.specular * factor);
 		}
 	}
+	if (phong.in_shadow)
+		return (ambient);
 	return (t_add(specular, t_add(diffuse, ambient)));
 }

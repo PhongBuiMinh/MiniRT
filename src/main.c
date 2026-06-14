@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:48:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 22:08:58 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 23:17:36 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(void)
 	t_canvas	*canvas;
 
 	world = scene_with_three_spheres();
-	camera = camera_init(500, 200, PI / 3);
+	camera = camera_init(1920, 1080, PI / 3);
 	from = point(0, 1.5, -5);
 	to = point(0, 1, 0);
 	up = vector(0, 1, 0);

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 16:23:54 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 19:26:48 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 22:23:56 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -383,4 +383,48 @@ int	test_ray_for_pixel_transformed_camera(void)
 	return (assert_tuple("ray_for_pixel_transformed_direction",
 			r.direction,
 			vector(v, 0, -v)));
+}
+
+int	test_no_shadow_nothing_collinear(void)
+{
+	t_world	w;
+	t_tuple	p;
+
+	w = world_default();
+	p = point(0, 10, 0);
+	return (assert_false("no_shadow_nothing_collinear",
+			is_shadowed(w, p)));
+}
+
+int	test_shadow_object_between_point_and_light(void)
+{
+	t_world	w;
+	t_tuple	p;
+
+	w = world_default();
+	p = point(10, -10, 10);
+	return (assert_true("shadow_object_between_point_and_light",
+			is_shadowed(w, p)));
+}
+
+int	test_no_shadow_object_behind_light(void)
+{
+	t_world	w;
+	t_tuple	p;
+
+	w = world_default();
+	p = point(-20, 20, -20);
+	return (assert_false("no_shadow_object_behind_light",
+			is_shadowed(w, p)));
+}
+
+int	test_no_shadow_object_behind_point(void)
+{
+	t_world	w;
+	t_tuple	p;
+
+	w = world_default();
+	p = point(-2, 2, -2);
+	return (assert_false("no_shadow_object_behind_point",
+			is_shadowed(w, p)));
 }

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:01:53 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 23:05:15 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 22:59:40 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_phong
 	t_tuple		point;
 	t_tuple		eyev;
 	t_tuple		normalv;
+	t_tuple		over_point;
+	bool		in_shadow;
 	bool		inside_obj;
 }	t_phong;
 

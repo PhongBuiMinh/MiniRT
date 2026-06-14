@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 16:23:45 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 19:28:39 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 22:24:52 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,26 @@
 /* ===========================
 ** comparison helpers
 ** =========================== */
+
+int	assert_true(char *name, bool value)
+{
+	if (!value)
+	{
+		printf("FAIL: %s\n", name);
+		return (0);
+	}
+	return (1);
+}
+
+int	assert_false(char *name, bool value)
+{
+	if (value)
+	{
+		printf("FAIL: %s\n", name);
+		return (0);
+	}
+	return (1);
+}
 
 int	tuple_equal(t_tuple a, t_tuple b)
 {
@@ -130,6 +150,10 @@ int	main(void)
 	{"test_ray_for_pixel_center", test_ray_for_pixel_center},
 	{"test_ray_for_pixel_corner", test_ray_for_pixel_corner},
 	{"test_ray_for_pixel_transformed_camera", test_ray_for_pixel_transformed_camera},
+	{"test_no_shadow_nothing_collinear", test_no_shadow_nothing_collinear},
+	{"test_shadow_object_between_point_and_light", test_shadow_object_between_point_and_light},
+	{"test_no_shadow_object_behind_light", test_no_shadow_object_behind_light},
+	{"test_no_shadow_object_behind_point", test_no_shadow_object_behind_point},
 	};
 
 	passed = 0;
