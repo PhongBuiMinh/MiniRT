@@ -252,3 +252,82 @@ int	test_normal_scaled_rotated_sphere(void)
 	return (assert_tuple("normal_scaled_rotated_sphere", normal_at(s, point(0,
 					v, -v)), vector(0, 0.97014, -0.24254)));
 }
+
+int	test_view_transform_default_orientation(void)
+{
+	t_tuple		from;
+	t_tuple		to;
+	t_tuple		up;
+
+	from = point(0, 0, 0);
+	to = point(0, 0, -1);
+	up = vector(0, 1, 0);
+	return (assert_matrix("view_transform_default_orientation",
+			view_transform(from, to, up),
+			init_id_matrix(4, 4)));
+}
+
+int	test_view_transform_positive_z(void)
+{
+	t_tuple		from;
+	t_tuple		to;
+	t_tuple		up;
+
+	from = point(0, 0, 0);
+	to = point(0, 0, 1);
+	up = vector(0, 1, 0);
+	return (assert_matrix("view_transform_positive_z",
+			view_transform(from, to, up),
+			scaling(-1, 1, -1)));
+}
+
+int	test_view_transform_moves_world(void)
+{
+	t_tuple		from;
+	t_tuple		to;
+	t_tuple		up;
+
+	from = point(0, 0, 8);
+	to = point(0, 0, 0);
+	up = vector(0, 1, 0);
+	return (assert_matrix("view_transform_moves_world",
+			view_transform(from, to, up),
+			translation(0, 0, -8)));
+}
+
+int	test_view_transform_arbitrary(void)
+{
+	t_tuple		from;
+	t_tuple		to;
+	t_tuple		up;
+	t_matrix	expected;
+
+	from = point(1, 3, 2);
+	to = point(4, -2, 8);
+	up = vector(1, 1, 0);
+
+	expected = m_init(4, 4);
+	expected.data[0][0] = -0.50709;
+	expected.data[0][1] = 0.50709;
+	expected.data[0][2] = 0.67612;
+	expected.data[0][3] = -2.36643;
+
+	expected.data[1][0] = 0.76772;
+	expected.data[1][1] = 0.60609;
+	expected.data[1][2] = 0.12122;
+	expected.data[1][3] = -2.82843;
+
+	expected.data[2][0] = -0.35857;
+	expected.data[2][1] = 0.59761;
+	expected.data[2][2] = -0.71714;
+	expected.data[2][3] = 0.00000;
+
+	expected.data[3][0] = 0.00000;
+	expected.data[3][1] = 0.00000;
+	expected.data[3][2] = 0.00000;
+	expected.data[3][3] = 1.00000;
+
+	return (assert_matrix("view_transform_arbitrary",
+			view_transform(from, to, up),
+			expected));
+}

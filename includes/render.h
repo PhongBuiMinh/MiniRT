@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:17:46 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 23:21:08 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 16:09:38 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ typedef struct s_scene
 	double		pixel_size;
 	double		wall_z;
 }	t_scene;
+
+typedef struct s_camera
+{
+	t_matrix	transform;
+	int			h_size;
+	int			v_size;
+	double		fov;
+}	t_camera;
 
 t_tuple	color_at(t_world world, t_ray ray);
 int		render_scene(t_scene *scene);

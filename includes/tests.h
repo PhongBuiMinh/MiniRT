@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:17:56 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 23:12:31 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 16:02:26 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,14 @@ int	test_lighting_eye_in_reflection_path(void);
 int	test_lighting_light_behind_surface(void);
 int	test_shading_intersection(void);
 int	test_shading_intersection_inside(void);
+
+/* ===========================
+** View Transformation tests
+** =========================== */
+
+int	test_view_transform_default_orientation(void);
+int	test_view_transform_positive_z(void);
+int	test_view_transform_moves_world(void);
+int	test_view_transform_arbitrary(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:48:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 23:52:52 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 15:57:44 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,29 @@ int	init_scene(t_scene *scene)
 }
 
 
-//int	main(void)
-//{
-//	t_world	world;
-//	t_ray	ray;
-
-//	world = world_default();
-//	world.spheres[0].material.ambient = 1;
-//	world.spheres[1].material.ambient = 1;
-//	ray = r_init(point(0, 0, 0.75), vector(0, 0, 1));
-//	t_print(color_at(world, ray));
-//	t_print(world.spheres[1].material.color);
-//	return (0);
-//}
-
 int	main(void)
 {
-	t_scene	scene;
+	t_tuple	from;
+	t_tuple	up;
+	t_tuple	to;
 
-	if (!init_scene(&scene))
-		return (1);
-	if (!render_scene(&scene))
-		return (1);
-	canvas_to_ppm(&scene.canvas);
-	free_pixels(scene.canvas.pixels);
+	from = point(1, 3, 2);
+	to = point(4, -2, 8);
+	up = vector(1, 1, 0);
+	m_print(view_transform(from, to, up));
+	printf("--------------\n");
 	return (0);
 }
+
+//int	main(void)
+//{
+//	t_scene	scene;
+
+//	if (!init_scene(&scene))
+//		return (1);
+//	if (!render_scene(&scene))
+//		return (1);
+//	canvas_to_ppm(&scene.canvas);
+//	free_pixels(scene.canvas.pixels);
+//	return (0);
+//}

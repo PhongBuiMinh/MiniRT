@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 23:22:12 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 16:09:42 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,3 +80,15 @@ t_tuple	color_at(t_world world, t_ray ray)
 	phong.light = world.light;
 	return (phong_lightning(phong));
 }
+
+t_camera	camera_init(int h_size, int v_size, double fov)
+{
+	t_camera	camera;
+
+	camera.h_size = h_size;
+	camera.v_size = v_size;
+	camera.fov = fov;
+	camera.transform = init_id_matrix(4, 4);
+	return (camera);
+}
+

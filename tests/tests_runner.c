@@ -121,7 +121,11 @@ int	main(void)
 	{"rotation_y", test_rotation_y},
 	{"rotation_z", test_rotation_z},
 	{"shearing_xy", test_shearing_xy},
-	{"matrix_inverse", test_matrix_inverse}
+	{"matrix_inverse", test_matrix_inverse},
+	{"test_view_transform_default_orientation", test_view_transform_default_orientation},
+	{"test_view_transform_positive_z", test_view_transform_positive_z},
+	{"test_view_transform_moves_world", test_view_transform_moves_world},
+	{"test_view_transform_arbitrary", test_view_transform_arbitrary},
 	};
 
 	passed = 0;
