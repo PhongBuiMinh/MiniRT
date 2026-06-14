@@ -1,14 +1,15 @@
 /* ************************************************************************** */
-/* */
-/* :::      ::::::::   */
-/* unit_test_runner.c                                 :+:      :+:    :+:   */
-/* +:+ +:+         +:+     */
-/* By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
-/* +#+#+#+#+#+   +#+           */
-/* Created: 2026/06/08 15:15:15 by bpetrovi          #+#    #+#             */
-/* Updated: 2026/06/08 15:15:15 by bpetrovi         ###   ########.fr       */
-/* */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tests_runner.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/14 16:23:45 by bpetrovi          #+#    #+#             */
+/*   Updated: 2026/06/14 19:28:39 by bpetrovi         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "tests.h"
 
@@ -126,6 +127,9 @@ int	main(void)
 	{"test_view_transform_positive_z", test_view_transform_positive_z},
 	{"test_view_transform_moves_world", test_view_transform_moves_world},
 	{"test_view_transform_arbitrary", test_view_transform_arbitrary},
+	{"test_ray_for_pixel_center", test_ray_for_pixel_center},
+	{"test_ray_for_pixel_corner", test_ray_for_pixel_corner},
+	{"test_ray_for_pixel_transformed_camera", test_ray_for_pixel_transformed_camera},
 	};
 
 	passed = 0;

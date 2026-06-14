@@ -1,14 +1,15 @@
 /* ************************************************************************** */
-/* */
-/* :::      ::::::::   */
-/* matrix_tests.c                                     :+:      :+:    :+:   */
-/* +:+ +:+         +:+     */
-/* By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
-/* +#+#+#+#+#+   +#+           */
-/* Created: 2026/06/08 15:15:05 by bpetrovi          #+#    #+#             */
-/* Updated: 2026/06/08 15:15:05 by bpetrovi         ###   ########.fr       */
-/* */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrix_tests.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/14 16:23:54 by bpetrovi          #+#    #+#             */
+/*   Updated: 2026/06/14 19:26:48 by bpetrovi         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
+
 
 #include "tests.h"
 
@@ -330,4 +331,56 @@ int	test_view_transform_arbitrary(void)
 	return (assert_matrix("view_transform_arbitrary",
 			view_transform(from, to, up),
 			expected));
+}
+
+
+int	test_ray_for_pixel_center(void)
+{
+	t_camera	c;
+	t_ray		r;
+
+	c = camera_init(201, 101, PI / 2);
+	r = ray_for_pixel(c, 100, 50);
+	if (!assert_tuple("ray_for_pixel_center_origin",
+			r.origin, point(0, 0, 0)))
+		return (0);
+	return (assert_tuple("ray_for_pixel_center_direction",
+			r.direction, vector(0, 0, -1)));
+}
+
+int	test_ray_for_pixel_corner(void)
+{
+	t_camera	c;
+	t_ray		r;
+
+	c = camera_init(201, 101, PI / 2);
+	r = ray_for_pixel(c, 0, 0);
+	if (!assert_tuple("ray_for_pixel_corner_origin",
+			r.origin, point(0, 0, 0)))
+		return (0);
+	return (assert_tuple("ray_for_pixel_corner_direction",
+			r.direction,
+			vector(0.66519, 0.33259, -0.66851)));
+}
+
+int	test_ray_for_pixel_transformed_camera(void)
+{
+	t_camera	c;
+	t_ray		r;
+	double		v;
+
+	c = camera_init(201, 101, PI / 2);
+	c.transform = m_multiply(rotation_y(PI / 4),
+			translation(0, -2, 5));
+
+	r = ray_for_pixel(c, 100, 50);
+
+	if (!assert_tuple("ray_for_pixel_transformed_origin",
+			r.origin, point(0, 2, -5)))
+		return (0);
+
+	v = sqrt(2) / 2;
+	return (assert_tuple("ray_for_pixel_transformed_direction",
+			r.direction,
+			vector(v, 0, -v)));
 }

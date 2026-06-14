@@ -6,45 +6,31 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:48:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 15:57:44 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 20:09:56 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	init_scene(t_scene *scene)
-{
-	t_canvas	canvas;
-	double		wall_size;
-
-	wall_size = 5;
-	if (!init_canvas(&canvas, 400, 400))
-		return (0);
-	scene->canvas = canvas;
-	scene->origin = point(0, 0, -5);
-	scene->sphere = sphere(5);
-	scene->sphere.material = material();
-	scene->sphere.material.color = color(1, 0.2, 1);
-	scene->light = light_init(point(10, 10, -10), color(1, 1, 1));
-	scene->half = wall_size / 2;
-	scene->pixel_size = wall_size / canvas.width;
-	scene->wall_z = 5;
-	return (1);
-}
-
 
 int	main(void)
 {
-	t_tuple	from;
-	t_tuple	up;
-	t_tuple	to;
+	t_world		world;
+	t_camera	camera;
+	t_tuple		from;
+	t_tuple		to;
+	t_tuple		up;
+	t_canvas	*canvas;
 
-	from = point(1, 3, 2);
-	to = point(4, -2, 8);
-	up = vector(1, 1, 0);
-	m_print(view_transform(from, to, up));
-	printf("--------------\n");
-	return (0);
+	world = world_default();
+	camera = camera_init(11, 11, PI / 2);
+	from = point(0, 0, -5);
+	to = point(0, 0, 0);
+	up = vector(0, 1, 0);
+	camera.transform = view_transform(from, to, up);
+	canvas = render_scene(camera, world);
+	t_print(canvas->pixels[5][5]);
+	free_pixels(canvas->pixels);
 }
 
 //int	main(void)

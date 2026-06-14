@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:17:56 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 16:02:26 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 19:27:52 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,20 @@ int	test_shading_intersection(void);
 int	test_shading_intersection_inside(void);
 
 /* ===========================
-** View Transformation tests
+** View Transformation Tests
 ** =========================== */
 
 int	test_view_transform_default_orientation(void);
 int	test_view_transform_positive_z(void);
 int	test_view_transform_moves_world(void);
 int	test_view_transform_arbitrary(void);
+
+/* ===========================
+** Ray Pixel Tests
+** =========================== */
+
+int	test_ray_for_pixel_center(void);
+int	test_ray_for_pixel_corner(void);
+int	test_ray_for_pixel_transformed_camera(void);
 
 #endif

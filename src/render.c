@@ -6,65 +6,37 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 16:09:42 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 20:11:08 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_ray	find_direction(t_scene *scene, int x, int y)
+t_canvas	*render_scene(t_camera camera, t_world world)
 {
-	t_tuple	direction;
-	float	world_x;
-	float	world_y;
+	t_canvas	*canvas;
+	t_tuple		color;
+	t_ray		ray;
+	int			y;
+	int			x;
 
-	world_y = scene->half - y * scene->pixel_size;
-	world_x = -scene->half + x * scene->pixel_size;
-	direction = t_substract(point(world_x, world_y, scene->wall_z),
-			scene->origin);
-	direction = normalize(direction);
-	return (r_init(scene->origin, direction));
-}
-
-
-void	render_pixel(t_scene *scene, int x, int y)
-{
-	t_intersections	xs;
-	t_intersection	is;
-	t_phong			phong;
-	t_ray			ray;
-
-	ray = find_direction(scene, x, y);
-	xs = xs_find(scene->sphere, ray);
-	if (xs.count == 0)
-	{
-		free(xs.intersections);
-		return ;
-	}
-	is = hit(xs);
-	phong = phong_computations(is, ray);
-	phong.light = scene->light;
-	write_pixel(&scene->canvas, x, y, phong_lightning(phong));
-	free(xs.intersections);
-}
-
-int	render_scene(t_scene *scene)
-{
-	int		y;
-	int		x;
-
+	canvas = init_canvas(camera.h_size, camera.v_size);
+	if (!canvas)
+		return (NULL);
 	y = 0;
-	while (y < scene->canvas.height)
+	while (y < camera.v_size)
 	{
 		x = 0;
-		while (x < scene->canvas.width)
+		while (x < camera.h_size)
 		{
-			render_pixel(scene, x, y);
+			ray = ray_for_pixel(camera, x, y);
+			color = color_at(world, ray); // COULD FAIL
+			write_pixel(canvas, x, y, color);
 			x++;
 		}
 		y++;
 	}
-	return (1);
+	return (canvas);
 }
 
 t_tuple	color_at(t_world world, t_ray ray)
@@ -81,6 +53,45 @@ t_tuple	color_at(t_world world, t_ray ray)
 	return (phong_lightning(phong));
 }
 
+t_ray	ray_for_pixel(t_camera camera, int x, int y)
+{
+	t_matrix	obj_to_world;
+	t_tuple		origin;
+	t_tuple		direction;
+	double		world_x;
+	double		world_y;
+
+	world_x = camera.half_width - (x + 0.5) * camera.pixel_size;
+	world_y = camera.half_height - (y + 0.5) * camera.pixel_size;
+	obj_to_world = inversion(camera.transform);
+	origin = m_apply(obj_to_world, point(0, 0, 0));
+	direction = normalize(t_substract(
+				m_apply(obj_to_world, point(world_x, world_y, -1)),
+				origin));
+	return (r_init(origin, direction));
+}
+
+void	find_camera_values(t_camera *camera)
+{
+	double	half_view;
+	double	aspect;
+
+	half_view = tan(camera->fov / 2);
+	aspect = (double)camera->h_size / (double)camera->v_size;
+	if (aspect >= 1)
+	{
+		camera->half_width = half_view;
+		camera->half_height = half_view / aspect;
+	}
+	else
+	{
+		camera->half_width = half_view / aspect;
+		camera->half_height = half_view;
+	}
+	camera->pixel_size = camera->half_width * 2 / camera->h_size;
+}
+
+
 t_camera	camera_init(int h_size, int v_size, double fov)
 {
 	t_camera	camera;
@@ -89,6 +100,7 @@ t_camera	camera_init(int h_size, int v_size, double fov)
 	camera.v_size = v_size;
 	camera.fov = fov;
 	camera.transform = init_id_matrix(4, 4);
+	find_camera_values(&camera);
 	return (camera);
 }
 

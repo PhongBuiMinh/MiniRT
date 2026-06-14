@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:35:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/07 20:16:49 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/06/14 20:07:32 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,19 @@ t_tuple	**init_pixels(int x, int y)
 	return (pixels);
 }
 
-int	init_canvas(t_canvas *canvas, int x, int y)
+t_canvas	*init_canvas(int x, int y)
 {
+	t_canvas	*canvas;
+
+	canvas = malloc(sizeof(t_canvas));
+	if (!canvas)
+		return (NULL);
 	canvas->pixels = init_pixels(x, y);
 	if (!canvas->pixels)
 		return (0);
 	canvas->width = x;
 	canvas->height = y;
-	return (1);
+	return (canvas);
 }
 
 int	clamp_color(int c)
