@@ -27,3 +27,4 @@ int main(int argc, char **argv)
     // 7. Event loop
     mlx_loop(prog.mlx.mlx);
 }
+(https://github.com/42Paris/minilibx-linux/actions/workflows/ci.yml/badge.svg)](https://github.com/42Paris/minilibx-linux/actions/workflows/ci.yml)
