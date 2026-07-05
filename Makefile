@@ -3,80 +3,75 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+         #
+#    By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/06/14 19:42:09 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/07/03 07:16:11 by fbui-min         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-GREEN = \033[0;32m
-RED = \033[0;31m
+GREEN   = \033[0;32m
+RED     = \033[0;31m
 DEFAULT = \033[0m
 
-NAME = fractol
-CC = gcc
-FLAG = -Wall -Wextra -Werror -g
+NAME    = minirt
+CC      = cc
+CFLAGS  = -Wall -Wextra -Werror -g
 
 OS_TYPE := $(shell uname -s)
+
 ifeq ($(OS_TYPE),Darwin)
 	MLX_PATH = lib/minilibx-macos
-	MLX_TAR = minilibx_macos_opengl.tgz
 	MLX_FLAG = -framework OpenGL -framework AppKit
 else ifeq ($(OS_TYPE),Linux)
 	MLX_PATH = lib/minilibx-linux
-	MLX_TAR = minilibx-linux.tgz
 	MLX_FLAG = -lXext -lX11 -lm -lz
 endif
+
 LIBFT_PATH = lib/libft
+LIBFT      = $(LIBFT_PATH)/libft.a
+MLX        = $(MLX_PATH)/libmlx.a
 
-# Libraries
-LIBFT = lib/libft/libft.a
-MLX = $(MLX_PATH)/libmlx.a
+SRC_DIR = srcs
+SRC     = main.c \
+		  hook_handler.c \
+		  init.c
 
-# RECOURSE
-SRC_DIR = src
-SRC = main.c \
-		hook_handler.c init.c
 OBJ_DIR = obj
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+OBJ     = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 all: $(NAME)
 
 $(LIBFT):
 	@echo "$(GREEN)Building libft library...$(DEFAULT)"
-	@make -C lib/libft
+	@$(MAKE) -C $(LIBFT_PATH)
 
 $(MLX):
 	@echo "$(GREEN)Building mlx library...$(DEFAULT)"
-	@tar -xvzf $(MLX_TAR) -C lib
-ifeq ($(OS_TYPE),Darwin)
-	mv lib/minilibx_opengl_20191021 $(MLX_PATH)
-endif
-	@make -C $(MLX_PATH)
+	@$(MAKE) -C $(MLX_PATH)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@echo "$(GREEN)Compling source file...$(DEFAULT)"
-	@$(CC) $(FLAG) -Iinclude -I$(LIBFT_PATH) -I$(MLX_PATH) -c $< -o $@
+	@echo "$(GREEN)Compiling source file...$(DEFAULT)"
+	@$(CC) $(CFLAGS) -Iincludes -I$(LIBFT_PATH) -I$(MLX_PATH) -c $< -o $@
 
 $(NAME): $(LIBFT) $(MLX) $(OBJ)
 	@echo "$(GREEN)Linking files...$(DEFAULT)"
-	@$(CC) $(FLAG) $(OBJ) -L$(LIBFT_PATH) -lft -L$(MLX_PATH) -lmlx $(MLX_FLAG) -o $@
+	@$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_PATH) -lft -L$(MLX_PATH) -lmlx $(MLX_FLAG) -o $(NAME)
 
 clean:
 	@echo "$(RED)Removing object files...$(DEFAULT)"
 	@rm -rf $(OBJ_DIR)
-	@make clean -C $(LIBFT_PATH)
-	@make clean -C $(MLX_PATH)
+	@$(MAKE) clean -C $(LIBFT_PATH)
+	@if [ -d "$(MLX_PATH)" ]; then $(MAKE) clean -C $(MLX_PATH); fi
 
 fclean: clean
-	@echo "$(RED)Removing program and libraries...$(DEFAULT)"
+	@echo "$(RED)Removing program...$(DEFAULT)"
 	@rm -f $(NAME)
-	@make fclean -C $(LIBFT_PATH)
-	@rm -rf $(MLX_PATH)
+	@$(MAKE) fclean -C $(LIBFT_PATH)
 
-# wget https://cdn.intra.42.fr/document/document/37672/minilibx_macos_metal.tgz -O minilibx-linux.tgz
-# curl -o minilibx-linux.tgz https://cdn.intra.42.fr/document/document/37672/minilibx_macos_metal.tgz
+re: fclean all
+
+.PHONY: all clean fclean re

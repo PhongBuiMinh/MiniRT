@@ -10,21 +10,44 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include "minirt.h"
+#include "scene.h"
+
+# define WIDTH 350
+# define HEIGHT 250
 
 void	fatal(char *msg, t_program *prog)
 {
 	// cleanup_program(prog);
+	(void)prog;
 	ft_putstr_fd(msg, 2);
+	exit(EXIT_FAILURE);
 }
 
-// copy from engine canvas to MLX image buffer
-// or render directly into MLX buffer instead of t_canvas
 void	render_minirt(t_program *prog)
 {
 	// render(camera, world, canvas);
 	mlx_put_image_to_window(prog->mlx.mlx, prog->mlx.win,
 		prog->mlx.img, 0, 0);
+}
+
+int build_world_from_scene(t_scene *scene, t_world *world, t_camera *camera)
+{
+		// 1. Set up the camera
+		// 2. Set up world with objects
+		// 3. Set up lights
+}
+
+t_canvas	canvas_new(int width, int height)
+{
+	t_canvas	canvas;
+
+	canvas.width = width;
+	canvas.height = height;
+	canvas.pixels = malloc(sizeof(t_color) * width * height);
+	if (!canvas.pixels)
+		canvas.pixels = NULL;
+	return (canvas);
 }
 
 int	main(int argc, char **argv)

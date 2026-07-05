@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook_handler.h                                     :+:      :+:    :+:   */
+/*   hook_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 19:10:49 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/06/14 19:11:07 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/03 07:33:51 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
+#include "minirt.h"
 
 int	exit_minirt(t_program *prog)
 {
@@ -24,8 +24,11 @@ int	exit_minirt(t_program *prog)
 	exit(0);
 }
 
-int	key_hook(int keycode, t_program *prog)
+int	key_hook(int keycode, void *param)
 {
+	t_program	*prog;
+
+	prog = (t_program *)param;
 	if (keycode == 53)
 		exit_minirt(prog);
 	return (0);
