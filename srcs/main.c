@@ -31,11 +31,15 @@ void	render_minirt(t_program *prog)
 		prog->mlx.img, 0, 0);
 }
 
-int build_world_from_scene(t_scene *scene, t_world *world, t_camera *camera)
+int	build_world_from_scene(t_scene *scene, t_world *world, t_camera *camera)
 {
-		// 1. Set up the camera
-		// 2. Set up world with objects
-		// 3. Set up lights
+	(void)scene;
+	(void)world;
+	(void)camera;
+	// 1. Set up the camera
+	// 2. Set up world with objects
+	// 3. Set up lights
+	return (0);
 }
 
 t_canvas	canvas_new(int width, int height)
@@ -64,9 +68,11 @@ int	main(int argc, char **argv)
 		fatal("Failed to parse scene file", &prog);
 	if (!build_world_from_scene(&prog.scene, &prog.world, &prog.camera))
 		fatal("Failed to build world from scene", &prog);
-	prog.canvas = canvas_new(prog.camera.h_size, prog.camera.v_size); // RENDER INTO CANVAS USING ENGINE (ray tracer core)
+	prog.canvas = canvas_new(prog.camera.h_size, prog.camera.v_size);
 	if (!prog.canvas.pixels)
 		fatal("Failed to allocate canvas", &prog);
+	// prog.camera.h_size = 350;
+	// prog.camera.v_size = 250;
 	init_render(&prog);
 	init_img(&prog);
 	render_minirt(&prog);
@@ -75,3 +81,20 @@ int	main(int argc, char **argv)
 	// mlx_mouse_hook(prog.mlx.win, mouse_hook, prog);
 	mlx_loop(prog.mlx.mlx);
 }
+
+// #include <mlx.h>
+
+// int	main(void)
+// {
+// 	void	*mlx;
+// 	void	*win;
+
+// 	mlx = mlx_init();
+// 	if (!mlx)
+// 		return (1);
+// 	win = mlx_new_window(mlx, 800, 600, "MLX Test");
+// 	if (!win)
+// 		return (1);
+// 	mlx_loop(mlx);
+// 	return (0);
+// }

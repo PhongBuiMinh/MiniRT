@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 07:35:42 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/05 09:27:01 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/05 13:51:25 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
-#include "libft.h"
-#include "minirt.h"
+#include "parser.h"
 
 int	add_object(t_scene *scene, t_scene_obj obj)
 {

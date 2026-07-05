@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 19:08:07 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/03 07:29:01 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/05 14:17:34 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 void	init_render(t_program *prog)
 {
-	// prog->mlx.width = WIDTH;
-	// prog->mlx.height = HEIGHT;
 	prog->mlx.mlx = mlx_init();
 	if (!prog->mlx.mlx)
 		fatal("mlx_init failed", prog);
 	prog->mlx.win = mlx_new_window(
 			prog->mlx.mlx,
-			// prog->mlx.width,
-			// prog->mlx.height,
 			prog->camera.h_size,
 			prog->camera.v_size,
 			"MiniRT"

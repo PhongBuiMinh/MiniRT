@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/05 06:27:38 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/05 14:04:23 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <unistd.h>
-#include "scene.h"
-#include "libft.h"
-#include "minirt.h"
-
-int	parse_ambient(char **tokens, t_scene *scene);
-int	parse_camera(char **tokens, t_scene *scene);
-int	parse_light(char **tokens, t_scene *scene);
-int	parse_sphere(char **tokens, t_scene *scene);
-int	parse_plane(char **tokens, t_scene *scene);
-int	parse_cylinder(char **tokens, t_scene *scene);
+#include "parser.h"
 
 int	dispatch_line(char **tokens, t_scene *scene)
 {
@@ -73,6 +62,40 @@ int	validate_scene(t_scene *s)
 	if (s->obj_count <= 0)
 		return (0);
 	return (1);
+}
+
+// Temporary gnl
+char	*get_next_line(int fd)
+{
+	char	*line;
+	char	c;
+	ssize_t	n;
+	int		len;
+
+	line = malloc(1);
+	if (!line)
+		return (NULL);
+	len = 0;
+	while ((n = read(fd, &c, 1)) > 0)
+	{
+		char	*tmp = realloc(line, len + 2);
+		if (!tmp)
+		{
+			free(line);
+			return (NULL);
+		}
+		line = tmp;
+		line[len++] = c;
+		if (c == '\n')
+			break ;
+	}
+	if (n <= 0 && len == 0)
+	{
+		free(line);
+		return (NULL);
+	}
+	line[len] = '\0';
+	return (line);
 }
 
 int	parse_scene_file(const char *path, t_scene *scene)

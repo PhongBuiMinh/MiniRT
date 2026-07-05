@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:19:38 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/05 05:55:21 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/05 13:39:34 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdbool.h>
 # include "color.h"
 # include "mlx.h"
+# include "scene.h"
 // #include "../lib/minilibx-linux/mlx.h"
 
 // WINDOW
@@ -48,10 +49,6 @@ typedef struct s_mlx
 typedef struct s_world
 {
 }	t_world;
-
-// typedef struct s_scene
-// {
-// }	t_scene;
 
 typedef struct s_camera
 {

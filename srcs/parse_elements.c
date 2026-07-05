@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/05 07:29:03 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/05 13:50:03 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
-#include "libft.h"
-#include "minirt.h"
+#include "parser.h"
 
 int	token_count(char **tokens)
 {
@@ -63,9 +61,9 @@ int	parse_color(char *str, t_color *color)
 	color->g = ft_atoi(rgb[1]);
 	color->b = ft_atoi(rgb[2]);
 	free_tokens(rgb);
-	if (color->r < 0 || color->r > 255 ||
-		color->g < 0 || color->g > 255 ||
-		color->b < 0 || color->b > 255)
+	if (color->r < 0 || color->r > 255
+		|| color->g < 0 || color->g > 255
+		|| color->b < 0 || color->b > 255)
 		return (0);
 	return (1);
 }

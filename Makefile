@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/07/03 07:16:11 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/07/05 13:55:47 by fbui-min         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ MLX        = $(MLX_PATH)/libmlx.a
 SRC_DIR = srcs
 SRC     = main.c \
 		  hook_handler.c \
-		  init.c
+		  init.c \
+		  parse_elements.c parse_helpers.c parse_objects.c parser.c
 
 OBJ_DIR = obj
 OBJ     = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
