@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:28:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 23:05:15 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/03 21:23:19 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@
 ////	t_ray			r;
 ////	t_light			light_src;
 ////	t_canvas		canvas;
-////	t_sphere		s;
+////	t_object		s;
 ////	t_tuple			origin;
 ////	t_tuple			pos;
 ////	t_tuple			dir;
@@ -125,7 +125,7 @@
 ////	half = wall_size / 2;
 ////	init_canvas(&canvas, 200, 200);
 ////	pixel_size = wall_size / canvas.height;
-////	s = sphere(5);
+////	s = set_as_sphere(5);
 ////	s.material = material();
 ////	s.material.color = color(1, 0.2, 1);
 ////	light_src = light_init(point(-10, 10, -10), color(1, 1, 1));
@@ -140,7 +140,7 @@
 ////			pos = point(world_x, world_y, 10);
 ////			dir = normalize(t_substract(pos, origin));
 ////			r = r_init(origin, dir);
-////			xs = xs_find(s, r);
+////			xs = intersect(s, r);
 ////			if (xs.count == -1)
 ////				continue ;
 ////			else
@@ -162,11 +162,11 @@
 ////	free_pixels(canvas.pixels);
 ////}
 ///*
-//DRAWING A SPHERE BY CASTING RAYS AT IT
+//DRAWING A set_as_sphere BY CASTING RAYS AT IT
 //int	main(void)
 //{
 //	t_canvas		canvas;
-//	t_sphere		s;
+//	t_object		s;
 //	t_tuple			origin;
 //	t_tuple			position;
 //	t_intersections	xs;
@@ -183,7 +183,7 @@
 //	half = wall_size / 2;
 //	init_canvas(&canvas, 200, 200);
 //	pixel_size = wall_size / canvas.height;
-//	s = sphere(5);
+//	s = set_as_sphere(5);
 //	struct s_shear shear = {1, 0, 0, 0, 0, 0};
 //	s.transformation = m_multiply(shearing(shear), rotation_z(PI / 4));
 //	y = 0;
@@ -195,7 +195,7 @@
 //		{
 //			world_x = -half + pixel_size * x;
 //			position = point(world_x, world_y, 10);
-//			xs = xs_find(s, r_init(origin, normalize(t_substract(position, origin))));
+//			xs = intersect(s, r_init(origin, normalize(t_substract(position, origin))));
 //			if (xs.count != 0)
 //				write_pixel(&canvas, x, y, color(1, 0, 0));
 //			else

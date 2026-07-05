@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 16:24:06 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 23:16:20 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/03 21:27:02 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,13 @@ int	test_shading_intersection(void)
 
 	world = world_default();
 
-	xs = xs_find(
-			world.spheres[0],
+	xs = intersect(
+			world.objects[0],
 			r_init(point(0, 0, -5),
 			vector(0, 0, 1)));
 
 	if (xs.err)
-		return (free(world.spheres), false);
+		return (free(world.objects), false);
 
 	phong = phong_computations(hit(xs),
 			r_init(point(0, 0, -5),
@@ -123,7 +123,7 @@ int	test_shading_intersection(void)
 	result = tuple_equal(actual, expected);
 
 	free(xs.intersections);
-	free(world.spheres);
+	free(world.objects);
 
 	return (result);
 }
@@ -148,10 +148,10 @@ int	test_shading_intersection_inside(void)
 			point(0, 0, 0),
 			vector(0, 0, 1));
 
-	xs = xs_find(world.spheres[1], ray);
+	xs = intersect(world.objects[1], ray);
 
 	if (xs.err)
-		return (free(world.spheres), false);
+		return (free(world.objects), false);
 
 	phong = phong_computations(
 			hit(xs),
@@ -165,7 +165,7 @@ int	test_shading_intersection_inside(void)
 	result = tuple_equal(actual, expected);
 
 	free(xs.intersections);
-	free(world.spheres);
+	free(world.objects);
 
 	return (result);
 }

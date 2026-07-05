@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 16:23:54 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 22:23:56 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/03 22:16:26 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,33 +88,33 @@ int	test_translation_inverse(void)
 
 int	test_scaling_point(void)
 {
-	t_matrix	s;
+	t_matrix	m;
 	t_tuple		p;
 
-	s = scaling(2, 3, 4);
+	m = scaling(2, 3, 4);
 	p = point(-4, 6, 8);
-	return (assert_tuple("scaling_point", m_apply(s, p), point(-8, 18, 32)));
+	return (assert_tuple("scaling_point", m_apply(m, p), point(-8, 18, 32)));
 }
 
 int	test_scaling_vector(void)
 {
-	t_matrix	s;
+	t_matrix	m;
 	t_tuple		v;
 
-	s = scaling(2, 3, 4);
+	m = scaling(2, 3, 4);
 	v = vector(-4, 6, 8);
-	return (assert_tuple("scaling_vector", m_apply(s, v), vector(-8, 18,
+	return (assert_tuple("scaling_vector", m_apply(m, v), vector(-8, 18,
 				32)));
 }
 
 int	test_scaling_inverse(void)
 {
-	t_matrix	s;
+	t_matrix	m;
 	t_tuple		v;
 
-	s = scaling(2, 3, 4);
+	m = scaling(2, 3, 4);
 	v = vector(-4, 6, 8);
-	return (assert_tuple("scaling_inverse", m_apply(inversion(s), v),
+	return (assert_tuple("scaling_inverse", m_apply(inversion(m), v),
 			vector(-2, 2, 2)));
 }
 
@@ -201,19 +201,19 @@ int	test_matrix_inverse(void)
 
 int	test_normal_x_axis(void)
 {
-	t_sphere	s;
+	t_object	s;
 
-	s = sphere(1);
+	s = sphere(0);
 	return (assert_tuple("normal_x_axis", normal_at(s, point(1, 0, 0)),
 			vector(1, 0, 0)));
 }
 
 int	test_normal_nonaxial(void)
 {
-	t_sphere	s;
+	t_object	s;
 	double		v;
 
-	s = sphere(1);
+	s = sphere(0);
 	v = sqrt(3) / 3;
 	return (assert_tuple("normal_nonaxial", normal_at(s, point(v, v, v)),
 			vector(v, v, v)));
@@ -221,11 +221,11 @@ int	test_normal_nonaxial(void)
 
 int	test_normal_is_normalized(void)
 {
-	t_sphere	s;
+	t_object	s;
 	t_tuple		n;
 	double		v;
 
-	s = sphere(1);
+	s = sphere(0);
 	v = sqrt(3) / 3;
 	n = normal_at(s, point(v, v, v));
 	return (assert_tuple("normal_is_normalized", n, normalize(n)));
@@ -233,9 +233,9 @@ int	test_normal_is_normalized(void)
 
 int	test_normal_translated_sphere(void)
 {
-	t_sphere	s;
+	t_object	s;
 
-	s = sphere(1);
+	set_as_sphere(&s);
 	s.transformation = translation(0, 1, 0);
 	return (assert_tuple("normal_translated_sphere", normal_at(s, point(0,
 					1.70711, -0.70711)), vector(0, 0.70711, -0.70711)));
@@ -243,10 +243,10 @@ int	test_normal_translated_sphere(void)
 
 int	test_normal_scaled_rotated_sphere(void)
 {
-	t_sphere	s;
+	t_object	s;
 	double		v;
 
-	s = sphere(1);
+	set_as_sphere(&s);
 	s.transformation = m_multiply(scaling(1, 0.5, 1), rotation_z(PI
 				/ 5));
 	v = sqrt(2) / 2;

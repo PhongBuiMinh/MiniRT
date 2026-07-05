@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 22:52:12 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/03 21:57:31 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,16 @@ t_intersections	xs_init(void)
 }
 
 // TOO MANY VARIABLES + XS_PUSH FAILURE CAN BE HANDLED BETTER
-t_intersections	xs_find(t_sphere sphere, t_ray ray)
+
+t_intersections	intersect(t_object object, t_ray ray)
+{
+	t_ray	local_ray;
+
+	local_ray = r_transform(ray, inversion(object.transformation));
+	return (object.intersect(object, local_ray));
+}
+
+t_intersections	intersect_sphere( t_object object, t_ray ray)
 {
 	t_intersections	xs;
 	t_intersection	is;
@@ -38,14 +47,13 @@ t_intersections	xs_find(t_sphere sphere, t_ray ray)
 	xs = xs_init();
 	if (xs.err == true)
 		return (xs);
-	ray = r_transform(ray, inversion(sphere.transformation));
 	d = discriminant(ray);
 	if (d < -EPSILON)
 		return (xs.count = 0, xs);
 	sphere_to_ray = t_substract(ray.origin, point(0, 0, 0));
 	a = dot(ray.direction, ray.direction);
 	b = 2 * dot(ray.direction, sphere_to_ray);
-	is.object = sphere;
+	is.object = object;
 	is.t = (-b - sqrt(d)) / (2 * a);
 	xs_push(&xs, is);
 	is.t = (-b + sqrt(d)) / (2 * a);
