@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_world.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 12:46:50 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/07 13:09:11 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/07 13:58:09 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	create_cylinder(t_world *w, const t_scene_obj *obj)
 	if (w->cyl_count >= MAX_CYLINDERS)
 		return (0);
 	cylinder_set_axis_and_size(&cy, obj->pos, obj->normal_or_axis,
-			radius, obj->height);
+		radius, obj->height);
 	cy.material.color = obj->color;
 	w->cylinders[w->cyl_count++] = cy;
 	return (1);
@@ -126,10 +126,10 @@ t_light point_light(t_tuple position, t_color intensity)
 
 int	build_world_from_scene(t_scene *s, t_world *w, t_camera *cam)
 {
-	int	i;
-	int	success;
-	t_tuple light_position;
-	t_color light_color_bright;
+	int		i;
+	int		success;
+	t_tuple	light_position;
+	t_color	light_color_bright;
 
 	if (!validate_scene(s) || !w || !cam)
 		return (0);
@@ -143,13 +143,12 @@ int	build_world_from_scene(t_scene *s, t_world *w, t_camera *cam)
 	w->sphere_count = 0;
 	w->plane_count = 0;
 	w->cyl_count = 0;
-	i = 0;
-	while (i < s->obj_count)
+	i = -1;
+	while (++i < s->obj_count)
 	{
 		success = process_object(w, &s->objects[i]);
 		if (!success)
 			return (0);
-		i++;
 	}
 	return (1);
 }

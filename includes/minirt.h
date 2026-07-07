@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:19:38 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/05 13:39:34 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/07 15:13:22 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,12 @@ typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
-	// int		width;
-	// int		height;
 	void	*img;
 	char	*addr;
 	int		bpp;
 	int		line_len;
 	int		endian;
 }	t_mlx;
-
-typedef struct s_world
-{
-}	t_world;
 
 typedef struct s_camera
 {
@@ -61,14 +55,33 @@ typedef struct s_camera
 	double		fov;
 }	t_camera;
 
-typedef struct s_program
+// typedef struct s_canvas
+// {
+// 	t_tuple	**pixels;
+// 	int		width;
+// 	int		height;
+// }	t_canvas;
+
+typedef struct s_renderer
 {
-	t_scene		scene;
+	t_mlx		mlx;
+	t_canvas	canvas;
+}	t_renderer;
+
+typedef struct s_rt
+{
 	t_world		world;
 	t_camera	camera;
-	t_canvas	canvas;
-	t_mlx		mlx;
-}	t_program;
+}	t_rt;
+
+// typedef struct s_program
+// {
+// 	t_scene		scene;
+// 	t_world		world;
+// 	t_camera	camera;
+// 	t_canvas	canvas;
+// 	t_mlx		mlx;
+// }	t_program;
 
 void	init_img(t_program *prog);
 void	init_render(t_program *prog);

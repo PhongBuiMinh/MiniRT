@@ -6,7 +6,7 @@
 #    By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/07/05 13:55:47 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/07/07 14:04:19 by fbui-min         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRC_DIR = srcs
 SRC     = main.c \
 		  hook_handler.c \
 		  init.c \
-		  parse_elements.c parse_helpers.c parse_objects.c parser.c
+		  parse_elements.c parse_helpers.c parse_objects.c parser.c \
+		  build_world.c
 
 OBJ_DIR = obj
 OBJ     = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
