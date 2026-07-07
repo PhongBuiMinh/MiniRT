@@ -31,16 +31,16 @@ void	render_minirt(t_program *prog)
 		prog->mlx.img, 0, 0);
 }
 
-int	build_world_from_scene(t_scene *scene, t_world *world, t_camera *camera)
-{
-	(void)scene;
-	(void)world;
-	(void)camera;
-	// 1. Set up the camera
-	// 2. Set up world with objects
-	// 3. Set up lights
-	return (0);
-}
+// int	build_world_from_scene(t_scene *scene, t_world *world, t_camera *camera)
+// {
+// 	(void)scene;
+// 	(void)world;
+// 	(void)camera;
+// 	// 1. Set up the camera
+// 	// 2. Set up world with objects
+// 	// 3. Set up lights
+// 	return (0);
+// }
 
 t_canvas	canvas_new(int width, int height)
 {
