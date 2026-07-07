@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:04:12 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/03 22:29:47 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/07 20:55:01 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,58 +29,47 @@ void	set_transformation(t_object *object, t_matrix transformation)
 	object->transformation = transformation;
 }
 
-t_object	object(int id)
+void	object_init(t_object *object)
 {
-	t_object	new_object;
-
-	new_object.transformation = init_id_matrix(4, 4);
-	new_object.material = material();
-	new_object.id = id;
-	return (new_object);
+	object->material = material();
+	object->transformation = init_id_matrix(4, 4);
 }
 
-t_object	*init_objects(int obj_cnt)
+t_object	*sphere_create(int id)
 {
-	t_object	*objects;
-	int			i;
+	t_sphere	*new_sphere;
 
-	objects = malloc(sizeof(t_object) * obj_cnt);
-	if (!objects)
+	new_sphere = malloc(sizeof(t_sphere));
+	if (!new_sphere)
 		return (NULL);
+	object_init(&new_sphere->base_obj);
+	new_sphere->base_obj.intersect = intersect_sphere;
+	new_sphere->base_obj.normal_at = normal_at_sphere;
+	new_sphere->base_obj.id = id;
+	return ((t_object *)new_sphere);
+}
+
+//t_object	*plane(int id)
+//{
+//	t_plane	*new_plane;
+
+//	new_plane = malloc(sizeof(t_plane *));
+//	if (!new_plane)
+//		return (NULL);
+//	object_init(&new_plane->base_obj);
+//	new_plane->base_obj.intersect = intersect_plane;
+//	new_plane->base_obj.normal_at = normal_at_plane;
+//	return ((t_object *)new_plane);
+//}
+
+void	free_objects(t_object **ptr, int nbr)
+{
+	int	i;
+
 	i = 0;
-	while (i < obj_cnt)
+	while (i < nbr)
 	{
-		objects[i] = object(i);
+		free(ptr[i]);
 		i++;
 	}
-	return (objects);
-}
-
-
-void	set_as_sphere(t_object *object)
-{
-	object->intersect = intersect_sphere;
-	object->normal_at = normal_at_sphere;
-}
-
-t_object	sphere(int id)
-{
-	t_object	new_sphere;
-
-	new_sphere.transformation = init_id_matrix(4, 4);
-	new_sphere.material = material();
-	new_sphere.id = id;
-	new_sphere.intersect = intersect_sphere;
-	new_sphere.normal_at = normal_at_sphere;
-	return (new_sphere);
-}
-
-t_object	plane(int id)
-{
-	t_object	new_plane;
-	new_plane.transformation = init_id_matrix(4, 4);
-	new_plane.material = material();
-	new_plane.id = id;
-	new_plane.intersect = intersect_plane;
-	new_plane.normal_at = normal_at_plane;
 }

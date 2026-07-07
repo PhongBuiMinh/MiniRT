@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:45:00 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/01 18:27:51 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/07 20:37:59 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 typedef struct s_world
 {
 	t_light		light;
-	t_object	*objects;
+	t_object	*objects[64];
 	int			object_cnt;
 }	t_world;
 

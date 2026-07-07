@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:07:14 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/03 22:43:34 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/07 20:48:37 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_material
 typedef struct s_object
 {
 	t_tuple			(*normal_at)(t_tuple);
-	t_intersections	(*intersect)(t_object * self, t_ray);
+	t_intersections	(*intersect)(struct s_object * self, t_ray);
 	t_matrix		transformation;
 	t_material		material;
 	int				id;
@@ -51,11 +51,10 @@ typedef struct s_cone
 	double		more_info;
 }	t_cone;
 
-t_object	*init_objects(int obj_cnt);
-t_object	sphere(int id);
+t_object	*sphere_create(int id);
 t_material	material(void);
+void		free_objects(t_object **ptr, int nbr);
 void		set_transformation(t_object *object, t_matrix transformation);
-void		set_as_sphere(t_object *object);
 
 
 #endif

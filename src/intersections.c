@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/03 21:57:31 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/07 20:50:29 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ t_intersections	xs_init(void)
 
 // TOO MANY VARIABLES + XS_PUSH FAILURE CAN BE HANDLED BETTER
 
-t_intersections	intersect(t_object object, t_ray ray)
+t_intersections	intersect(t_object *object, t_ray ray)
 {
 	t_ray	local_ray;
 
-	local_ray = r_transform(ray, inversion(object.transformation));
-	return (object.intersect(object, local_ray));
+	local_ray = r_transform(ray, inversion(object->transformation));
+	return (object->intersect(object, local_ray));
 }
 
-t_intersections	intersect_sphere( t_object object, t_ray ray)
+t_intersections	intersect_sphere(t_object *object, t_ray ray)
 {
 	t_intersections	xs;
 	t_intersection	is;
@@ -53,7 +53,7 @@ t_intersections	intersect_sphere( t_object object, t_ray ray)
 	sphere_to_ray = t_substract(ray.origin, point(0, 0, 0));
 	a = dot(ray.direction, ray.direction);
 	b = 2 * dot(ray.direction, sphere_to_ray);
-	is.object = object;
+	is.object = *object;
 	is.t = (-b - sqrt(d)) / (2 * a);
 	xs_push(&xs, is);
 	is.t = (-b + sqrt(d)) / (2 * a);
