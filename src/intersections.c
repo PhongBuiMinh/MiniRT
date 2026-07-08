@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/07 20:50:29 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/08 12:03:14 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ t_intersections	xs_init(void)
 	return (new_xs);
 }
 
-// TOO MANY VARIABLES + XS_PUSH FAILURE CAN BE HANDLED BETTER
-
 t_intersections	intersect(t_object *object, t_ray ray)
 {
 	t_ray	local_ray;
@@ -34,6 +32,24 @@ t_intersections	intersect(t_object *object, t_ray ray)
 	local_ray = r_transform(ray, inversion(object->transformation));
 	return (object->intersect(object, local_ray));
 }
+
+t_intersections	intersect_plane(t_object *object, t_ray ray)
+{
+	t_intersections	xs;
+	t_intersection	is;
+
+	xs = xs_init();
+	if (xs.err)
+		return (xs);
+	if (fabs(ray.direction.y) < EPSILON)
+		return (xs);
+	is.t = -ray.origin.y / ray.direction.y;
+	is.object = *object;
+	xs_push(&xs, is);
+	return (xs);
+}
+
+// TOO MANY VARIABLES + XS_PUSH FAILURE CAN BE HANDLED BETTER
 
 t_intersections	intersect_sphere(t_object *object, t_ray ray)
 {

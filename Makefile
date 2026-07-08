@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/05 21:36:59 by bpetrovi          #+#    #+#              #
-#    Updated: 2026/06/09 22:41:43 by bpetrovi         ###   ########.fr        #
+#    Updated: 2026/07/08 12:17:37 by bpetrovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minirt
 INCLUDES = -Iincludes -Ilibft
 CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
-DEBUG = -fsanitize=address -g
+DEBUG = -g
 LIBFT_DIR = libft
 LIBFT = ${LIBFT_DIR}/libft.a
 SRCS_DIR = src

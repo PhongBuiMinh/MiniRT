@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 23:04:58 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/08 12:36:49 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_tuple	color_at(t_world world, t_ray ray)
 	xs = world_intersect(world, ray);
 	h = hit(xs);
 	free(xs.intersections);
-	if (xs.count > 0)
+	if (hit_exists(h))
 		phong = phong_computations(h, ray);
 	else
 		return (color(0, 0, 0));

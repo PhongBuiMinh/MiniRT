@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:07:14 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/07 20:48:37 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/08 12:05:49 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_cone
 }	t_cone;
 
 t_object	*sphere_create(int id);
+t_object	*plane_create(int id);
 t_material	material(void);
 void		free_objects(t_object **ptr, int nbr);
 void		set_transformation(t_object *object, t_matrix transformation);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:04:12 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/07 20:55:01 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/08 12:07:02 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,19 @@ t_object	*sphere_create(int id)
 	return ((t_object *)new_sphere);
 }
 
-//t_object	*plane(int id)
-//{
-//	t_plane	*new_plane;
+t_object	*plane_create(int id)
+{
+	t_plane	*new_plane;
 
-//	new_plane = malloc(sizeof(t_plane *));
-//	if (!new_plane)
-//		return (NULL);
-//	object_init(&new_plane->base_obj);
-//	new_plane->base_obj.intersect = intersect_plane;
-//	new_plane->base_obj.normal_at = normal_at_plane;
-//	return ((t_object *)new_plane);
-//}
+	new_plane = malloc(sizeof(t_plane));
+	if (!new_plane)
+		return (NULL);
+	object_init(&new_plane->base_obj);
+	new_plane->base_obj.intersect = intersect_plane;
+	new_plane->base_obj.normal_at = normal_at_plane;
+	new_plane->base_obj.id = id;
+	return ((t_object *)new_plane);
+}
 
 void	free_objects(t_object **ptr, int nbr)
 {
