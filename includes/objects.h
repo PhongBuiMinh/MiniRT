@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:07:14 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 13:47:35 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 14:30:26 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ typedef struct s_plane
 typedef struct s_cylinder
 {
 	t_object	base_obj;
-	double		radius;
+	double		min;
+	double		max;
 }	t_cylinder;
 
 t_object	*sphere_create(int id);

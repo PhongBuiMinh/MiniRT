@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:40:19 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 13:50:19 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 14:29:12 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_tuple	normal_at_plane(t_tuple	is_point)
 
 t_tuple	normal_at_cylinder(t_tuple is_point)
 {
-	return (is_point);
+	return (vector(is_point.x, 0, is_point.z));
 }
 
 t_tuple	reflect(t_tuple in, t_tuple normal)

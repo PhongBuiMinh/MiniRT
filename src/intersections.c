@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 12:16:43 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 14:47:13 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,19 @@ void	intersect_plane(t_object *object, t_ray ray, t_intersections *xs)
 	xs_push(xs, intersection(-ray.origin.y / ray.direction.y, object));
 }
 
+bool	truncate_cylinder(t_object *object, t_ray ray, t_intersections *xs, double t)
+{
+	t_cylinder	*cylinder;
+	double		y;
+
+	cylinder = (t_cylinder *)object;
+	y = ray.origin.y + ray.direction.y * t;
+	if (y > cylinder->min && y < cylinder->max)
+		if (!xs_push(xs, intersection(t, object)))
+			return (false);
+	return (true);
+}
+
 void	intersect_cylinder(t_object *object, t_ray ray, t_intersections *xs)
 {
 	double			a;
@@ -66,9 +79,9 @@ void	intersect_cylinder(t_object *object, t_ray ray, t_intersections *xs)
 	d = b * b - 4 * a * c;
 	if (d < 0)
 		return;
-	if (!xs_push(xs, intersection((-b - sqrt(d))/(2*a), object)))
+	if (!truncate_cylinder(object, ray, xs, (-b - sqrt(d))/(2*a)))
 		return;
-	xs_push(xs, intersection((-b + sqrt(d))/(2*a), object));
+	truncate_cylinder(object, ray, xs, (-b + sqrt(d))/(2*a));
 }
 
 void	intersect_sphere(t_object *object, t_ray ray, t_intersections *xs)

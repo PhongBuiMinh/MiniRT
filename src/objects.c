@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:04:12 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 13:55:48 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 14:49:09 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ t_object	*cylinder_create(int id)
 	object_init(&new_cylinder->base_obj);
 	new_cylinder->base_obj.intersect = intersect_cylinder;
 	new_cylinder->base_obj.normal_at = normal_at_cylinder;
+	new_cylinder->max = 2;
+	new_cylinder->min = 1;
 	new_cylinder->base_obj.id = id;
 	return ((t_object *)new_cylinder);
 }
