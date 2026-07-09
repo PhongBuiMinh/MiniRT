@@ -63,6 +63,8 @@ int	test_normal_nonaxial(void);
 int	test_normal_is_normalized(void);
 int	test_normal_translated_sphere(void);
 int	test_normal_scaled_rotated_sphere(void);
+int	test_cylinder_intersection(void);
+int	test_cylinder_normal_at(void);
 
 /* ===========================
 ** phong_lightning Tests

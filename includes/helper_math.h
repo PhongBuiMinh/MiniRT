@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper_math.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:34:00 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:49:56 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 11:45:49 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include "matrices.h"
 # include "rays.h"
 
-double	discriminant(t_ray ray);
 double	cofactor(t_matrix matrix, int row, int col);
 double	determinant(t_matrix matrix);
 double	minor(t_matrix matrix, int row, int col);

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:48:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/08 12:26:06 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 10:43:23 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	main(void)
 	to = point(0, 1, 0);
 	up = vector(0, 1, 0);
 	camera.transform = view_transform(from, to, up);
-	canvas = render_scene(camera, world); // crash
+	canvas = render_scene(camera, world);
 	canvas_to_ppm(canvas);
 	free_objects(world.objects, world.object_cnt);
 	free_pixels(canvas->pixels);

@@ -6,11 +6,21 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:45:35 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/08 12:03:14 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 12:16:43 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+t_intersection	intersection(double t, t_object *object)
+{
+	t_intersection	is;
+
+	is.t = t;
+	is.object = object;
+	return (is);
+}
+
 
 t_intersections	xs_init(void)
 {
@@ -25,56 +35,60 @@ t_intersections	xs_init(void)
 	return (new_xs);
 }
 
-t_intersections	intersect(t_object *object, t_ray ray)
+void	intersect(t_object *object, t_ray ray, t_intersections *xs)
 {
-	t_ray	local_ray;
+	t_ray			local_ray;
 
 	local_ray = r_transform(ray, inversion(object->transformation));
-	return (object->intersect(object, local_ray));
+	object->intersect(object, local_ray, xs);
 }
 
-t_intersections	intersect_plane(t_object *object, t_ray ray)
+void	intersect_plane(t_object *object, t_ray ray, t_intersections *xs)
 {
-	t_intersections	xs;
-	t_intersection	is;
-
-	xs = xs_init();
-	if (xs.err)
-		return (xs);
 	if (fabs(ray.direction.y) < EPSILON)
-		return (xs);
-	is.t = -ray.origin.y / ray.direction.y;
-	is.object = *object;
-	xs_push(&xs, is);
-	return (xs);
+		return;
+	xs_push(xs, intersection(-ray.origin.y / ray.direction.y, object));
 }
 
-// TOO MANY VARIABLES + XS_PUSH FAILURE CAN BE HANDLED BETTER
-
-t_intersections	intersect_sphere(t_object *object, t_ray ray)
+void	intersect_cylinder(t_object *object, t_ray ray, t_intersections *xs)
 {
-	t_intersections	xs;
-	t_intersection	is;
-	t_tuple			sphere_to_ray;
+	double			a;
+	double			b;
+	double			c;
+	double			d;
+
+	a = ray.direction.x * ray.direction.x + ray.direction.z * ray.direction.z;
+	if (equal(a, 0))
+		return;
+	b = 2 * (ray.origin.x * ray.direction.x +
+			ray.origin.z * ray.direction.z);
+	c = ray.origin.x * ray.origin.x + ray.origin.z * ray.origin.z - 1;
+	d = b * b - 4 * a * c;
+	if (d < 0)
+		return;
+	if (!xs_push(xs, intersection((-b - sqrt(d))/(2*a), object)))
+		return;
+	xs_push(xs, intersection((-b + sqrt(d))/(2*a), object));
+}
+
+void	intersect_sphere(t_object *object, t_ray ray, t_intersections *xs)
+{
 	double			d;
 	double			a;
 	double			b;
+	double			c;
+	t_tuple			sphere_to_ray;
 
-	xs = xs_init();
-	if (xs.err == true)
-		return (xs);
-	d = discriminant(ray);
-	if (d < -EPSILON)
-		return (xs.count = 0, xs);
 	sphere_to_ray = t_substract(ray.origin, point(0, 0, 0));
 	a = dot(ray.direction, ray.direction);
 	b = 2 * dot(ray.direction, sphere_to_ray);
-	is.object = *object;
-	is.t = (-b - sqrt(d)) / (2 * a);
-	xs_push(&xs, is);
-	is.t = (-b + sqrt(d)) / (2 * a);
-	xs_push(&xs, is);
-	return (xs);
+	c = dot(sphere_to_ray, sphere_to_ray) - 1;
+	d = b * b - 4 * a * c;
+	if (d < 0)
+		return;
+	if (!xs_push(xs, intersection((-b - sqrt(d))/(2*a), object)))
+		return;
+	xs_push(xs, intersection((-b + sqrt(d))/(2*a), object));
 }
 
 bool	xs_grow(t_intersections *xs)
@@ -179,7 +193,7 @@ t_intersection	hit(t_intersections xs)
 	found = 0;
 	while (i < xs.count)
 	{
-		if (xs.intersections[i].t > 0)
+		if (xs.intersections[i].t >= 0)
 		{
 			if (!found || xs.intersections[i].t < closest.t)
 			{

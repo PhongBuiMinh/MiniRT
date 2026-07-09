@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:40:19 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/03 22:19:09 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 13:50:19 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ t_tuple	normalize(t_tuple tuple)
 
 // WORLD_P = POINT IN WORLD SPACE, AND LOCAL_P = POINT IN OBJECT SPACE
 
-t_tuple	normal_at(t_object object, t_tuple world_p)
+t_tuple	normal_at(t_object *object, t_tuple world_p)
 {
 	t_tuple	local_p;
 	t_tuple	local_normal;
 	t_tuple	world_normal;
 
-	local_p = m_apply(inversion(object.transformation), world_p);
-	local_normal = object.normal_at(local_p);
-	world_normal = m_apply(transpose(inversion(object.transformation)),
+	local_p = m_apply(inversion(object->transformation), world_p);
+	local_normal = object->normal_at(local_p);
+	world_normal = m_apply(transpose(inversion(object->transformation)),
 			local_normal);
 	world_normal.w = 0;
 	return (normalize(world_normal));
@@ -71,6 +71,11 @@ t_tuple	normal_at_plane(t_tuple	is_point)
 {
 	(void)is_point;
 	return (vector(0, 1, 0));
+}
+
+t_tuple	normal_at_cylinder(t_tuple is_point)
+{
+	return (is_point);
 }
 
 t_tuple	reflect(t_tuple in, t_tuple normal)

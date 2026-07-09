@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/08 12:36:49 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 14:12:34 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_canvas	*render_scene(t_camera camera, t_world world)
 	return (canvas);
 }
 
+//check and fix error handling
 t_tuple	color_at(t_world world, t_ray ray)
 {
 	t_intersections	xs;

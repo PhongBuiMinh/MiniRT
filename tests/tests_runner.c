@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests_runner.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 16:23:45 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 22:24:52 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 14:16:30 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,8 @@ int	main(void)
 	{"normal_is_normalized", test_normal_is_normalized},
 	{"normal_translated_sphere", test_normal_translated_sphere},
 	{"normal_scaled_rotated_sphere", test_normal_scaled_rotated_sphere},
+	{"cylinder_intersection", test_cylinder_intersection},
+	{"cylinder_normal_at", test_cylinder_normal_at},
 	{"identity_matrix", test_identity_matrix},
 	{"matrix_multiply", test_matrix_multiply},
 	{"matrix_tuple_mul", test_matrix_tuple_mul},

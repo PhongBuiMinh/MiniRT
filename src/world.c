@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:58:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/07 20:51:34 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 14:12:15 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_world	world_default(void)
 	return (new_world);
 }
 
-// FIX ERROR HANDLING	
+// check
 
 bool	is_shadowed(t_world world, t_tuple point)
 {
@@ -52,27 +52,20 @@ bool	is_shadowed(t_world world, t_tuple point)
 	return (false);
 }
 
-// FIX ERROR HANDLING
-
 t_intersections	world_intersect(t_world world, t_ray ray)
 {
-	t_intersections	all;
 	t_intersections	xs;
 	int				i;
 
 	i = 0;
-	all = xs_init();
-	if (all.err)
-		return (all);
+	xs = xs_init();
 	while (i < world.object_cnt)
 	{
-		xs = intersect(world.objects[i], ray);
+		intersect(world.objects[i], ray, &xs);
 		if (xs.err == true)
-			return (free(all.intersections), all.err = true, all);
-		if (!xs_append(&all, xs))
-			return (all.err = true, all);
-		xs_sort(&all);
+			return (xs);
+		xs_sort(&xs);
 		i++;
 	}
-	return (all);
+	return (xs);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_tests.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 16:23:54 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/03 22:16:26 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 13:58:46 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,57 +201,116 @@ int	test_matrix_inverse(void)
 
 int	test_normal_x_axis(void)
 {
-	t_object	s;
+	t_object	*s;
+	int		result;
 
-	s = sphere(0);
-	return (assert_tuple("normal_x_axis", normal_at(s, point(1, 0, 0)),
-			vector(1, 0, 0)));
+	s = sphere_create(0);
+	if (!s)
+		return (0);
+	result = assert_tuple("normal_x_axis", normal_at(s, point(1, 0, 0)),
+			vector(1, 0, 0));
+	return (result);
 }
 
 int	test_normal_nonaxial(void)
 {
-	t_object	s;
+	t_object	*s;
 	double		v;
+	int		result;
 
-	s = sphere(0);
+	s = sphere_create(0);
+	if (!s)
+		return (0);
 	v = sqrt(3) / 3;
-	return (assert_tuple("normal_nonaxial", normal_at(s, point(v, v, v)),
-			vector(v, v, v)));
+	result = assert_tuple("normal_nonaxial", normal_at(s, point(v, v, v)),
+			vector(v, v, v));
+	return (result);
 }
 
 int	test_normal_is_normalized(void)
 {
-	t_object	s;
+	t_object	*s;
 	t_tuple		n;
 	double		v;
+	int		result;
 
-	s = sphere(0);
+	s = sphere_create(0);
+	if (!s)
+		return (0);
 	v = sqrt(3) / 3;
 	n = normal_at(s, point(v, v, v));
-	return (assert_tuple("normal_is_normalized", n, normalize(n)));
+	result = assert_tuple("normal_is_normalized", n, normalize(n));
+	return (result);
 }
 
 int	test_normal_translated_sphere(void)
 {
-	t_object	s;
+	t_object	*s;
+	int		result;
 
-	set_as_sphere(&s);
-	s.transformation = translation(0, 1, 0);
-	return (assert_tuple("normal_translated_sphere", normal_at(s, point(0,
-					1.70711, -0.70711)), vector(0, 0.70711, -0.70711)));
+	s = sphere_create(0);
+	if (!s)
+		return (0);
+	set_transformation(s, translation(0, 1, 0));
+	result = assert_tuple("normal_translated_sphere", normal_at(s, point(0,
+					1.70711, -0.70711)), vector(0, 0.70711, -0.70711));
+	return (result);
 }
 
 int	test_normal_scaled_rotated_sphere(void)
 {
-	t_object	s;
+	t_object	*s;
 	double		v;
+	int		result;
 
-	set_as_sphere(&s);
-	s.transformation = m_multiply(scaling(1, 0.5, 1), rotation_z(PI
-				/ 5));
+	s = sphere_create(0);
+	if (!s)
+		return (0);
+	set_transformation(s, m_multiply(scaling(1, 0.5, 1), rotation_z(PI
+				/ 5)));
 	v = sqrt(2) / 2;
-	return (assert_tuple("normal_scaled_rotated_sphere", normal_at(s, point(0,
-					v, -v)), vector(0, 0.97014, -0.24254)));
+	result = assert_tuple("normal_scaled_rotated_sphere", normal_at(s, point(0,
+					v, -v)), vector(0, 0.97014, -0.24254));
+	return (result);
+}
+
+int	test_cylinder_intersection(void)
+{
+	t_object		*cylinder;
+	t_intersections	xs;
+	t_ray			ray;
+	int			result;
+
+	cylinder = cylinder_create(0);
+	if (!cylinder)
+		return (0);
+	xs = xs_init();
+	if (xs.err)
+		return (0);
+	ray = r_init(point(0, 0, -5), vector(0, 0, 1));
+	intersect(cylinder, ray, &xs);
+	result = assert_true("cylinder_intersections_count", xs.count == 2);
+	if (!result)
+		return (free(xs.intersections), 0);
+	result = assert_true("cylinder_intersection_t1", equal(xs.intersections[0].t, 4));
+	if (!result)
+		return (free(xs.intersections), 0);
+	result = assert_true("cylinder_intersection_t2", equal(xs.intersections[1].t, 6));
+	free(xs.intersections);
+	return (result);
+}
+
+int	test_cylinder_normal_at(void)
+{
+	t_object	*cylinder;
+	int		result;
+
+	cylinder = cylinder_create(0);
+	if (!cylinder)
+		return (0);
+	result = assert_tuple("cylinder_normal_at", normal_at(cylinder,
+				point(1, 0, 0)), vector(1, 0, 0));
+	return (result);
 }
 
 int	test_view_transform_default_orientation(void)

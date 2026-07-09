@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:01:53 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/03 17:38:56 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 12:17:19 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_light
 
 typedef struct s_phong
 {
-	t_object	object;
+	t_object	*object;
 	t_light		light;
 	t_tuple		point;
 	t_tuple		eyev;

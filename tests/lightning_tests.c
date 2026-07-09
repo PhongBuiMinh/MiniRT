@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lightning_tests.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 16:24:06 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/03 21:27:02 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 14:19:12 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,14 @@ int	test_lighting_eye_between_light_and_surface(void)
 {
 	t_phong	phong;
 	t_tuple	result;
+	t_object	*object;
 
+	object = sphere_create(0);
+	if (!object)
+		return (0);
 	phong.in_shadow = false;
-	phong.object.material = material();
+	phong.object = object;
+	phong.object->material = material();
 	phong.point = point(0, 0, 0);
 	phong.eyev = vector(0, 0, -1);
 	phong.normalv = vector(0, 0, -1);
@@ -33,9 +38,14 @@ int	test_lighting_eye_offset_45(void)
 {
 	t_phong	phong;
 	t_tuple	result;
+	t_object	*object;
 
+	object = sphere_create(0);
+	if (!object)
+		return (0);
 	phong.in_shadow = false;
-	phong.object.material = material();
+	phong.object = object;
+	phong.object->material = material();
 	phong.point = point(0, 0, 0);
 	phong.eyev = vector(0, sqrt(2) / 2, -sqrt(2) / 2);
 	phong.normalv = vector(0, 0, -1);
@@ -48,9 +58,14 @@ int	test_lighting_light_offset_45(void)
 {
 	t_phong	phong;
 	t_tuple	result;
+	t_object	*object;
 
+	object = sphere_create(0);
+	if (!object)
+		return (0);
 	phong.in_shadow = false;
-	phong.object.material = material();
+	phong.object = object;
+	phong.object->material = material();
 	phong.point = point(0, 0, 0);
 	phong.eyev = vector(0, 0, -1);
 	phong.normalv = vector(0, 0, -1);
@@ -64,9 +79,14 @@ int	test_lighting_eye_in_reflection_path(void)
 {
 	t_phong	phong;
 	t_tuple	result;
+	t_object	*object;
 
+	object = sphere_create(0);
+	if (!object)
+		return (0);
 	phong.in_shadow = false;
-	phong.object.material = material();
+	phong.object = object;
+	phong.object->material = material();
 	phong.point = point(0, 0, 0);
 	phong.eyev = vector(0, -sqrt(2) / 2, -sqrt(2) / 2);
 	phong.normalv = vector(0, 0, -1);
@@ -80,9 +100,14 @@ int	test_lighting_light_behind_surface(void)
 {
 	t_phong	phong;
 	t_tuple	result;
+	t_object	*object;
 
+	object = sphere_create(0);
+	if (!object)
+		return (0);
 	phong.in_shadow = false;
-	phong.object.material = material();
+	phong.object = object;
+	phong.object->material = material();
 	phong.point = point(0, 0, 0);
 	phong.eyev = vector(0, 0, -1);
 	phong.normalv = vector(0, 0, -1);
@@ -102,14 +127,23 @@ int	test_shading_intersection(void)
 	int				result;
 
 	world = world_default();
+	xs = xs_init();
+	if (xs.err)
+	{
+		free(xs.intersections);
+		return (false);
+	}
 
-	xs = intersect(
+	intersect(
 			world.objects[0],
 			r_init(point(0, 0, -5),
-			vector(0, 0, 1)));
+			vector(0, 0, 1)), &xs);
 
 	if (xs.err)
-		return (free(world.objects), false);
+	{
+		free(xs.intersections);
+		return (false);
+	}
 
 	phong = phong_computations(hit(xs),
 			r_init(point(0, 0, -5),
@@ -121,9 +155,7 @@ int	test_shading_intersection(void)
 	expected = color(0.38066, 0.47583, 0.28550);
 
 	result = tuple_equal(actual, expected);
-
 	free(xs.intersections);
-	free(world.objects);
 
 	return (result);
 }
@@ -139,6 +171,9 @@ int	test_shading_intersection_inside(void)
 	t_ray			ray;
 
 	world = world_default();
+	xs = xs_init();
+	if (xs.err)
+		return (false);
 
 	world.light = light_init(
 			point(0, 0.25, 0),
@@ -148,10 +183,13 @@ int	test_shading_intersection_inside(void)
 			point(0, 0, 0),
 			vector(0, 0, 1));
 
-	xs = intersect(world.objects[1], ray);
+	intersect(world.objects[1], ray, &xs);
 
 	if (xs.err)
-		return (free(world.objects), false);
+	{
+		free(xs.intersections);
+		return (false);
+	}
 
 	phong = phong_computations(
 			hit(xs),
@@ -163,9 +201,7 @@ int	test_shading_intersection_inside(void)
 	expected = color(0.90498, 0.90498, 0.90498);
 
 	result = tuple_equal(actual, expected);
-
 	free(xs.intersections);
-	free(world.objects);
 
 	return (result);
 }
