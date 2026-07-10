@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:17:56 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 22:23:20 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 19:58:05 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	test_normal_is_normalized(void);
 int	test_normal_translated_sphere(void);
 int	test_normal_scaled_rotated_sphere(void);
 int	test_cylinder_intersection(void);
+int	test_cylinder_truncated_intersections(void);
+int	test_cylinder_closed_caps_intersections(void);
 int	test_cylinder_normal_at(void);
 
 /* ===========================

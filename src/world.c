@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:58:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 14:12:15 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 20:11:55 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ t_intersections	world_intersect(t_world world, t_ray ray)
 		intersect(world.objects[i], ray, &xs);
 		if (xs.err == true)
 			return (xs);
-		xs_sort(&xs);
 		i++;
 	}
 	return (xs);

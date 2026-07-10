@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:48:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 10:43:23 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/10 18:56:53 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_world	scene_with_three_spheres(void)
 		new_world.objects[i] = sphere_create(i);
 		i++;
 	}
+	new_world.object_cnt++;
+	new_world.objects[i] = cylinder_create(i);
 	// /* Left wall */
 	// new_world.objects[1]->transformation = m_multiply(translation(0, 0, 5),
 	// 		m_multiply(rotation_y(-PI / 4), m_multiply(rotation_x(PI / 2),
@@ -57,6 +59,9 @@ t_world	scene_with_three_spheres(void)
 	new_world.objects[3]->material.color = color(1, 0.8, 0.1);
 	new_world.objects[3]->material.diffuse = 0.7;
 	new_world.objects[3]->material.specular = 0.3;
+	/* Cylinder */
+	new_world.objects[4]->transformation = translation(2, 2, 2);
+	new_world.objects[4]->material.color = color(1, 0.8, 0.1);
 	return (new_world);
 }
 

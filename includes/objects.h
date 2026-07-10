@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:07:14 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 14:30:26 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/10 18:46:02 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ typedef struct s_material
 
 typedef struct s_object
 {
-	t_tuple			(*normal_at)(t_tuple);
-	void			(*intersect)(struct s_object * self, t_ray, t_intersections *xs);
+	t_tuple			(*normal_at)(t_tuple, struct s_object * self);
+	void			(*intersect)(struct s_object *self, t_ray, t_intersections *xs);
 	t_matrix		transformation;
 	t_material		material;
 	int				id;
@@ -49,6 +49,7 @@ typedef struct s_cylinder
 	t_object	base_obj;
 	double		min;
 	double		max;
+	bool		closed;
 }	t_cylinder;
 
 t_object	*sphere_create(int id);

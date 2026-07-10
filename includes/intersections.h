@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:13:15 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 13:49:16 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 20:04:53 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

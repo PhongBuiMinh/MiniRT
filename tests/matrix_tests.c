@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_tests.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 16:23:54 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 13:58:46 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/09 20:23:26 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,7 +279,7 @@ int	test_cylinder_intersection(void)
 	t_object		*cylinder;
 	t_intersections	xs;
 	t_ray			ray;
-	int			result;
+	int				result;
 
 	cylinder = cylinder_create(0);
 	if (!cylinder)
@@ -300,10 +300,67 @@ int	test_cylinder_intersection(void)
 	return (result);
 }
 
+int	test_cylinder_truncated_intersections(void)
+{
+	t_object		*cylinder;
+	t_intersections	xs;
+	t_ray			ray;
+	int				result;
+
+	cylinder = cylinder_create(0);
+	if (!cylinder)
+		return (0);
+	((t_cylinder *)cylinder)->min = 1;
+	((t_cylinder *)cylinder)->max = 2;
+	xs = xs_init();
+	if (xs.err)
+		return (0);
+	ray = r_init(point(0, 1.5, -2), vector(0, 0, 1));
+	intersect(cylinder, ray, &xs);
+	result = assert_true("truncated_cylinder_count", xs.count == 2);
+	if (!result)
+		return (free(xs.intersections), 0);
+	result = assert_true("truncated_cylinder_t1", equal(xs.intersections[0].t, 1));
+	if (!result)
+		return (free(xs.intersections), 0);
+	result = assert_true("truncated_cylinder_t2", equal(xs.intersections[1].t, 3));
+	free(xs.intersections);
+	return (result);
+}
+
+int	test_cylinder_closed_caps_intersections(void)
+{
+	t_object		*cylinder;
+	t_intersections	xs;
+	t_ray			ray;
+	int				result;
+
+	cylinder = cylinder_create(0);
+	if (!cylinder)
+		return (0);
+	((t_cylinder *)cylinder)->min = 1;
+	((t_cylinder *)cylinder)->max = 2;
+	((t_cylinder *)cylinder)->closed = true;
+	xs = xs_init();
+	if (xs.err)
+		return (0);
+	ray = r_init(point(0, 3, 0), vector(0, -1, 0));
+	intersect(cylinder, ray, &xs);
+	result = assert_true("closed_cylinder_count", xs.count == 2);
+	if (!result)
+		return (free(xs.intersections), 0);
+	result = assert_true("closed_cylinder_t1", equal(xs.intersections[0].t, 1));
+	if (!result)
+		return (free(xs.intersections), 0);
+	result = assert_true("closed_cylinder_t2", equal(xs.intersections[1].t, 2));
+	free(xs.intersections);
+	return (result);
+}
+
 int	test_cylinder_normal_at(void)
 {
 	t_object	*cylinder;
-	int		result;
+	int			result;
 
 	cylinder = cylinder_create(0);
 	if (!cylinder)
