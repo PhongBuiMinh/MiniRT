@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 14:12:34 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/10 19:47:42 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_canvas	*render_scene(t_camera camera, t_world world)
 		while (x < camera.h_size)
 		{
 			ray = ray_for_pixel(camera, x, y);
-			color = color_at(world, ray); // COULD FAIL
+			color = color_at(world, ray);
 			write_pixel(canvas, x, y, color);
 			x++;
 		}
@@ -57,6 +57,8 @@ t_tuple	color_at(t_world world, t_ray ray)
 	phong.light = world.light;
 	return (phong_lightning(phong));
 }
+
+//obj_to_world = object space to world space transformation
 
 t_ray	ray_for_pixel(t_camera camera, int x, int y)
 {

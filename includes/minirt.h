@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 21:29:17 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/10 19:15:40 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,5 @@
 # include "transformations.h"
 # include "geometry.h"
 # include "render.h"
-
-//typedef struct s_projectile
-//{
-//	t_tuple	position;
-//	t_tuple	velocity;
-//}	t_projectile;
-
-//typedef struct environment
-//{
-//	t_tuple	gravity;
-//	t_tuple	wind;
-//}	t_environment;
-
 
 #endif

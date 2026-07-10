@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   canvas_functions.c                                 :+:      :+:    :+:   */
+/*   canvas.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:35:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/14 20:07:32 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/10 20:25:44 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-t_tuple	color(double r, double g, double b)
-{
-	return ((t_tuple){.x = r, .y = g, .z = b, .w = 0});
-}
 
 void	write_pixel(t_canvas *canvas, int x, int y, t_tuple color)
 {
@@ -81,44 +76,7 @@ t_canvas	*init_canvas(int x, int y)
 	return (canvas);
 }
 
-int	clamp_color(int c)
-{
-	if (c < 0)
-		return (0);
-	if (c > 255)
-		return (255);
-	return (c);
-}
-
-int	scale_color(float c)
-{
-	return (clamp_color((int)round(c * 255)));
-}
-
-void	write_star(t_canvas *canvas, int x, int y, t_tuple color)
-{
-	int	i;
-	int	d;
-
-	i = 0;
-	while (i < 10)
-	{
-		d = 10;
-		while (d > 0)
-		{
-			write_pixel(canvas, x + d, y, color);
-			write_pixel(canvas, x, y + d, color);
-			write_pixel(canvas, x - d, y, color);
-			write_pixel(canvas, x, y - d, color);
-			write_pixel(canvas, x + d, y + d, color);
-			write_pixel(canvas, x - d, y - d, color);
-			write_pixel(canvas, x - d, y + d, color);
-			write_pixel(canvas, x + d, y - d, color);
-			d--;
-		}
-		i++;
-	}
-}
+// WONT BE NEEEDED OTHER THAN FOR TESTING
 
 void	canvas_to_ppm(t_canvas *canvas)
 {

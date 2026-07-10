@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:57:02 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/10 20:51:13 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ typedef struct s_matrix
 	double	data[4][4];
 }	t_matrix;
 
+
+typedef struct s_subcopy
+{
+	t_matrix	matrix;
+	t_matrix	sub;
+	int			skip_col;
+}	t_subcopy;
 
 t_matrix	submatrix(t_matrix matrix, int row, int col);
 t_matrix	m_init(int rows, int cols);

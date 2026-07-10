@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+         #
+#    By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/05 21:36:59 by bpetrovi          #+#    #+#              #
-#    Updated: 2026/07/08 12:17:37 by bpetrovi         ###   ########.fr        #
+#    Updated: 2026/07/10 20:14:24 by bpetrovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,17 @@ LIBFT_DIR = libft
 LIBFT = ${LIBFT_DIR}/libft.a
 SRCS_DIR = src
 OBJS_DIR = build
-CORE_SRCS = canvas_functions.c \
+CORE_SRCS = canvas.c \
+			color.c \
+			normal_at.c \
+			hit.c \
+			intersect.c \
+			intersect_manipulation.c \
+            intersect_helper.c \
             tuples.c \
             matrices.c \
             rays.c \
             objects.c \
-            intersections.c \
             light.c \
 			helper_math.c \
 			geometry.c \

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:27:18 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/10 19:02:00 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/10 20:55:48 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ t_matrix	inversion(t_matrix matrix)
 	det = determinant(matrix);
 	inverted_matrix.rows = matrix.rows;
 	inverted_matrix.cols = matrix.cols;
-	if (equal(det, 0))
-		return (printf("cannot invert matrix: \n"), m_print(matrix), inverted_matrix.rows = -1, inverted_matrix);
 	while (x < matrix.rows)
 	{
 		y = 0;

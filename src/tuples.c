@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 17:03:36 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:57:02 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/10 19:14:34 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,51 +101,3 @@ void	t_print(t_tuple tuple)
 	printf("z: %f, ", tuple.z);
 	printf("w: %f\n", tuple.w);
 }
-
-
-//PROJECTILE FIRING DIAGONALLY UPWARDS
-//int	main(void)
-//{
-//	t_projectile	projectile;
-//	t_environment	environment;
-//	t_canvas		canvas;
-//	int				x;
-//	int				y;
-
-//	init_canvas(&canvas, 1000, 500);
-//	projectile = init_projectile(point(0, 1, 0), t_scale(normalize(vector(1, 1.8, 0)), 11.25));
-//	environment = init_environment(vector(0, -0.1, 0), vector(-0.01, 0, 0));
-//	while (projectile.position.y > 0)
-//	{
-//		//printf("%f\n %f\n", projectile.position.y, projectile.position.x);
-//		tick(&environment, &projectile);
-//		x = (int)(projectile.position.x + 0.5);
-//		y = (int)(projectile.position.y + 0.5);
-//		y = canvas.height - y;
-//		write_pixel(&canvas, x, y, color(1, 0, 0));
-//	}
-//	canvas_to_ppm(&canvas);
-//	free_pixels(canvas.pixels);
-//	return (0);
-//}
-
-
-// DRAWING A CLOCK
-//int	main(void)
-//{
-//	t_canvas	canvas;
-//	t_tuple		p;
-//	int			i = 12;
-
-//	init_canvas(&canvas, 1000, 1000);
-//	p = point(0, 0, 0);
-//	p = m_apply(translation(0, 300, 0), p);
-//	while (i > 0)
-//	{
-//		//t_print(p);
-//		write_star(&canvas, p.x + canvas.width / 2, p.y + canvas.height / 2, color(1, 0, 0));
-//		p = m_apply(rotation_z(PI / 6), p);
-//		i--;
-//	}
-//	canvas_to_ppm(&canvas);
-//}

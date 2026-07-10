@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 20:57:14 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/10 20:58:42 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,6 @@ t_matrix	m_init(int rows, int cols)
 	return (new_matrix);
 }
 
-void	m_print(t_matrix matrix)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	if (matrix.rows <= 0 || matrix.cols <= 0)
-	{
-		printf("dont work");
-		return ;
-	}
-	while (x < matrix.rows)
-	{
-		y = 0;
-		printf("|");
-		while (y < matrix.cols)
-		{
-			printf(" %f |", matrix.data[x][y]);
-			y++;
-		}
-		printf("\n");
-		x++;
-	}
-}
-
 // Still to be worked on
 
 t_matrix	m_multiply(t_matrix a, t_matrix b)
@@ -70,9 +45,6 @@ t_matrix	m_multiply(t_matrix a, t_matrix b)
 	double		value;
 
 	product_matrix = m_init(a.rows, b.cols);
-	if (a.cols != b.rows)
-		return (printf("these 2 matrices cannot be multiplied"),
-			product_matrix);
 	x = 0;
 	while (x < a.rows)
 	{
@@ -113,6 +85,7 @@ int	m_equal(t_matrix matrix_a, t_matrix matrix_b)
 	}
 	return (1);
 }
+
 
 t_matrix	submatrix(t_matrix matrix, int row, int col)
 {
@@ -173,3 +146,29 @@ t_tuple	m_apply(t_matrix matrix, t_tuple tuple)
 }
 
 
+// FOR TESTING
+
+//void	m_print(t_matrix matrix)
+//{
+//	int	x;
+//	int	y;
+
+//	x = 0;
+//	if (matrix.rows <= 0 || matrix.cols <= 0)
+//	{
+//		printf("dont work");
+//		return ;
+//	}
+//	while (x < matrix.rows)
+//	{
+//		y = 0;
+//		printf("|");
+//		while (y < matrix.cols)
+//		{
+//			printf(" %f |", matrix.data[x][y]);
+//			y++;
+//		}
+//		printf("\n");
+//		x++;
+//	}
+//}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:01:53 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 12:17:19 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/10 20:48:01 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,21 @@ typedef struct s_phong
 	bool		in_shadow;
 	bool		inside_obj;
 }	t_phong;
+
+// ONLY MADE TO COMPLY WITH NORMINETTE, HENCE THE NAME
+
+typedef struct s_phong_norm
+{
+	t_tuple	effective_color;
+	t_tuple	lightv;
+	t_tuple	ambient;
+	t_tuple	diffuse;
+	t_tuple	specular;
+	t_tuple	reflectv;
+	double	light_dot_normal;
+	double	reflect_dot_eye;
+	double	factor;
+}	t_phong_norm;
 
 t_phong		phong_computations(t_intersection is, t_ray ray);
 t_tuple		phong_lightning(t_phong phong);

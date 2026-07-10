@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper_math.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:29:53 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 11:45:55 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/10 20:17:33 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

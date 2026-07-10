@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:03:25 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 12:19:21 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/07/10 20:32:45 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,43 +40,46 @@ t_phong	phong_computations(t_intersection is, t_ray ray)
 	return (phong);
 }
 
-
-// POOR ATTEMPTS
-t_tuple	phong_lightning(t_phong phong)
+static void	calc_diffuse_specular(t_phong phong, t_phong_norm *norm)
 {
-	t_tuple	effective_color;
-	t_tuple	lightv;
-	t_tuple	ambient;
-	t_tuple	diffuse;
-	t_tuple	specular;
-	t_tuple	reflectv;
-	double	light_dot_normal;
-	double	reflect_dot_eye;
-	double	factor;
-
-	effective_color = t_multiply(phong.object->material.color, phong.light.intensity);
-	lightv = normalize(t_substract(phong.light.pos, phong.point));
-	ambient = t_scale(effective_color, phong.object->material.ambient);
-	light_dot_normal = dot(lightv, phong.normalv);
-	if (light_dot_normal < 0)
-	{
-		diffuse = color(0, 0, 0);
-		specular = color(0, 0, 0);
-	}
+	norm->diffuse = t_scale(norm->effective_color,
+			phong.object->material.diffuse * norm->light_dot_normal);
+	norm->reflectv = reflect(t_scale(norm->lightv, -1), phong.normalv);
+	norm->reflect_dot_eye = dot(norm->reflectv, phong.eyev);
+	if (norm->reflect_dot_eye <= 0)
+		norm->specular = color(0, 0, 0);
 	else
 	{
-		diffuse = t_scale(effective_color, phong.object->material.diffuse * light_dot_normal);
-		reflectv = reflect(t_scale(lightv, -1), phong.normalv);
-		reflect_dot_eye = dot(reflectv, phong.eyev);
-		if (reflect_dot_eye <= 0)
-			specular = color(0, 0, 0);
-		else
-		{
-			factor = pow(reflect_dot_eye, phong.object->material.shininess);
-			specular = t_scale(phong.light.intensity, phong.object->material.specular * factor);
-		}
+		norm->factor = pow(norm->reflect_dot_eye,
+				phong.object->material.shininess);
+		norm->specular = t_scale(phong.light.intensity,
+				phong.object->material.specular * norm->factor);
 	}
+}
+
+static void	init_phong_norm(t_phong phong, t_phong_norm *norm)
+{
+	norm->effective_color = t_multiply(phong.object->material.color,
+			phong.light.intensity);
+	norm->lightv = normalize(t_substract(phong.light.pos, phong.point));
+	norm->ambient = t_scale(norm->effective_color,
+			phong.object->material.ambient);
+	norm->light_dot_normal = dot(norm->lightv, phong.normalv);
+}
+
+t_tuple	phong_lightning(t_phong phong)
+{
+	t_phong_norm	norm;
+
+	init_phong_norm(phong, &norm);
+	if (norm.light_dot_normal < 0)
+	{
+		norm.diffuse = color(0, 0, 0);
+		norm.specular = color(0, 0, 0);
+	}
+	else
+		calc_diffuse_specular(phong, &norm);
 	if (phong.in_shadow)
-		return (ambient);
-	return (t_add(specular, t_add(diffuse, ambient)));
+		return (norm.ambient);
+	return (t_add(norm.specular, t_add(norm.diffuse, norm.ambient)));
 }
