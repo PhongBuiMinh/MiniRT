@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:36:08 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/06/14 17:38:14 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/28 19:53:20 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,34 @@
 
 # include "tuple.h"
 
-typedef struct s_color
-{
-	double	r;
-	double	g;
-	double	b;
-}	t_color;
+// typedef struct s_color
+// {
+// 	double	r;
+// 	double	g;
+// 	double	b;
+// }	t_color;
 
-typedef struct s_canvas
-{
-	int		width;
-	int		height;
-	t_color	*pixels;
-}	t_canvas;
+// typedef struct s_canvas
+// {
+// 	int		width;
+// 	int		height;
+// 	t_color	*pixels;
+// }	t_canvas;
 
-// Color operations
-t_color		color(double r, double g, double b);
-t_color		add_color(t_color a, t_color b);
-t_color		sub_color(t_color a, t_color b);
-t_color		mul_color_scalar(t_color c, double s);
-t_color		hadamard_color(t_color a, t_color b);
+// // Color operations
+// t_color		color(double r, double g, double b);
+// t_color		add_color(t_color a, t_color b);
+// t_color		sub_color(t_color a, t_color b);
+// t_color		mul_color_scalar(t_color c, double s);
+// t_color		hadamard_color(t_color a, t_color b);
 
-// Canvas operations
-t_canvas	canvas_new(int width, int height);
-void		canvas_destroy(t_canvas *c);
-void		write_pixel(t_canvas *c, int x, int y, t_color color);
-t_color		pixel_at(t_canvas *c, int x, int y);
+// // Canvas operations
+// t_canvas	canvas_new(int width, int height);
+// void		canvas_destroy(t_canvas *c);
+// void		write_pixel(t_canvas *c, int x, int y, t_color color);
+// t_color		pixel_at(t_canvas *c, int x, int y);
 
-// ppm
-void		canvas_to_ppm(const t_canvas *c, const char *filename);
+// // ppm
+// void		canvas_to_ppm(const t_canvas *c, const char *filename);
 
 #endif

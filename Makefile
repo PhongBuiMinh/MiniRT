@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+         #
+#    By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/07/07 14:04:19 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/07/28 21:57:58 by fbui-min         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,23 +20,23 @@ CFLAGS  = -Wall -Wextra -Werror -g
 
 OS_TYPE := $(shell uname -s)
 
-ifeq ($(OS_TYPE),Darwin)
-	MLX_PATH = lib/minilibx-macos
-	MLX_FLAG = -framework OpenGL -framework AppKit
-else ifeq ($(OS_TYPE),Linux)
-	MLX_PATH = lib/minilibx-linux
-	MLX_FLAG = -lXext -lX11 -lm -lz
-endif
-
 LIBFT_PATH = lib/libft
 LIBFT      = $(LIBFT_PATH)/libft.a
-MLX        = $(MLX_PATH)/libmlx.a
+
+MLX42_PATH = lib/MLX42
+MLX42_LIB  = $(MLX42_PATH)/build/libmlx42.a
+
+ifeq ($(OS_TYPE),Darwin)
+	MLX42_FLAG = -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+else ifeq ($(OS_TYPE),Linux)
+	MLX42_FLAG = -ldl -lglfw -pthread -lm
+endif
 
 SRC_DIR = srcs
 SRC     = main.c \
 		  hook_handler.c \
-		  init.c \
-		  parse_elements.c parse_helpers.c parse_objects.c parser.c \
+		  render_init.c render_draw.c \
+		  parse_elements.c parse_helpers.c parse_helpers2.c parse_objects.c parser.c \
 		  build_world.c
 
 OBJ_DIR = obj
@@ -45,29 +45,30 @@ OBJ     = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 all: $(NAME)
 
 $(LIBFT):
-	@echo "$(GREEN)Building libft library...$(DEFAULT)"
+	@echo "$(GREEN)Building libft...$(DEFAULT)"
 	@$(MAKE) -C $(LIBFT_PATH)
 
-$(MLX):
-	@echo "$(GREEN)Building mlx library...$(DEFAULT)"
-	@$(MAKE) -C $(MLX_PATH)
+$(MLX42_LIB):
+	@echo "$(GREEN)Building MLX42...$(DEFAULT)"
+	@cmake -S $(MLX42_PATH) -B $(MLX42_PATH)/build
+	@cmake --build $(MLX42_PATH)/build -j4
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@echo "$(GREEN)Compiling source file...$(DEFAULT)"
-	@$(CC) $(CFLAGS) -Iincludes -I$(LIBFT_PATH) -I$(MLX_PATH) -c $< -o $@
+	@echo "$(GREEN)Compiling $<...$(DEFAULT)"
+	@$(CC) $(CFLAGS) -Iincludes -I$(LIBFT_PATH) -I$(MLX42_PATH)/include -c $< -o $@
 
-$(NAME): $(LIBFT) $(MLX) $(OBJ)
-	@echo "$(GREEN)Linking files...$(DEFAULT)"
-	@$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_PATH) -lft -L$(MLX_PATH) -lmlx $(MLX_FLAG) -o $(NAME)
+$(NAME): $(LIBFT) $(MLX42_LIB) $(OBJ)
+	@echo "$(GREEN)Linking $(NAME)...$(DEFAULT)"
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX42_LIB) $(MLX42_FLAG) -o $(NAME)
 
 clean:
 	@echo "$(RED)Removing object files...$(DEFAULT)"
 	@rm -rf $(OBJ_DIR)
 	@$(MAKE) clean -C $(LIBFT_PATH)
-	@if [ -d "$(MLX_PATH)" ]; then $(MAKE) clean -C $(MLX_PATH); fi
+	@if [ -d "$(MLX42_PATH)/build" ]; then rm -rf $(MLX42_PATH)/build; fi
 
 fclean: clean
 	@echo "$(RED)Removing program...$(DEFAULT)"

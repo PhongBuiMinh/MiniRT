@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/05 13:59:39 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/28 21:49:21 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	token_count(char **tokens)
 {
-	size_t	i;
+	int	count;
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	count = 0;
+	while (tokens[count])
+		count++;
+	return (count);
 }
 
 void	free_tokens(char **tokens)
@@ -37,6 +37,17 @@ void	free_tokens(char **tokens)
 	free(tokens);
 }
 
+int	is_normalized_range(t_tuple dir)
+{
+	if (dir.x < -1.0 || dir.x > 1.0)
+		return (0);
+	if (dir.y < -1.0 || dir.y > 1.0)
+		return (0);
+	if (dir.z < -1.0 || dir.z > 1.0)
+		return (0);
+	return (1);
+}
+
 void	normalize_tuple(t_tuple *v)
 {
 	double	length;
@@ -47,40 +58,4 @@ void	normalize_tuple(t_tuple *v)
 	v->x /= length;
 	v->y /= length;
 	v->z /= length;
-}
-
-double	ft_atof(const char *str)
-{
-	double	result;
-	double	fraction;
-	int		sign;
-	int		i;
-
-	result = 0.0;
-	fraction = 0.1;
-	sign = 1;
-	i = 0;
-	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	else if (str[i] == '+')
-		i++;
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10.0 + (str[i] - '0');
-		i++;
-	}
-	if (str[i] == '.')
-	{
-		i++;
-		while (str[i] && str[i] >= '0' && str[i] <= '9')
-		{
-			result += (str[i] - '0') * fraction;
-			fraction /= 10.0;
-			i++;
-		}
-	}
-	return (result * sign);
 }

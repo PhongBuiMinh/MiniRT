@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 13:43:13 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/05 14:05:00 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/28 21:47:44 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ int		parse_tuple(char *str, t_tuple *tuple);
 int		is_valid_number(char *str);
 int		parse_color(char *str, t_color *color);
 int		ft_strcmp(const char *s1, const char *s2);
+int		is_normalized_range(t_tuple dir);
 
 #endif

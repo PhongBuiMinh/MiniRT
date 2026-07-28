@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 07:35:42 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/05 13:51:25 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/28 21:42:48 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ int	add_object(t_scene *scene, t_scene_obj obj)
 {
 	if (scene->obj_count >= MAX_OBJECTS)
 		return (0);
-	scene->objects[scene->obj_count] = obj;
-	scene->obj_count++;
+	scene->objects[scene->obj_count++] = obj;
 	return (1);
 }
 
@@ -25,25 +24,20 @@ int	add_object(t_scene *scene, t_scene_obj obj)
 int	parse_sphere(char **tokens, t_scene *scene)
 {
 	t_scene_obj	obj;
-	t_tuple		pos;
-	double		diameter;
-	t_color		color;
 
 	if (token_count(tokens) != 4)
 		return (0);
-	if (!parse_tuple(tokens[1], &pos))
+	ft_bzero(&obj, sizeof(obj));
+	if (!parse_tuple(tokens[1], &obj.pos))
 		return (0);
 	if (!is_valid_number(tokens[2]))
 		return (0);
-	diameter = ft_atof(tokens[2]);
-	if (diameter <= 0.0)
+	obj.diameter = ft_atof(tokens[2]);
+	if (obj.diameter <= 0.0)
 		return (0);
-	if (!parse_color(tokens[3], &color))
+	if (!parse_color(tokens[3], &obj.color))
 		return (0);
 	obj.type = OBJ_SPHERE;
-	obj.pos = pos;
-	obj.diameter = diameter;
-	obj.color = color;
 	return (add_object(scene, obj));
 }
 
@@ -51,23 +45,20 @@ int	parse_sphere(char **tokens, t_scene *scene)
 int	parse_plane(char **tokens, t_scene *scene)
 {
 	t_scene_obj	obj;
-	t_tuple		pos;
-	t_tuple		normal;
-	t_color		color;
 
 	if (token_count(tokens) != 4)
 		return (0);
-	if (!parse_tuple(tokens[1], &pos))
+	ft_bzero(&obj, sizeof(obj));
+	if (!parse_tuple(tokens[1], &obj.pos))
 		return (0);
-	if (!parse_tuple(tokens[2], &normal))
+	if (!parse_tuple(tokens[2], &obj.orientation))
 		return (0);
-	normalize_tuple(&normal);
-	if (!parse_color(tokens[3], &color))
+	if (!is_normalized_range(obj.orientation))
+		return (0);
+	normalize_tuple(&obj.orientation);
+	if (!parse_color(tokens[3], &obj.color))
 		return (0);
 	obj.type = OBJ_PLANE;
-	obj.pos = pos;
-	obj.orientation = normal;
-	obj.color = color;
 	return (add_object(scene, obj));
 }
 
@@ -75,36 +66,25 @@ int	parse_plane(char **tokens, t_scene *scene)
 int	parse_cylinder(char **tokens, t_scene *scene)
 {
 	t_scene_obj	obj;
-	t_tuple		pos;
-	t_tuple		axis;
-	double		diameter;
-	double		height;
-	t_color		color;
 
 	if (token_count(tokens) != 6)
 		return (0);
-	if (!parse_tuple(tokens[1], &pos))
+	ft_bzero(&obj, sizeof(obj));
+	if (!parse_tuple(tokens[1], &obj.pos))
 		return (0);
-	if (!parse_tuple(tokens[2], &axis))
+	if (!parse_tuple(tokens[2], &obj.orientation))
 		return (0);
-	normalize_tuple(&axis);
-	if (!is_valid_number(tokens[3]))
+	if (!is_normalized_range(obj.orientation))
 		return (0);
-	diameter = ft_atof(tokens[3]);
-	if (diameter <= 0.0)
+	normalize_tuple(&obj.orientation);
+	if (!is_valid_number(tokens[3]) || !is_valid_number(tokens[4]))
 		return (0);
-	if (!is_valid_number(tokens[4]))
+	obj.diameter = ft_atof(tokens[3]);
+	obj.height = ft_atof(tokens[4]);
+	if (obj.diameter <= 0.0 || obj.height <= 0.0)
 		return (0);
-	height = ft_atof(tokens[4]);
-	if (height <= 0.0)
-		return (0);
-	if (!parse_color(tokens[5], &color))
+	if (!parse_color(tokens[5], &obj.color))
 		return (0);
 	obj.type = OBJ_CYLINDER;
-	obj.pos = pos;
-	obj.orientation = axis;
-	obj.diameter = diameter;
-	obj.height = height;
-	obj.color = color;
 	return (add_object(scene, obj));
 }

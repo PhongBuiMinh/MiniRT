@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/05 14:04:23 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/28 21:40:16 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,48 +18,80 @@ int	dispatch_line(char **tokens, t_scene *scene)
 		return (1);
 	if (ft_strcmp(tokens[0], "A") == 0)
 		return (parse_ambient(tokens, scene));
-	else if (ft_strcmp(tokens[0], "C") == 0)
+	if (ft_strcmp(tokens[0], "C") == 0)
 		return (parse_camera(tokens, scene));
-	else if (ft_strcmp(tokens[0], "L") == 0)
+	if (ft_strcmp(tokens[0], "L") == 0)
 		return (parse_light(tokens, scene));
-	else if (ft_strcmp(tokens[0], "sp") == 0)
+	if (ft_strcmp(tokens[0], "sp") == 0)
 		return (parse_sphere(tokens, scene));
-	else if (ft_strcmp(tokens[0], "pl") == 0)
+	if (ft_strcmp(tokens[0], "pl") == 0)
 		return (parse_plane(tokens, scene));
-	else if (ft_strcmp(tokens[0], "cy") == 0)
+	if (ft_strcmp(tokens[0], "cy") == 0)
 		return (parse_cylinder(tokens, scene));
 	return (0);
 }
 
-static int	process_line(char *line, t_scene *scene)
+// function for test
+int	process_line(char *line, t_scene *scene)
 {
 	char	*trimmed;
 	char	**tokens;
 	int		result;
 
+	dprintf(2, "RAW: [%s]\n", line);
 	trimmed = ft_strtrim(line, " \t\r\n");
 	if (!trimmed)
 		return (0);
+	dprintf(2, "TRIMMED: [%s]\n", trimmed);
 	if (trimmed[0] == '\0')
 		return (free(trimmed), 1);
 	tokens = ft_split(trimmed, ' ');
 	free(trimmed);
 	if (!tokens)
 		return (0);
+	if (tokens[0])
+		dprintf(2, "TOKEN0: [%s]\n", tokens[0]);
+	if (tokens[1])
+		dprintf(2, "TOKEN1: [%s]\n", tokens[1]);
+	if (tokens[2])
+		dprintf(2, "TOKEN2: [%s]\n", tokens[2]);
+	if (tokens[3])
+		dprintf(2, "TOKEN3: [%s]\n", tokens[3]);
 	result = dispatch_line(tokens, scene);
+	dprintf(2, "DISPATCH RESULT: %d\n", result);
 	free_tokens(tokens);
 	return (result);
 }
 
-int	validate_scene(t_scene *s)
+// static int	process_line(char *line, t_scene *scene)
+// {
+// 	char	*trimmed;
+// 	char	**tokens;
+// 	int		result;
+
+// 	trimmed = ft_strtrim(line, " \t\r\n");
+// 	if (!trimmed)
+// 		return (0);
+// 	if (trimmed[0] == '\0')
+// 		return (free(trimmed), 1);
+// 	tokens = ft_split(trimmed, ' ');
+// 	free(trimmed);
+// 	if (!tokens)
+// 		return (0);
+// 	result = dispatch_line(tokens, scene);
+// 	free_tokens(tokens);
+// 	return (result);
+// }
+
+int	validate_scene(t_scene *scene)
 {
-	if (!s->has_ambient)
+	if (!scene->has_ambient)
 		return (0);
-	if (!s->has_camera)
+	if (!scene->has_camera)
 		return (0);
-	if (!s->has_light)
+	if (!scene->has_light)
 		return (0);
-	if (s->obj_count <= 0)
+	if (scene->obj_count <= 0)
 		return (0);
 	return (1);
 }

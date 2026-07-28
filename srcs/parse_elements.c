@@ -3,42 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/05 13:50:03 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/07/28 21:46:36 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-int	token_count(char **tokens)
-{
-	int	count;
-
-	count = 0;
-	while (tokens[count])
-		count++;
-	return (count);
-}
-
-int	is_valid_number(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if (!str[i])
-		return (0);
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]) && str[i] != '.')
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 int	parse_color(char *str, t_color *color)
 {
@@ -71,12 +43,10 @@ int	parse_color(char *str, t_color *color)
 // Format: A ratio R,G,B
 int	parse_ambient(char **tokens, t_scene *scene)
 {
-	t_color	color;
 	double	ratio;
+	t_color	color;
 
-	if (token_count(tokens) != 3)
-		return (0);
-	if (scene->has_ambient)
+	if (scene->has_ambient || token_count(tokens) != 3)
 		return (0);
 	if (!is_valid_number(tokens[1]))
 		return (0);
@@ -85,9 +55,9 @@ int	parse_ambient(char **tokens, t_scene *scene)
 		return (0);
 	if (!parse_color(tokens[2], &color))
 		return (0);
-	scene->has_ambient = 1;
 	scene->ambient_ratio = ratio;
 	scene->ambient_color = color;
+	scene->has_ambient = 1;
 	return (1);
 }
 
@@ -122,24 +92,24 @@ int	parse_camera(char **tokens, t_scene *scene)
 	t_tuple	dir;
 	double	fov;
 
-	if (token_count(tokens) != 4)
-		return (0);
-	if (scene->has_camera)
+	if (scene->has_camera || token_count(tokens) != 4)
 		return (0);
 	if (!parse_tuple(tokens[1], &pos))
 		return (0);
 	if (!parse_tuple(tokens[2], &dir))
 		return (0);
+	if (!is_normalized_range(dir))
+		return (0);
 	normalize_tuple(&dir);
 	if (!is_valid_number(tokens[3]))
 		return (0);
 	fov = ft_atof(tokens[3]);
-	if (fov < 0.0 || fov > 180.0)
+	if (fov <= 0.0 || fov >= 180.0)
 		return (0);
-	scene->has_camera = 1;
 	scene->cam_pos = pos;
 	scene->cam_dir = dir;
 	scene->cam_fov = fov;
+	scene->has_camera = 1;
 	return (1);
 }
 
@@ -150,9 +120,7 @@ int	parse_light(char **tokens, t_scene *scene)
 	double	brightness;
 	t_color	color;
 
-	if (token_count(tokens) != 3 && token_count(tokens) != 4)
-		return (0);
-	if (scene->has_light)
+	if (scene->has_light || token_count(tokens) != 4)
 		return (0);
 	if (!parse_tuple(tokens[1], &pos))
 		return (0);
@@ -161,20 +129,11 @@ int	parse_light(char **tokens, t_scene *scene)
 	brightness = ft_atof(tokens[2]);
 	if (brightness < 0.0 || brightness > 1.0)
 		return (0);
-	if (tokens[3])
-	{
-		if (!parse_color(tokens[3], &color))
-			return (0);
-	}
-	else
-	{
-		color.r = 255;
-		color.g = 255;
-		color.b = 255;
-	}
-	scene->has_light = 1;
+	if (!parse_color(tokens[3], &color))
+		return (0);
 	scene->light_pos = pos;
 	scene->light_brightness = brightness;
 	scene->light_color = color;
+	scene->has_light = 1;
 	return (1);
 }
