@@ -6,12 +6,13 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/10 19:15:40 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/03 00:51:46 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
+# define PI 3.14159265358979323846
 # define PI 3.14159265358979323846
 # define EPSILON 0.0001
 # define VECTOR 0
@@ -35,5 +36,26 @@
 # include "transformations.h"
 # include "geometry.h"
 # include "render.h"
+# include "libft.h"
+# include "tuple.h"
+
+
+// ADDITIONAL
+# include <unistd.h>
+# include "program.h"
+# include "scene.h"
+# include "MLX42/MLX42.h"
+# include "parser.h"
+# include "canvas.h"
+
+# define WIDTH 350
+# define HEIGHT 250
+
+
+# ifdef __linux__
+#  define ESC 65307
+# elif defined(__APPLE__)
+#  define ESC 53
+# endif
 
 #endif

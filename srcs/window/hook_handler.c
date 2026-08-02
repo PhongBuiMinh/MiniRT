@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   canvas.h                                           :+:      :+:    :+:   */
+/*   hook_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/05 22:04:04 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/03 00:46:49 by bpetrovi         ###   ########.fr       */
+/*   Created: 2026/06/14 19:10:49 by fbui-min          #+#    #+#             */
+/*   Updated: 2026/08/03 00:53:37 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CANVAS_H
-# define CANVAS_H
-# include "tuple.h"
+#include "minirt.h"
 
-typedef struct s_canvas
+void	exit_minirt(void *param)
 {
-	t_tuple	**pixels;
-	int		width;
-	int		height;
-}	t_canvas;
+	t_program	*prog;
 
-t_tuple		color(double r, double g, double b);
-t_canvas	*init_canvas(int x, int y);
-int			scale_color(float c);
-void		canvas_to_ppm(t_canvas *canvas);
-void		write_pixel(t_canvas *canvas, int x, int y, t_tuple color);
-void		free_pixels(t_tuple **pixels);
+	prog = (t_program *)param;
+	cleanup_program(prog);
+	exit(EXIT_SUCCESS);
+}
 
-#endif
+void	key_hook(mlx_key_data_t keydata, void *param)
+{
+	t_program	*prog;
+
+	prog = (t_program *)param;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		mlx_close_window(prog->mlx.mlx);
+}
