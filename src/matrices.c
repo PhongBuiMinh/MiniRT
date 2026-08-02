@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/10 20:58:42 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/02 20:22:28 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,3 +172,41 @@ t_tuple	m_apply(t_matrix matrix, t_tuple tuple)
 //		x++;
 //	}
 //}
+
+
+/*
+static void	copy_submatrix_row(t_subcopy data, int src_row, int dst_row)
+{
+	int	j;
+	int	y;
+
+	j = 0;
+	y = 0;
+	while (j < data.matrix.cols)
+	{
+		if (j != data.skip_col)
+			data.sub.data[dst_row][y++] = data.matrix.data[src_row][j];
+		j++;
+	}
+}
+
+t_matrix	submatrix(t_matrix matrix, int row, int col)
+{
+	t_subcopy	data;
+	int			i;
+	int			x;
+
+	data.matrix = matrix;
+	data.sub = m_init(matrix.rows - 1, matrix.cols - 1);
+	data.skip_col = col;
+	x = 0;
+	i = 0;
+	while (i < matrix.rows)
+	{
+		if (i != row)
+			copy_submatrix_row(data, i, x++);
+		i++;
+	}
+	return (data.sub);
+}
+	*/
