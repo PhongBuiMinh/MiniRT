@@ -27,6 +27,9 @@ int main(int argc, char **argv)
     // 7. Event loop
     mlx_loop(prog.mlx.mlx);
 }
+grep -Rnw . -e "world_add_object"
+grep -Rnw --include="*.c" --include="*.h" . -e "world_add_object"
+
 (https://github.com/42Paris/minilibx-linux/actions/workflows/ci.yml/badge.svg)](https://github.com/42Paris/minilibx-linux/actions/workflows/ci.yml)
 
 https://github.com/codam-coding-college/MLX42

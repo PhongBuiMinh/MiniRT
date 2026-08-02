@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 12:46:50 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/02 14:18:29 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/02 14:36:43 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ static t_object	*make_object(const t_scene_obj *src)
 	if (src->type == OBJ_CYLINDER)
 		return (make_cylinder_object(src));
 	return (NULL);
+}
+
+int world_add_object(t_world *w, t_object *obj)
+{
+	if (!w || !obj)
+		return (0);
+	if (w->object_cnt >= WORLD_MAX_OBJECTS)
+		return (0);
+	w->objects[w->object_cnt++] = obj;
+	return (1);
 }
 
 int	build_world_from_scene(t_scene *s, t_world *w, t_camera *cam)
