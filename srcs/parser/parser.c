@@ -6,11 +6,11 @@
 /*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/02 18:14:35 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/02 20:43:41 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minirt.h"
 
 int	dispatch_line(char **tokens, t_scene *scene)
 {

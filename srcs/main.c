@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include "scene.h"
 
 void	cleanup_program(t_program *prog)
 {

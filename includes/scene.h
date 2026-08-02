@@ -6,14 +6,14 @@
 /*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 05:42:40 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/02 20:05:55 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/02 20:42:58 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
 
-# include "minirt.h"
+# include "tuple.h"
 
 # define MAX_OBJECTS 64
 

@@ -6,12 +6,11 @@
 /*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 12:46:50 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/02 18:46:07 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/02 20:44:23 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include "scene.h"
 
 static int	scene_ready(const t_scene *s)
 {
@@ -24,11 +23,11 @@ static int	scene_ready(const t_scene *s)
 	return (1);
 }
 
-static int		build_ambient_light(const t_scene *s, t_world *w);
-static int		build_camera(const t_scene *s, t_camera *cam);
-static t_object	*make_sphere_object(const t_scene_obj *src);
-static t_object	*make_plane_object(const t_scene_obj *src);
-static t_object	*make_cylinder_object(const t_scene_obj *src);
+int			build_ambient_light(const t_scene *s, t_world *w);
+int			build_camera(const t_scene *s, t_camera *cam);
+t_object	*make_sphere_object(const t_scene_obj *src);
+t_object	*make_plane_object(const t_scene_obj *src);
+t_object	*make_cylinder_object(const t_scene_obj *src);
 
 static int	build_ambient_light(const t_scene *s, t_world *w)
 {
@@ -45,7 +44,7 @@ static int	build_ambient_light(const t_scene *s, t_world *w)
 	return (1);
 }
 
-static t_object	*make_object(const t_scene_obj *src)
+t_object	*make_object(const t_scene_obj *src)
 {
 	if (src->type == OBJ_SPHERE)
 		return (make_sphere_object(src));

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helpers2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 21:46:57 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/28 21:49:27 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/02 20:43:34 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "minirt.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

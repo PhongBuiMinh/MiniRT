@@ -6,14 +6,14 @@
 /*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 13:43:13 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/02 19:35:48 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/02 20:42:33 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "minirt.h"
+# include "scene.h"
 
 int		parse_scene_file(const char *path, t_scene *scene);
 
