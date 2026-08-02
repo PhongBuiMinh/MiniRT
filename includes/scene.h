@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 05:42:40 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/28 19:53:53 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/02 13:00:17 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SCENE_H
 
 # include "tuple.h"
-# include "color.h"
 
 # define MAX_OBJECTS 64
 
