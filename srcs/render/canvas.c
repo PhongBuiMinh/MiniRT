@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   render_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 19:08:07 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/07/28 21:56:21 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/02 19:10:08 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,4 @@ t_canvas	canvas_new(int width, int height)
 		ft_bzero(canvas.pixels[y], sizeof(t_tuple) * width);
 	}
 	return (canvas);
-}
-
-void	init_render(t_program *prog)
-{
-	prog->mlx.mlx = mlx_init(prog->camera.h_size,
-			prog->camera.v_size, "miniRT", true);
-	if (!prog->mlx.mlx)
-		fatal("Failed to initialize MLX42", prog);
-}
-
-void	init_img(t_program *prog)
-{
-	prog->mlx.img = mlx_new_image(prog->mlx.mlx,
-			prog->camera.h_size, prog->camera.v_size);
-	if (!prog->mlx.img)
-		fatal("Failed to create image", prog);
-	if (mlx_image_to_window(prog->mlx.mlx, prog->mlx.img, 0, 0) < 0)
-		fatal("Failed to display image", prog);
 }

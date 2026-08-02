@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 05:42:40 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/02 13:00:17 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/02 20:05:55 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
 
-# include "tuple.h"
+# include "minirt.h"
 
 # define MAX_OBJECTS 64
 
@@ -57,7 +57,5 @@ typedef struct s_scene
 	t_scene_obj	objects[MAX_OBJECTS];
 	int			obj_count;
 }	t_scene;
-
-int	parse_scene_file(const char *path, t_scene *scene);
 
 #endif

@@ -3,35 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minirt_parser.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:19:38 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/02 13:01:28 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/02 20:11:36 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef PROGRAM_H
+# define PROGRAM_H
 
-// # include "render.h"
-# include "libft.h"
-# include <stdlib.h>
-# include <math.h>
-# include <stdbool.h>
-# include "MLX42/MLX42.h"
-# include "scene.h"
-// #include "../lib/minilibx-linux/mlx.h"
-
-// WINDOW
-# define WIDTH 350
-# define HEIGHT 250
-# define WORLD_MAX_OBJECTS 64
-
-# ifdef __linux__
-#  define ESC 65307
-# elif defined(__APPLE__)
-#  define ESC 53
-# endif
+# include "minirt.h"
 
 typedef struct s_mlx
 {

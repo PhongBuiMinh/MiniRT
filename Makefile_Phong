@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    Makefile_Phong                                     :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/07/28 21:57:58 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/08/02 19:14:46 by fbui-min         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,11 @@ endif
 
 SRC_DIR = srcs
 SRC     = main.c \
-		  hook_handler.c \
-		  render_init.c render_draw.c \
-		  parse_elements.c parse_helpers.c parse_helpers2.c parse_objects.c parser.c \
-		  build_world.c
+		  window/hook_handler.c window/window_init.c \
+		  render/render.c render/canvas.c \
+		  parser/parser.c parser/parse_elements.c parse_objects.c \
+		  parser/parse_helpers.c parser/parse_helpers2.c \
+		  world/build_world.c
 
 OBJ_DIR = obj
 OBJ     = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

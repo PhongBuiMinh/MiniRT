@@ -72,39 +72,3 @@ int	main(int argc, char **argv)
 	mlx_loop(prog.mlx.mlx);
 	return (0);
 }
-
-// int	main(int argc, char **argv)
-// {
-// 	t_program	prog;
-// 	int			x;
-// 	int			y;
-
-// 	if (argc != 2)
-// 		return (ft_putstr_fd("Usage: ./miniRT <scene.rt>\n", 2), EXIT_FAILURE);
-// 	ft_bzero(&prog, sizeof(prog));
-// 	if (!parse_scene_file(argv[1], &prog.scene))
-// 		fatal("Failed to parse scene file", &prog);
-
-// 	prog.camera.h_size = 800;
-// 	prog.camera.v_size = 600;
-
-// 	init_render(&prog);
-// 	init_img(&prog);
-
-// 	y = 0;
-// 	while (y < prog.camera.v_size)
-// 	{
-// 		x = 0;
-// 		while (x < prog.camera.h_size)
-// 		{
-// 			mlx_put_pixel(prog.mlx.img, x, y, 0x00FF00FF);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-
-// 	mlx_close_hook(prog.mlx.mlx, exit_minirt, &prog);
-// 	mlx_key_hook(prog.mlx.mlx, key_hook, &prog);
-// 	mlx_loop(prog.mlx.mlx);
-// 	return (0);
-// }

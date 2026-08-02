@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_world.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 12:46:50 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/02 14:39:33 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/02 18:46:07 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static t_object	*make_object(const t_scene_obj *src)
 	return (NULL);
 }
 
-int world_add_object(t_world *w, t_object *obj)
+int	world_add_object(t_world *w, t_object *obj)
 {
 	if (!w || !obj)
 		return (0);
