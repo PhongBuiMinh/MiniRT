@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 12:46:50 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/02 14:36:43 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/02 14:39:33 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,21 @@ static int		build_camera(const t_scene *s, t_camera *cam);
 static t_object	*make_sphere_object(const t_scene_obj *src);
 static t_object	*make_plane_object(const t_scene_obj *src);
 static t_object	*make_cylinder_object(const t_scene_obj *src);
+
+static int	build_ambient_light(const t_scene *s, t_world *w)
+{
+	t_tuple	light_pos;
+	t_color	light_color;
+
+	if (!s || !w)
+		return (0);
+	w->ambient_ratio = s->ambient_ratio;
+	w->ambient_color = s->ambient_color;
+	light_pos = point(s->light_pos.x, s->light_pos.y, s->light_pos.z);
+	light_color = mul_color_scalar(s->light_color, s->light_brightness);
+	w->light = point_light(light_pos, light_color);
+	return (1);
+}
 
 static t_object	*make_object(const t_scene_obj *src)
 {
