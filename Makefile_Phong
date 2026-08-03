@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile_Phong                                     :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+         #
+#    By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/08/02 19:14:46 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/08/03 17:14:32 by bpetrovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,11 +34,30 @@ endif
 
 SRC_DIR = srcs
 SRC     = main.c \
-		  window/hook_handler.c window/window_init.c \
-		  render/render.c render/canvas.c \
-		  parser/parser.c parser/parse_elements.c parse_objects.c \
-		  parser/parse_helpers.c parser/parse_helpers2.c \
-		  world/build_world.c
+		math/geometry.c \
+		math/helper_math.c \
+		math/matrices.c \
+		math/tuples.c \
+		parser/parse_helpers.c \
+		parser/parse_helpers2.c \
+		parser/parse_objects.c \
+		parser/parser.c \
+		render/canvas.c \
+		render/color.c \
+		render/light.c \
+		render/render.c \
+		tracing/hit.c \
+		tracing/intersect_helper.c \
+		tracing/intersect_manipulation.c \
+		tracing/intersect.c \
+		tracing/normal_at.c \
+		tracing/rays.c \
+		window/hook_handler.c \
+		window/window_init.c \
+		world/build_world.c \
+		world/objects.c \
+		world/transformation.c \
+		world/world.c
 
 OBJ_DIR = obj
 OBJ     = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

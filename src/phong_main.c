@@ -52,7 +52,6 @@ int	main(int argc, char **argv)
 {
 	t_program	prog;
 
-	printf("HI");
 	if (argc != 2)
 		return (ft_putstr_fd("Usage: ./miniRT <scene.rt>\n", 2), EXIT_FAILURE);
 	ft_bzero(&prog, sizeof(prog));
