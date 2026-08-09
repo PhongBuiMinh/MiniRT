@@ -5,79 +5,98 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/05/05 21:36:59 by bpetrovi          #+#    #+#              #
-#    Updated: 2026/07/10 20:14:24 by bpetrovi         ###   ########.fr        #
+#    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
+#    Updated: 2026/08/09 16:45:51 by bpetrovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minirt
-INCLUDES = -Iincludes -Ilibft
-CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
-DEBUG = -g
-LIBFT_DIR = libft
-LIBFT = ${LIBFT_DIR}/libft.a
-SRCS_DIR = src
-OBJS_DIR = build
-CORE_SRCS = canvas.c \
-			color.c \
-			normal_at.c \
-			hit.c \
-			intersect.c \
-			intersect_manipulation.c \
-            intersect_helper.c \
-            tuples.c \
-            matrices.c \
-            rays.c \
-            objects.c \
-            light.c \
-			helper_math.c \
-			geometry.c \
-			transformations.c \
-			render.c \
-			world.c
-SRCS = main.c $(CORE_SRCS)
-OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
+GREEN   = \033[0;32m
+RED     = \033[0;31m
+DEFAULT = \033[0m
 
-all: ${NAME} ${LIBFT}
+NAME    = minirt
+CC      = cc
+CFLAGS  = -Wall -Wextra -Werror -g
 
-debug: CFLAGS += ${DEBUG}
-debug: re
+OS_TYPE := $(shell uname -s)
 
-test: ${LIBFT}
-	@$(MAKE) SRCS="$(CORE_SRCS) tests/lightning_tests.c tests/matrix_tests.c tests/tests_runner.c" NAME="test_runner" all
+LIBFT_PATH = lib/libft
+LIBFT      = $(LIBFT_PATH)/libft.a
 
-${LIBFT}:
-	@make -s -C ${LIBFT_DIR}
-	@echo "compiling libft"
+MLX42_PATH = lib/MLX42
+MLX42_LIB  = $(MLX42_PATH)/build/libmlx42.a
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME) -lm
+ifeq ($(OS_TYPE),Darwin)
+	MLX42_FLAG = -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+else ifeq ($(OS_TYPE),Linux)
+	MLX42_FLAG = -ldl -lglfw -pthread -lm
+endif
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
-	@mkdir -p $(dir $@)
-	gcc $(CFLAGS) -c $< -o $@
+SRC_DIR = src
+SRC     = main.c \
+		math/geometry.c \
+		math/helper_math.c \
+		math/matrices.c \
+		math/tuples.c \
+		parser/parse_elements.c \
+		parser/parse_helpers.c \
+		parser/parse_helpers2.c \
+		parser/parse_objects.c \
+		parser/parser.c \
+		render/canvas.c \
+		render/color.c \
+		render/light.c \
+		render/render.c \
+		tracing/hit.c \
+		tracing/intersect_helper.c \
+		tracing/intersect_manipulation.c \
+		tracing/intersect.c \
+		tracing/normal_at.c \
+		tracing/rays.c \
+		window/hook_handler.c \
+		window/window_init.c \
+		world/build_world.c \
+		world/objects.c \
+		world/transformations.c \
+		world/world.c
 
-$(OBJS_DIR)/tests/%.o: tests/%.c | $(OBJS_DIR)/tests
-	@mkdir -p $(dir $@)
-	gcc $(CFLAGS) -c $< -o $@
+OBJ_DIR = obj
+OBJ     = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-${OBJS_DIR}:
-	mkdir -p ${OBJS_DIR}
+all: $(NAME)
 
-${OBJS_DIR}/tests:
-	mkdir -p ${OBJS_DIR}/tests
+$(LIBFT):
+	@echo "$(GREEN)Building libft...$(DEFAULT)"
+	@$(MAKE) -C $(LIBFT_PATH)
+
+$(MLX42_LIB):
+	@echo "$(GREEN)Building MLX42...$(DEFAULT)"
+	@cmake -S $(MLX42_PATH) -B $(MLX42_PATH)/build
+	@cmake --build $(MLX42_PATH)/build -j4
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	mkdir -p $(dir $@)
+	@echo "$(GREEN)Compiling $<...$(DEFAULT)"
+	@$(CC) $(CFLAGS) -Iincludes -I$(LIBFT_PATH) -I$(MLX42_PATH)/include -c $< -o $@
+
+$(NAME): $(LIBFT) $(MLX42_LIB) $(OBJ)
+	@echo "$(GREEN)Linking $(NAME)...$(DEFAULT)"
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX42_LIB) $(MLX42_FLAG) -o $(NAME)
 
 clean:
-	@make -s -C ${LIBFT_DIR} clean
-	@echo "make clean libft"
-	rm -rf ${OBJS_DIR}
+	@echo "$(RED)Removing object files...$(DEFAULT)"
+	@rm -rf $(OBJ_DIR)
+	@$(MAKE) clean -C $(LIBFT_PATH)
+	@if [ -d "$(MLX42_PATH)/build" ]; then rm -rf $(MLX42_PATH)/build; fi
 
 fclean: clean
-	@make -s -C ${LIBFT_DIR} fclean
-	@echo "make fclean libft"
-	rm -f minirt test_runner
+	@echo "$(RED)Removing program...$(DEFAULT)"
+	@rm -f $(NAME)
+	@$(MAKE) fclean -C $(LIBFT_PATH)
 
 re: fclean all
-	@make -s -C ${LIBFT_DIR} re
 
-.PHONY: all clean fclean re debug test
+.PHONY: all clean fclean re

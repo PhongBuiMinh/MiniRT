@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 07:35:42 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/09 14:58:29 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/09 16:40:33 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int	parse_cylinder(char **tokens, t_scene *scene)
 	if (!is_valid_number(tokens[3]) || !is_valid_number(tokens[4]))
 		return (0);
 	diameter = ft_atof(tokens[3]);
-	height   = ft_atof(tokens[4]);
+	height = ft_atof(tokens[4]);
 	if (diameter <= 0.0 || height <= 0.0)
 		return (0);
 	if (!parse_color(tokens[5], &color))

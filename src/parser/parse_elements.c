@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/09 15:02:51 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/09 16:40:11 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,10 +133,10 @@ int	parse_light(char **tokens, t_scene *scene)
 		return (0);
 	scene->pos = pos;
 	scene->intensity = vector(
-		color.r * brightness,
-		color.g * brightness,
-		color.b * brightness
-	);
+			color.r * brightness,
+			color.g * brightness,
+			color.b * brightness
+			);
 	scene->has_light = 1;
 	return (1);
 }

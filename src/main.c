@@ -3,88 +3,108 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/07 22:48:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/03 17:18:13 by bpetrovi         ###   ########.fr       */
+/*   Created: 2026/06/8 12:45:00 by fbui-min          #+#    #+#             */
+/*   Updated: 2026/06/14 13:18:16 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_world	scene_with_three_spheres(void)
+void	cleanup_program(t_program *prog)
 {
-	t_world	new_world;
-	int		i;
+	int	y;
 
-	new_world.light = light_init(point(-10, 10, -10), color(1, 1, 1));
-	new_world.object_cnt = 4;
-	i = 1;
-	// FLOOR
-	new_world.objects[0] = plane_create(0);
-	while (i < new_world.object_cnt)
+	if (!prog)
+		return ;
+	if (prog->canvas.pixels)
 	{
-		new_world.objects[i] = sphere_create(i);
-		i++;
+		y = 0;
+		while (y < prog->canvas.height)
+			free(prog->canvas.pixels[y++]);
+		free(prog->canvas.pixels);
+		prog->canvas.pixels = NULL;
 	}
-	new_world.object_cnt++;
-	new_world.objects[i] = cylinder_create(i);
-	// /* Left wall */
-	// new_world.objects[1]->transformation = m_multiply(translation(0, 0, 5),
-	// 		m_multiply(rotation_y(-PI / 4), m_multiply(rotation_x(PI / 2),
-	// 				scaling(10, 0.01, 10))));
-	// new_world.objects[1]->material = new_world.objects[0]->material;
-	// /* Right wall */
-	// new_world.objects[2]->transformation = m_multiply(translation(0, 0, 5),
-	// 		m_multiply(rotation_y(PI / 4), m_multiply(rotation_x(PI / 2),
-	// 				scaling(10, 0.01, 10))));
-	// new_world.objects[2]->material = new_world.objects[0]->material;
-	/* Middle sphere */
-	new_world.objects[1]->transformation = translation(-0.5, 1, 0.5);
-	new_world.objects[1]->material = material();
-	new_world.objects[1]->material.color = color(0.1, 1, 0.5);
-	new_world.objects[1]->material.diffuse = 0.7;
-	new_world.objects[1]->material.specular = 0.3;
-	/* Right sphere */
-	new_world.objects[2]->transformation = m_multiply(translation(1.5, 0.5,
-				-0.5), scaling(0.5, 0.5, 0.5));
-	new_world.objects[2]->material = material();
-	new_world.objects[2]->material.color = color(0.5, 1, 0.1);
-	new_world.objects[2]->material.diffuse = 0.7;
-	new_world.objects[2]->material.specular = 0.3;
-	/* Left sphere */
-	new_world.objects[3]->transformation = m_multiply(translation(-1.5, 0.33,
-				-0.75), scaling(0.33, 0.33, 0.33));
-	new_world.objects[3]->material = material();
-	new_world.objects[3]->material.color = color(1, 0.8, 0.1);
-	new_world.objects[3]->material.diffuse = 0.7;
-	new_world.objects[3]->material.specular = 0.3;
-	/* Cylinder */
-	new_world.objects[4]->transformation = translation(2, 2, 2);
-	new_world.objects[4]->material.color = color(1, 0.8, 0.1);
-	return (new_world);
+	if (prog->mlx.img && prog->mlx.mlx)
+	{
+		mlx_delete_image(prog->mlx.mlx, prog->mlx.img);
+		prog->mlx.img = NULL;
+	}
+	if (prog->mlx.mlx)
+	{
+		mlx_terminate(prog->mlx.mlx);
+		prog->mlx.mlx = NULL;
+	}
+	if (prog->scene.objects)
+	{
+		int i = 0;
+		while (i < prog->scene.object_cnt)
+			free(prog->scene.objects[i++]);
+		free(prog->scene.objects);
+		prog->scene.objects = NULL;
+		prog->scene.object_cnt = 0;
+	}
 }
 
-int	main(void)
+void	fatal(char *msg, t_program *prog)
 {
-	t_world		world;
-	t_camera	camera;
-	t_tuple		from;
-	t_tuple		to;
-	t_tuple		up;
-	t_canvas	*canvas;
-
-	world = scene_with_three_spheres();
-	camera = camera_init(400, 400, PI / 3);
-	from = point(0, 1.5, -5);
-	to = point(0, 1, 0);
-	up = vector(0, 1, 0);
-	camera.transform = view_transform(from, to, up);
-	canvas = render_scene(camera, world);
-	if (!canvas)
-		return (0); // FAIL
-	canvas_to_ppm(canvas);
-	free_objects(world.objects, world.object_cnt);
-	free_pixels(canvas->pixels);
-	free(canvas);
+	if (prog)
+		cleanup_program(prog);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
+	exit(EXIT_FAILURE);
 }
+
+int	main(int argc, char **argv)
+{
+	t_program	prog;
+
+	if (argc != 2)
+		return (ft_putstr_fd("Usage: ./miniRT <scene.rt>\n", 2), EXIT_FAILURE);
+
+	ft_bzero(&prog, sizeof(prog));
+
+	if (!parse_scene_file(argv[1], &prog.scene))
+		fatal("Failed to parse scene file", &prog);
+
+	if (!build_world_from_scene(&prog.scene, &prog.world, &prog.camera))
+		fatal("Failed to build world/camera", &prog);
+
+	prog.canvas = canvas_new(prog.camera.h_size, prog.camera.v_size);
+	if (!prog.canvas.pixels)
+		fatal("Failed to allocate canvas", &prog);
+
+	init_render(&prog);
+	init_img(&prog);
+	render_minirt(&prog);
+
+	mlx_close_hook(prog.mlx.mlx, exit_minirt, &prog);
+	mlx_key_hook(prog.mlx.mlx, key_hook, &prog);
+	mlx_loop(prog.mlx.mlx);
+	return (0);
+}
+
+// int	main(int argc, char **argv)
+// {
+// 	t_program	prog;
+
+// 	if (argc != 2)
+// 		return (ft_putstr_fd("Usage: ./miniRT <scene.rt>\n", 2), EXIT_FAILURE);
+// 	ft_bzero(&prog, sizeof(prog));
+// 	if (!parse_scene_file(argv[1], &prog.scene))
+// 		fatal("Failed to parse scene file", &prog);
+// 	if (!build_world_from_scene(&prog.scene, &prog.world, &prog.camera))
+// 		fatal("Failed to build world", &prog);
+// 	prog.canvas = canvas_new(prog.camera.h_size, prog.camera.v_size);
+// 	if (!prog.canvas.pixels)
+// 		fatal("Failed to allocate canvas", &prog);
+// 	init_render(&prog);
+// 	init_img(&prog);
+// 	render_minirt(&prog);
+// 	mlx_close_hook(prog.mlx.mlx, exit_minirt, &prog);
+// 	mlx_key_hook(prog.mlx.mlx, key_hook, &prog);
+// 	mlx_loop(prog.mlx.mlx);
+// 	return (0);
+// }

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/03 16:59:46 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/09 16:20:52 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	render_minirt(t_program *prog)
 	int			x;
 	int			y;
 
-	// rendered = render_scene(prog->camera, prog->world);
+	rendered = render_scene(prog->camera, prog->world);
 	rendered = 0;
 	if (!rendered)
 		fatal("render_scene failed", prog);

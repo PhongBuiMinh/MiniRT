@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:17:46 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/05 14:36:25 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/09 16:35:15 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "canvas.h"
 # include "objects.h"
 # include "light.h"
+# include "world.h"
 
 typedef struct s_camera
 {

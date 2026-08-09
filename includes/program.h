@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:19:38 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/09 14:29:14 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/09 16:35:38 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include "tuple.h"
 # include "scene.h"
+# include "MLX42/MLX42.h"
 
 typedef struct s_mlx
 {
@@ -92,7 +93,6 @@ void		init_render(t_program *prog);
 void		exit_minirt(void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
 void		fatal(char *msg, t_program *prog);
-int			build_world_from_scene(t_scene *s, t_world *w, t_camera *cam);
 void		cleanup_program(t_program *prog);
 void		render_minirt(t_program *prog);
 t_canvas	canvas_new(int width, int height);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/09 14:59:33 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/09 16:41:22 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,15 +130,6 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-void	world_init(t_world *w)
-{
-	if (!w)
-		return;
-	ft_bzero(w, sizeof(*w));
-	w->objects = NULL;
-	w->object_cnt = 0;
-}
-
 int	scene_add_object(t_scene *scene, t_object *obj)
 {
 	t_object	**tmp;
@@ -154,19 +145,6 @@ int	scene_add_object(t_scene *scene, t_object *obj)
 	scene->objects[scene->object_cnt] = obj;
 	scene->object_cnt = new_cnt;
 	return (1);
-}
-
-void	world_cleanup(t_world *w)
-{
-	int	i;
-
-	if (!w)
-		return;
-	for (i = 0; i < w->object_cnt; i++)
-		free(w->objects[i]);
-	free(w->objects);
-	w->objects = NULL;
-	w->object_cnt = 0;
 }
 
 int	parse_scene_file(const char *path, t_scene *scene)

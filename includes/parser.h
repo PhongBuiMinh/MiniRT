@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 13:43:13 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/02 20:42:33 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/09 16:41:56 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@
 
 int		parse_scene_file(const char *path, t_scene *scene);
 
+int		parse_color(char *str, t_color *color);
+int		parse_tuple(char *str, t_tuple *tuple);
+
 int		parse_ambient(char **tokens, t_scene *scene);
 int		parse_camera(char **tokens, t_scene *scene);
 int		parse_light(char **tokens, t_scene *scene);
 int		parse_sphere(char **tokens, t_scene *scene);
 int		parse_plane(char **tokens, t_scene *scene);
 int		parse_cylinder(char **tokens, t_scene *scene);
-
-int		parse_color(char *str, t_color *color);
-int		parse_tuple(char *str, t_tuple *tuple);
+int		scene_add_object(t_scene *scene, t_object *obj);
 
 int		token_count(char **tokens);
 void	free_tokens(char **tokens);
