@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/02 20:43:41 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/09 14:59:33 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	validate_scene(t_scene *scene)
 		return (0);
 	if (!scene->has_light)
 		return (0);
-	if (scene->obj_count <= 0)
+	if (scene->object_cnt <= 0)
 		return (0);
 	return (1);
 }
@@ -130,6 +130,45 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
+void	world_init(t_world *w)
+{
+	if (!w)
+		return;
+	ft_bzero(w, sizeof(*w));
+	w->objects = NULL;
+	w->object_cnt = 0;
+}
+
+int	scene_add_object(t_scene *scene, t_object *obj)
+{
+	t_object	**tmp;
+	int			new_cnt;
+
+	if (!scene || !obj)
+		return (0);
+	new_cnt = scene->object_cnt + 1;
+	tmp = realloc(scene->objects, new_cnt * sizeof(t_object *));
+	if (!tmp)
+		return (0);
+	scene->objects = tmp;
+	scene->objects[scene->object_cnt] = obj;
+	scene->object_cnt = new_cnt;
+	return (1);
+}
+
+void	world_cleanup(t_world *w)
+{
+	int	i;
+
+	if (!w)
+		return;
+	for (i = 0; i < w->object_cnt; i++)
+		free(w->objects[i]);
+	free(w->objects);
+	w->objects = NULL;
+	w->object_cnt = 0;
+}
+
 int	parse_scene_file(const char *path, t_scene *scene)
 {
 	int		fd;
@@ -137,6 +176,8 @@ int	parse_scene_file(const char *path, t_scene *scene)
 	int		success;
 
 	ft_bzero(scene, sizeof(t_scene));
+	scene->objects = NULL;
+	scene->object_cnt = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (0);
