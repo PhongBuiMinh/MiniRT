@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/09 16:25:22 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/09 18:57:05 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # define EPSILON 0.0001
 # define VECTOR 0
 # define POINT 1
+
+# define WIDTH 400
+# define HEIGHT 400
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -47,10 +50,6 @@
 # include "MLX42/MLX42.h"
 # include "parser.h"
 # include "canvas.h"
-
-# define WIDTH 350
-# define HEIGHT 250
-
 
 # ifdef __linux__
 #  define ESC 65307

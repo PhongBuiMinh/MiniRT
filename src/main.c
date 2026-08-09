@@ -76,10 +76,10 @@ int	main(int argc, char **argv)
 	if (!prog.canvas.pixels)
 		fatal("Failed to allocate canvas", &prog);
 
-	init_render(&prog);
-	init_img(&prog);
+	// init_render(&prog);
+	// init_img(&prog);
 	render_minirt(&prog);
-
+	printf("objs: %d\n", prog.scene.object_idx);
 	mlx_close_hook(prog.mlx.mlx, exit_minirt, &prog);
 	mlx_key_hook(prog.mlx.mlx, key_hook, &prog);
 	mlx_loop(prog.mlx.mlx);

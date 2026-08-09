@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/09 16:40:11 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/09 19:13:19 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	parse_light(char **tokens, t_scene *scene)
 {
 	t_tuple	pos;
 	double	brightness;
-	t_color	color;
+	t_color	p_color;
 
 	if (scene->has_light || token_count(tokens) != 4)
 		return (0);
@@ -129,13 +129,13 @@ int	parse_light(char **tokens, t_scene *scene)
 	brightness = ft_atof(tokens[2]);
 	if (brightness < 0.0 || brightness > 1.0)
 		return (0);
-	if (!parse_color(tokens[3], &color))
+	if (!parse_color(tokens[3], &p_color))
 		return (0);
 	scene->pos = pos;
-	scene->intensity = vector(
-			color.r * brightness,
-			color.g * brightness,
-			color.b * brightness
+	scene->intensity = color(
+			brightness,
+			brightness,
+			brightness
 			);
 	scene->has_light = 1;
 	return (1);

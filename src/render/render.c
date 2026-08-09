@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/09 16:20:52 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/09 22:30:21 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,26 +133,108 @@ int	color_to_int(t_tuple color)
 	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
+// void	print_matrix(t_matrix *matrix)
+// {
+// 	int	row;
+// 	int	col;
+
+// 	printf("Matrix (%d x %d):\n", matrix->rows, matrix->cols);
+// 	row = 0;
+// 	while (row < matrix->rows)
+// 	{
+// 		col = 0;
+// 		while (col < matrix->cols)
+// 		{
+// 			printf("%10.5f ", matrix->data[row][col]);
+// 			col++;
+// 		}
+// 		printf("\n");
+// 		row++;
+// 	}
+// }
+
+// void	print_tuple(t_tuple *tuple)
+// {
+// 	printf("(%.5f, %.5f, %.5f, %.5f)",
+// 		tuple->x,
+// 		tuple->y,
+// 		tuple->z,
+// 		tuple->w);
+// }
+
+// void	print_light(t_light *light)
+// {
+// 	printf("\n========== LIGHT ==========\n");
+
+// 	printf("intensity : ");
+// 	print_tuple(&light->intensity);
+// 	printf("\n");
+
+// 	printf("position  : ");
+// 	print_tuple(&light->pos);
+// 	printf("\n");
+
+// 	printf("===========================\n");
+// }
+
+// void	print_world(t_world *world)
+// {
+// 	int	i;
+
+// 	printf("\n=========== WORLD ===========\n");
+
+// 	printf("object_cnt : %d\n", world->object_cnt);
+
+// 	printf("\nlight:\n");
+// 	print_light(&world->light);
+
+// 	printf("\nobjects : %p\n", (void *)world->objects);
+
+// 	i = 0;
+// 	while (i < world->object_cnt)
+// 	{
+// 		printf("objects[%d] : %p\n",
+// 			i, (void *)world->objects[i]);
+// 		i++;
+// 	}
+
+// 	printf("=============================\n");
+// }
+
 void	render_minirt(t_program *prog)
 {
 	t_canvas	*rendered;
 	int			x;
 	int			y;
 
+	// printf("data after converting and building struct\n");
+	// printf("========== CAMERA ==========\n");
+	// printf("h_size     : %d\n", prog->camera.h_size);
+	// printf("v_size     : %d\n", prog->camera.v_size);
+	// printf("pixel_size : %f\n", prog->camera.pixel_size);
+	// printf("half_width : %f\n", prog->camera.half_width);
+	// printf("half_height: %f\n", prog->camera.half_height);
+	// printf("fov        : %f\n", prog->camera.fov);
+	// printf("\ntransform:\n");
+	// print_matrix(&prog->camera.transform);
+	// print_world(&prog->world);
+
+	// printf("Starting render...\n");
 	rendered = render_scene(prog->camera, prog->world);
-	rendered = 0;
 	if (!rendered)
 		fatal("render_scene failed", prog);
+	init_mlx(prog);
+	init_img(prog);
 	y = 0;
 	while (y < rendered->height)
 	{
 		x = 0;
 		while (x < rendered->width)
 		{
-			mlx_put_pixel(prog->mlx.img, x, y, color_to_int(rendered->pixels[y][x]));
+			mlx_put_pixel(prog->mlx.img, x, y,
+				color_to_int(rendered->pixels[y][x]));
 			x++;
 		}
 		y++;
 	}
-	mlx_image_to_window(prog->mlx.mlx, prog->mlx.img, 0, 0);
 }

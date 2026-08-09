@@ -6,13 +6,13 @@
 /*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/02 19:09:55 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/02 19:10:20 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/09 21:01:01 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	init_render(t_program *prog)
+void	init_mlx(t_program *prog)
 {
 	prog->mlx.mlx = mlx_init(prog->camera.h_size,
 			prog->camera.v_size, "miniRT", true);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/09 16:41:22 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/09 22:24:42 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	dispatch_line(char **tokens, t_scene *scene)
 // 	return (result);
 // }
 
-static int	process_line(char *line, t_scene *scene)
+int	process_line(char *line, t_scene *scene)
 {
 	char	*trimmed;
 	char	**tokens;
@@ -130,20 +130,55 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
+int	is_object_token(const char *s)
+{
+	if (s[0] == 's' && s[1] == 'p')
+		return (1);
+	if (s[0] == 'p' && s[1] == 'l')
+		return (1);
+	if (s[0] == 'c' && s[1] == 'y')
+		return (1);
+	return (0);
+}
+
+int	count_objects(const char *path, int *object_cnt)
+{
+	int		fd;
+	char	*line;
+	char	*tmp;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	line = get_next_line(fd);
+	while (line)
+	{
+		tmp = line;
+		while (*tmp == ' ' || *tmp == '\t')
+			tmp++;
+		if (*tmp == '\0' || *tmp == '\n')
+		{
+			free(line);
+			line = get_next_line(fd);
+			continue ;
+		}
+		if (is_object_token(tmp))
+			(*object_cnt)++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (1);
+}
+
 int	scene_add_object(t_scene *scene, t_object *obj)
 {
-	t_object	**tmp;
-	int			new_cnt;
-
 	if (!scene || !obj)
 		return (0);
-	new_cnt = scene->object_cnt + 1;
-	tmp = realloc(scene->objects, new_cnt * sizeof(t_object *));
-	if (!tmp)
+
+	if (scene->object_idx == scene->object_cnt)
 		return (0);
-	scene->objects = tmp;
-	scene->objects[scene->object_cnt] = obj;
-	scene->object_cnt = new_cnt;
+	scene->objects[scene->object_idx++] = obj;
 	return (1);
 }
 
@@ -156,8 +191,15 @@ int	parse_scene_file(const char *path, t_scene *scene)
 	ft_bzero(scene, sizeof(t_scene));
 	scene->objects = NULL;
 	scene->object_cnt = 0;
+	scene->object_idx = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
+		return (0);
+	count_objects(path, &scene->object_cnt);
+	if (scene->object_cnt <= 0)
+		return (0);
+	scene->objects = malloc(scene->object_cnt * sizeof(*scene->objects));
+	if (!scene->objects)
 		return (0);
 	success = 1;
 	line = get_next_line(fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:19:38 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/09 16:35:38 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/09 21:01:09 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_program
 }	t_program;
 
 void		init_img(t_program *prog);
-void		init_render(t_program *prog);
+void		init_mlx(t_program *prog);
 void		exit_minirt(void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
 void		fatal(char *msg, t_program *prog);
