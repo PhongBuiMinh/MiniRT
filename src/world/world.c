@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:58:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 20:11:55 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/10 13:58:24 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_world	world_default(void)
-{
-	t_world	new_world;
+// t_world	world_default(void)
+// {
+// 	t_world	new_world;
 
-	new_world.light = light_init(point(-10, 10, -10), color(1, 1, 1));
-	new_world.object_cnt = 2;
-	int	i = 0;
-	while (i < new_world.object_cnt)
-	{
-		new_world.objects[i] = sphere_create(i);
-		i++;
-	}
-	new_world.objects[0]->material.color = color(0.8, 1, 0.6);
-	new_world.objects[0]->material.diffuse = 0.7;
-	new_world.objects[0]->material.specular = 0.2;
-	new_world.objects[1]->transformation = scaling(0.5, 0.5, 0.5);
-	return (new_world);
-}
+// 	new_world.light = light_init(point(-10, 10, -10), color(1, 1, 1));
+// 	new_world.object_cnt = 2;
+// 	int	i = 0;
+// 	while (i < new_world.object_cnt)
+// 	{
+// 		new_world.objects[i] = sphere_create(i);
+// 		i++;
+// 	}
+// 	new_world.objects[0]->material.color = color(0.8, 1, 0.6);
+// 	new_world.objects[0]->material.diffuse = 0.7;
+// 	new_world.objects[0]->material.specular = 0.2;
+// 	new_world.objects[1]->transformation = scaling(0.5, 0.5, 0.5);
+// 	return (new_world);
+// }
 
 // check
 

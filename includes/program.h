@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:19:38 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/09 21:01:09 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/10 14:22:25 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,56 +28,6 @@ typedef struct s_mlx
 	int		line_len;
 	int		endian;
 }	t_mlx;
-
-// //
-// typedef struct s_matrix
-// {
-// 	int		rows;
-// 	int		cols;
-// 	double	data[4][4];
-// }	t_matrix;
-
-// typedef struct s_camera
-// {
-// 	t_matrix	transform;
-// 	int			h_size;
-// 	int			v_size;
-// 	double		pixel_size;
-// 	double		half_width;
-// 	double		half_height;
-// 	double		fov;
-// }	t_camera;
-
-// //
-// typedef struct s_light
-// {
-// 	t_tuple	intensity;
-// 	t_tuple	pos;
-// }	t_light;
-
-// //
-// typedef struct s_object
-// {
-// 	t_tuple			(*normal_at)(t_tuple, struct s_object * self);
-// 	void			(*intersect)(struct s_object *self, t_ray, t_intersections *xs);
-// 	t_matrix		transformation;
-// 	t_material		material;
-// 	int				id;
-// }	t_object;
-
-// typedef struct s_world
-// {
-// 	t_light		light;
-// 	t_object	**objects;
-// 	int			object_cnt;
-// }	t_world;
-
-// typedef struct s_canvas
-// {
-// 	t_tuple	**pixels;
-// 	int		width;
-// 	int		height;
-// }	t_canvas;
 
 typedef struct s_program
 {

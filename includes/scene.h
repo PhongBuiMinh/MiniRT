@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 05:42:40 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/09 14:56:11 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/10 14:22:44 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_scene
 
 	t_object	**objects;
 	int			object_cnt;
+	int			object_idx;
 }	t_scene;
 
 #endif

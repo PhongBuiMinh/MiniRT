@@ -39,11 +39,16 @@ void	cleanup_program(t_program *prog)
 	if (prog->scene.objects)
 	{
 		int i = 0;
-		while (i < prog->scene.object_cnt)
-			free(prog->scene.objects[i++]);
+
+		while (i < prog->scene.object_idx)
+		{
+			free(prog->scene.objects[i]);
+			i++;
+		}
 		free(prog->scene.objects);
 		prog->scene.objects = NULL;
 		prog->scene.object_cnt = 0;
+		prog->scene.object_idx = 0;
 	}
 }
 
@@ -65,10 +70,8 @@ int	main(int argc, char **argv)
 		return (ft_putstr_fd("Usage: ./miniRT <scene.rt>\n", 2), EXIT_FAILURE);
 
 	ft_bzero(&prog, sizeof(prog));
-
 	if (!parse_scene_file(argv[1], &prog.scene))
 		fatal("Failed to parse scene file", &prog);
-
 	if (!build_world_from_scene(&prog.scene, &prog.world, &prog.camera))
 		fatal("Failed to build world/camera", &prog);
 
@@ -76,7 +79,7 @@ int	main(int argc, char **argv)
 	if (!prog.canvas.pixels)
 		fatal("Failed to allocate canvas", &prog);
 
-	// init_render(&prog);
+	// init_mlx(&prog);
 	// init_img(&prog);
 	render_minirt(&prog);
 	printf("objs: %d\n", prog.scene.object_idx);
