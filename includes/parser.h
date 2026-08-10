@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 13:43:13 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/09 16:41:56 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/10 21:36:41 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ void	free_tokens(char **tokens);
 
 int		is_normalized_range(t_tuple dir);
 void	normalize_tuple(t_tuple *v);
+int		setup_objects(const char *path, t_scene *scene);
 
 int		is_valid_number(char *str);
 double	ft_atof(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_get_next_line(int fd);
 
 #endif

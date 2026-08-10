@@ -12,102 +12,33 @@
 
 #include "minirt.h"
 
-void	cleanup_program(t_program *prog)
-{
-	int	y;
-
-	if (!prog)
-		return ;
-	if (prog->canvas.pixels)
-	{
-		y = 0;
-		while (y < prog->canvas.height)
-			free(prog->canvas.pixels[y++]);
-		free(prog->canvas.pixels);
-		prog->canvas.pixels = NULL;
-	}
-	if (prog->mlx.img && prog->mlx.mlx)
-	{
-		mlx_delete_image(prog->mlx.mlx, prog->mlx.img);
-		prog->mlx.img = NULL;
-	}
-	if (prog->mlx.mlx)
-	{
-		mlx_terminate(prog->mlx.mlx);
-		prog->mlx.mlx = NULL;
-	}
-	if (prog->scene.objects)
-	{
-		int i = 0;
-
-		while (i < prog->scene.object_idx)
-		{
-			free(prog->scene.objects[i]);
-			i++;
-		}
-		free(prog->scene.objects);
-		prog->scene.objects = NULL;
-		prog->scene.object_cnt = 0;
-		prog->scene.object_idx = 0;
-	}
-}
-
-void	fatal(char *msg, t_program *prog)
-{
-	if (prog)
-		cleanup_program(prog);
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(msg, 2);
-	ft_putstr_fd("\n", 2);
-	exit(EXIT_FAILURE);
-}
-
 int	main(int argc, char **argv)
 {
 	t_program	prog;
 
 	if (argc != 2)
 		return (ft_putstr_fd("Usage: ./miniRT <scene.rt>\n", 2), EXIT_FAILURE);
-
 	ft_bzero(&prog, sizeof(prog));
 	if (!parse_scene_file(argv[1], &prog.scene))
 		fatal("Failed to parse scene file", &prog);
 	if (!build_world_from_scene(&prog.scene, &prog.world, &prog.camera))
 		fatal("Failed to build world/camera", &prog);
-
 	prog.canvas = canvas_new(prog.camera.h_size, prog.camera.v_size);
 	if (!prog.canvas.pixels)
 		fatal("Failed to allocate canvas", &prog);
-
-	// init_mlx(&prog);
-	// init_img(&prog);
 	render_minirt(&prog);
-	printf("objs: %d\n", prog.scene.object_idx);
-	mlx_close_hook(prog.mlx.mlx, exit_minirt, &prog);
-	mlx_key_hook(prog.mlx.mlx, key_hook, &prog);
-	mlx_loop(prog.mlx.mlx);
+	mlx_close_hook(prog.mlx, exit_minirt, &prog);
+	mlx_key_hook(prog.mlx, key_hook, &prog);
+	mlx_loop(prog.mlx);
 	return (0);
 }
 
-// int	main(int argc, char **argv)
+// int	main(void)
 // {
-// 	t_program	prog;
-
-// 	if (argc != 2)
-// 		return (ft_putstr_fd("Usage: ./miniRT <scene.rt>\n", 2), EXIT_FAILURE);
-// 	ft_bzero(&prog, sizeof(prog));
-// 	if (!parse_scene_file(argv[1], &prog.scene))
-// 		fatal("Failed to parse scene file", &prog);
-// 	if (!build_world_from_scene(&prog.scene, &prog.world, &prog.camera))
-// 		fatal("Failed to build world", &prog);
-// 	prog.canvas = canvas_new(prog.camera.h_size, prog.camera.v_size);
-// 	if (!prog.canvas.pixels)
-// 		fatal("Failed to allocate canvas", &prog);
-// 	init_render(&prog);
-// 	init_img(&prog);
-// 	render_minirt(&prog);
-// 	mlx_close_hook(prog.mlx.mlx, exit_minirt, &prog);
-// 	mlx_key_hook(prog.mlx.mlx, key_hook, &prog);
-// 	mlx_loop(prog.mlx.mlx);
+// 	mlx_t *mlx = mlx_init(400, 400, "test", true);
+// 	if (!mlx)
+// 		return (1);
+// 	mlx_loop(mlx);
+// 	mlx_terminate(mlx);
 // 	return (0);
 // }

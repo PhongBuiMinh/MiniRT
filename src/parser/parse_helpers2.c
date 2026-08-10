@@ -3,81 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helpers2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/28 21:46:57 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/09 16:40:22 by bpetrovi         ###   ########.fr       */
+/*   Created: 2026/08/10 20:53:24 by fbui-min          #+#    #+#             */
+/*   Updated: 2026/08/10 22:21:18 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	scene_add_object(t_scene *scene, t_object *obj)
 {
-	size_t	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
-int	is_valid_number(char *str)
-{
-	int	i;
-	int	dot_count;
-
-	i = 0;
-	dot_count = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if (!str[i])
+	if (!scene || !obj)
 		return (0);
-	while (str[i])
-	{
-		if (str[i] == '.')
-			dot_count++;
-		else if (!ft_isdigit(str[i]))
-			return (0);
-		if (dot_count > 1)
-			return (0);
-		i++;
-	}
+	if (scene->object_idx == scene->object_cnt)
+		return (0);
+	scene->objects[scene->object_idx++] = obj;
 	return (1);
 }
 
-double	ft_atof(const char *str)
+static int	is_object_token(const char *s)
 {
-	double	result;
-	double	fraction;
-	int		sign;
-	int		i;
+	if (!s)
+		return (0);
+	if (s[0] == 's' && s[1] == 'p')
+		return (1);
+	if (s[0] == 'p' && s[1] == 'l')
+		return (1);
+	if (s[0] == 'c' && s[1] == 'y')
+		return (1);
+	return (0);
+}
 
-	result = 0.0;
-	fraction = 0.1;
-	sign = 1;
-	i = 0;
-	if (str[i] == '-')
+int	count_objects(const char *path, int *object_cnt)
+{
+	int		fd;
+	char	*line;
+	char	*tmp;
+
+	*object_cnt = 0;
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	line = ft_get_next_line(fd);
+	while (line)
 	{
-		sign = -1;
-		i++;
+		tmp = line;
+		while (*tmp == ' ' || *tmp == '\t')
+			tmp++;
+		if (*tmp != '\0' && *tmp != '\n' && is_object_token(tmp))
+			(*object_cnt)++;
+		free(line);
+		line = ft_get_next_line(fd);
 	}
-	else if (str[i] == '+')
-		i++;
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10.0 + (str[i] - '0');
-		i++;
-	}
-	if (str[i] == '.')
-	{
-		i++;
-		while (str[i] && str[i] >= '0' && str[i] <= '9')
-		{
-			result += (str[i] - '0') * fraction;
-			fraction /= 10.0;
-			i++;
-		}
-	}
-	return (result * sign);
+	close(fd);
+	return (1);
+}
+
+int	setup_objects(const char *path, t_scene *scene)
+{
+	scene->objects = NULL;
+	scene->object_cnt = 0;
+	scene->object_idx = 0;
+	if (!count_objects(path, &scene->object_cnt) || scene->object_cnt <= 0)
+		return (0);
+	scene->objects = malloc(scene->object_cnt * sizeof(*scene->objects));
+	if (!scene->objects)
+		return (0);
+	return (1);
 }

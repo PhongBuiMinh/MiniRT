@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/09 22:24:42 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/10 21:47:10 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	dispatch_line(char **tokens, t_scene *scene)
+int	validate_scene(t_scene *scene)
+{
+	if (!scene->has_ambient)
+		return (0);
+	if (!scene->has_camera)
+		return (0);
+	if (!scene->has_light)
+		return (0);
+	if (scene->object_cnt <= 0)
+		return (0);
+	return (1);
+}
+
+static int	dispatch_line(char **tokens, t_scene *scene)
 {
 	if (!tokens || !tokens[0])
 		return (1);
@@ -29,6 +42,52 @@ int	dispatch_line(char **tokens, t_scene *scene)
 	if (ft_strcmp(tokens[0], "cy") == 0)
 		return (parse_cylinder(tokens, scene));
 	return (0);
+}
+
+int	process_line(char *line, t_scene *scene)
+{
+	char	*trimmed;
+	char	**tokens;
+	int		result;
+
+	trimmed = ft_strtrim(line, " \t\r\n");
+	if (!trimmed)
+		return (0);
+	if (trimmed[0] == '\0')
+		return (free(trimmed), 1);
+	tokens = ft_split(trimmed, ' ');
+	free(trimmed);
+	if (!tokens)
+		return (0);
+	result = dispatch_line(tokens, scene);
+	free_tokens(tokens);
+	return (result);
+}
+
+int	parse_scene_file(const char *path, t_scene *scene)
+{
+	int		fd;
+	char	*line;
+	int		success;
+
+	ft_bzero(scene, sizeof(t_scene));
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	if (!setup_objects(path, scene))
+		return (close(fd), 0);
+	success = 1;
+	line = ft_get_next_line(fd);
+	while (success && line)
+	{
+		success = process_line(line, scene);
+		free(line);
+		line = ft_get_next_line(fd);
+	}
+	close(fd);
+	if (!success)
+		return (0);
+	return (validate_scene(scene));
 }
 
 // function for test
@@ -62,155 +121,3 @@ int	dispatch_line(char **tokens, t_scene *scene)
 // 	free_tokens(tokens);
 // 	return (result);
 // }
-
-int	process_line(char *line, t_scene *scene)
-{
-	char	*trimmed;
-	char	**tokens;
-	int		result;
-
-	trimmed = ft_strtrim(line, " \t\r\n");
-	if (!trimmed)
-		return (0);
-	if (trimmed[0] == '\0')
-		return (free(trimmed), 1);
-	tokens = ft_split(trimmed, ' ');
-	free(trimmed);
-	if (!tokens)
-		return (0);
-	result = dispatch_line(tokens, scene);
-	free_tokens(tokens);
-	return (result);
-}
-
-int	validate_scene(t_scene *scene)
-{
-	if (!scene->has_ambient)
-		return (0);
-	if (!scene->has_camera)
-		return (0);
-	if (!scene->has_light)
-		return (0);
-	if (scene->object_cnt <= 0)
-		return (0);
-	return (1);
-}
-
-// Temporary gnl
-char	*get_next_line(int fd)
-{
-	char	*line;
-	char	c;
-	ssize_t	n;
-	int		len;
-
-	line = malloc(1);
-	if (!line)
-		return (NULL);
-	len = 0;
-	while ((n = read(fd, &c, 1)) > 0)
-	{
-		char	*tmp = realloc(line, len + 2);
-		if (!tmp)
-		{
-			free(line);
-			return (NULL);
-		}
-		line = tmp;
-		line[len++] = c;
-		if (c == '\n')
-			break ;
-	}
-	if (n <= 0 && len == 0)
-	{
-		free(line);
-		return (NULL);
-	}
-	line[len] = '\0';
-	return (line);
-}
-
-int	is_object_token(const char *s)
-{
-	if (s[0] == 's' && s[1] == 'p')
-		return (1);
-	if (s[0] == 'p' && s[1] == 'l')
-		return (1);
-	if (s[0] == 'c' && s[1] == 'y')
-		return (1);
-	return (0);
-}
-
-int	count_objects(const char *path, int *object_cnt)
-{
-	int		fd;
-	char	*line;
-	char	*tmp;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	line = get_next_line(fd);
-	while (line)
-	{
-		tmp = line;
-		while (*tmp == ' ' || *tmp == '\t')
-			tmp++;
-		if (*tmp == '\0' || *tmp == '\n')
-		{
-			free(line);
-			line = get_next_line(fd);
-			continue ;
-		}
-		if (is_object_token(tmp))
-			(*object_cnt)++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (1);
-}
-
-int	scene_add_object(t_scene *scene, t_object *obj)
-{
-	if (!scene || !obj)
-		return (0);
-
-	if (scene->object_idx == scene->object_cnt)
-		return (0);
-	scene->objects[scene->object_idx++] = obj;
-	return (1);
-}
-
-int	parse_scene_file(const char *path, t_scene *scene)
-{
-	int		fd;
-	char	*line;
-	int		success;
-
-	ft_bzero(scene, sizeof(t_scene));
-	scene->objects = NULL;
-	scene->object_cnt = 0;
-	scene->object_idx = 0;
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	count_objects(path, &scene->object_cnt);
-	if (scene->object_cnt <= 0)
-		return (0);
-	scene->objects = malloc(scene->object_cnt * sizeof(*scene->objects));
-	if (!scene->objects)
-		return (0);
-	success = 1;
-	line = get_next_line(fd);
-	while (success && line != NULL)
-	{
-		success = process_line(line, scene);
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	if (!success)
-		return (0);
-	return (validate_scene(scene));
-}

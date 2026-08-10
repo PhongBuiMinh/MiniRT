@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:19:38 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/10 14:22:25 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/10 22:15:09 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,14 @@
 # include "scene.h"
 # include "MLX42/MLX42.h"
 
-typedef struct s_mlx
-{
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_mlx;
-
 typedef struct s_program
 {
 	t_scene		scene;
 	t_world		world;
 	t_camera	camera;
 	t_canvas	canvas;
-	t_mlx		mlx;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
 }	t_program;
 
 void		init_img(t_program *prog);
