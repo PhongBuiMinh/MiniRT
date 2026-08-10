@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/10 22:24:25 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/10 22:38:17 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,6 @@ void	render_minirt(t_program *prog)
 	rendered = render_scene(prog->camera, prog->world);
 	if (!rendered)
 		fatal("render_scene failed", prog);
-	exit(0);
 	init_mlx(prog);
 	init_img(prog);
 	y = 0;
