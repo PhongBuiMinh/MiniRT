@@ -6,11 +6,16 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 20:53:24 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/10 22:21:18 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/11 01:04:45 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	set_object_color(t_object *obj, t_color color)
+{
+	obj->material.color = vector(color.r, color.g, color.b);
+}
 
 int	scene_add_object(t_scene *scene, t_object *obj)
 {

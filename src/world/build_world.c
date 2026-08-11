@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 12:46:50 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/10 22:30:06 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/11 00:25:04 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,110 +30,110 @@ static int	build_camera(const t_scene *s, t_camera *cam)
 	return (1);
 }
 
-int	build_world_from_scene(const t_scene *scene,
-	t_world *world, t_camera *camera)
-{
-	if (!scene || !world || !camera)
-		return (0);
-	if (!scene->has_ambient || !scene->has_camera
-		|| !scene->has_light || scene->object_cnt <= 0)
-		return (0);
-	world->light.pos = scene->pos;
-	world->light.intensity = scene->intensity;
-	world->objects = scene->objects;
-	world->object_cnt = scene->object_cnt;
-	if (!build_camera(scene, camera))
-		return (0);
-	return (1);
-}
-
 // int	build_world_from_scene(const t_scene *scene,
 // 	t_world *world, t_camera *camera)
 // {
 // 	if (!scene || !world || !camera)
 // 		return (0);
-
-// 	/* Basic required flags */
 // 	if (!scene->has_ambient || !scene->has_camera
-// 	|| !scene->has_light || scene->object_cnt <= 0)
+// 		|| !scene->has_light || scene->object_cnt <= 0)
 // 		return (0);
-
-// 	/* FOV sanity check */
-// 	if (scene->cam_fov <= 0.0 || scene->cam_fov >= 180.0)
-// 		return (0);
-
-// 	/* Convert / copy data from scene to world & camera */
 // 	world->light.pos = scene->pos;
 // 	world->light.intensity = scene->intensity;
 // 	world->objects = scene->objects;
 // 	world->object_cnt = scene->object_cnt;
-
 // 	if (!build_camera(scene, camera))
 // 		return (0);
-
-// 	/* === PRINT EVERYTHING THAT WAS CONVERTED / PUSHED === */
-// 	printf("\n========== BUILD_WORLD_FROM_SCENE: DATA DUMP ==========\n");
-
-// 	/* --- World --- */
-// 	printf("WORLD:\n");
-// 	printf("  object_cnt       : %d\n", world->object_cnt);
-
-// 	printf("  light.pos        : (%.6f, %.6f, %.6f)\n",
-// 		world->light.pos.x, world->light.pos.y, world->light.pos.z);
-	// printf("  light.intensity  : (%.6f, %.6f, %.6f)\n",
-	// 	world->light.intensity.x, world->light.intensity.y,
-	// 	world->light.intensity.z);
-
-// 	printf("  objects array    : %p\n", (void *)world->objects);
-// 	for (int i = 0; i < world->object_cnt; i++)
-// 	{
-// 		t_object *obj = world->objects[i];
-// 		printf("  objects[%d]      : %p\n", i, (void *)obj);
-// 		if (!obj)
-// 			continue;
-
-// 		printf("    id             : %d\n", obj->id);
-// 		printf("    material:\n");
-// 		printf("      color        : (%.6f, %.6f, %.6f)\n",
-// 			obj->material.color.x,
-// 			obj->material.color.y,
-// 			obj->material.color.z);
-// 		printf("      ambient      : %.6f\n", obj->material.ambient);
-// 		printf("      diffuse      : %.6f\n", obj->material.diffuse);
-// 		printf("      specular     : %.6f\n", obj->material.specular);
-// 		printf("      shininess    : %.6f\n", obj->material.shininess);
-
-// 		printf("    transformation (%dx%d):\n",
-// 			obj->transformation.rows, obj->transformation.cols);
-// 		for (int r = 0; r < obj->transformation.rows; r++)
-// 		{
-// 			printf("      ");
-// 			for (int c = 0; c < obj->transformation.cols; c++)
-// 				printf("%12.6f ", obj->transformation.data[r][c]);
-// 			printf("\n");
-// 		}
-// 	}
-
-// 	/* --- Camera --- */
-// 	printf("\nCAMERA:\n");
-// 	printf("  h_size           : %d\n", camera->h_size);
-// 	printf("  v_size           : %d\n", camera->v_size);
-// 	printf("  fov (deg)        : %.6f\n", scene->cam_fov);
-// 	printf("  fov (rad)        : %.6f\n", camera->fov);
-// 	printf("  pixel_size       : %.10f\n", camera->pixel_size);
-// 	printf("  half_width       : %.10f\n", camera->half_width);
-// 	printf("  half_height      : %.10f\n", camera->half_height);
-
-// 	printf("  transform (4x4):\n");
-// 	for (int r = 0; r < 4; r++)
-// 	{
-// 		printf("    ");
-// 		for (int c = 0; c < 4; c++)
-// 			printf("%12.6f ", camera->transform.data[r][c]);
-// 		printf("\n");
-// 	}
-
-// 	printf("========================================================\n\n");
-
 // 	return (1);
 // }
+
+int	build_world_from_scene(const t_scene *scene,
+	t_world *world, t_camera *camera)
+{
+	if (!scene || !world || !camera)
+		return (0);
+
+	/* Basic required flags */
+	if (!scene->has_ambient || !scene->has_camera
+	|| !scene->has_light || scene->object_cnt <= 0)
+		return (0);
+
+	/* FOV sanity check */
+	if (scene->cam_fov <= 0.0 || scene->cam_fov >= 180.0)
+		return (0);
+
+	/* Convert / copy data from scene to world & camera */
+	world->light.pos = scene->pos;
+	world->light.intensity = scene->intensity;
+	world->objects = scene->objects;
+	world->object_cnt = scene->object_cnt;
+
+	if (!build_camera(scene, camera))
+		return (0);
+
+	/* === PRINT EVERYTHING THAT WAS CONVERTED / PUSHED === */
+	printf("\n========== BUILD_WORLD_FROM_SCENE: DATA DUMP ==========\n");
+
+	/* --- World --- */
+	printf("WORLD:\n");
+	printf("  object_cnt       : %d\n", world->object_cnt);
+
+	printf("  light.pos        : (%.6f, %.6f, %.6f)\n",
+		world->light.pos.x, world->light.pos.y, world->light.pos.z);
+	printf("  light.intensity  : (%.6f, %.6f, %.6f)\n",
+		world->light.intensity.x, world->light.intensity.y,
+		world->light.intensity.z);
+
+	printf("  objects array    : %p\n", (void *)world->objects);
+	for (int i = 0; i < world->object_cnt; i++)
+	{
+		t_object *obj = world->objects[i];
+		printf("  objects[%d]      : %p\n", i, (void *)obj);
+		if (!obj)
+			continue;
+
+		printf("    id             : %d\n", obj->id);
+		printf("    material:\n");
+		printf("      color        : (%.6f, %.6f, %.6f)\n",
+			obj->material.color.x,
+			obj->material.color.y,
+			obj->material.color.z);
+		printf("      ambient      : %.6f\n", obj->material.ambient);
+		printf("      diffuse      : %.6f\n", obj->material.diffuse);
+		printf("      specular     : %.6f\n", obj->material.specular);
+		printf("      shininess    : %.6f\n", obj->material.shininess);
+
+		printf("    transformation (%dx%d):\n",
+			obj->transformation.rows, obj->transformation.cols);
+		for (int r = 0; r < obj->transformation.rows; r++)
+		{
+			printf("      ");
+			for (int c = 0; c < obj->transformation.cols; c++)
+				printf("%12.6f ", obj->transformation.data[r][c]);
+			printf("\n");
+		}
+	}
+
+	/* --- Camera --- */
+	printf("\nCAMERA:\n");
+	printf("  h_size           : %d\n", camera->h_size);
+	printf("  v_size           : %d\n", camera->v_size);
+	printf("  fov (deg)        : %.6f\n", scene->cam_fov);
+	printf("  fov (rad)        : %.6f\n", camera->fov);
+	printf("  pixel_size       : %.10f\n", camera->pixel_size);
+	printf("  half_width       : %.10f\n", camera->half_width);
+	printf("  half_height      : %.10f\n", camera->half_height);
+
+	printf("  transform (4x4):\n");
+	for (int r = 0; r < 4; r++)
+	{
+		printf("    ");
+		for (int c = 0; c < 4; c++)
+			printf("%12.6f ", camera->transform.data[r][c]);
+		printf("\n");
+	}
+
+	printf("========================================================\n\n");
+
+	return (1);
+}

@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 13:43:13 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/10 21:36:41 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/10 23:31:45 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ int		is_valid_number(char *str);
 double	ft_atof(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_get_next_line(int fd);
+void	set_object_color(t_object *obj, t_color color);
+t_matrix	build_rotation_from_y(const t_tuple *new_y);
 
 #endif

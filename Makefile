@@ -6,7 +6,7 @@
 #    By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/08/10 22:16:55 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/08/10 23:22:11 by fbui-min         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,9 @@ SRC     = main.c cleanup.c \
 		parser/parse_helpers2.c \
 		parser/num_utils.c \
 		parser/ft_get_next_line.c \
-		parser/parse_objects.c \
+		parser/parse_cylinder.c \
+		parser/parse_plane.c \
+		parser/parse_sphere.c \
 		parser/parser.c \
 		render/canvas.c \
 		render/color.c \
