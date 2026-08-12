@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 12:46:50 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/12 16:44:46 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/12 20:46:54 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@ int	build_world_from_scene(const t_scene *scene,
 	if (!scene->has_ambient || !scene->has_camera
 		|| !scene->has_light || scene->object_cnt <= 0)
 		return (0);
-	world->ambient = color(
-			(scene->ambient_color.r * scene->ambient_ratio),
-			(scene->ambient_color.g * scene->ambient_ratio),
-			(scene->ambient_color.b * scene->ambient_ratio)
-			);
 	world->light.pos = scene->pos;
 	world->light.intensity = scene->intensity;
 	world->objects = scene->objects;
