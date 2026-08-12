@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:45:00 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/09 16:35:03 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/12 16:45:52 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_world
 	t_light		light;
 	t_object	**objects;
 	int			object_cnt;
+	t_tuple		ambient;
 }	t_world;
 
 int				build_world_from_scene(const t_scene *scene, t_world *world,
