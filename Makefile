@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/08/10 23:22:11 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/08/12 19:52:30 by bpetrovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ MLX42_PATH = lib/MLX42
 MLX42_LIB  = $(MLX42_PATH)/build/libmlx42.a
 
 ifeq ($(OS_TYPE),Darwin)
-	MLX42_FLAG = -lglfw -framework Cocoa -framework OpenGL -framework IOKit
+	GLFW_PATH = $(shell brew --prefix glfw 2>/dev/null)
+	MLX42_FLAG = -L$(GLFW_PATH)/lib -lglfw \
+             -framework Cocoa -framework OpenGL -framework IOKit
 else ifeq ($(OS_TYPE),Linux)
 	MLX42_FLAG = -ldl -lglfw -pthread -lm
 endif
