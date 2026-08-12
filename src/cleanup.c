@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 22:13:11 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/12 13:59:32 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/12 15:01:36 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,12 @@ void	fatal(char *msg, t_program *prog)
 
 void	free_canvas(t_canvas *canvas)
 {
-	int i;
-
 	if (!canvas)
 		return ;
-	if (!canvas->pixels)
-		return ;
-	i = 0;
-	while (i < canvas->height)
-	{
-		free(canvas->pixels[i]);
-		i++;
-	}
-	free(canvas->pixels);
+	if (canvas->pixels)
+		free_pixels(canvas->pixels);
 	free(canvas);
 }
-
-// static void	cleanup_canvas(t_canvas *canvas)
-// {
-// 	int	y;
-
-// 	if (!canvas || !canvas->pixels)
-// 		return ;
-// 	y = 0;
-// 	while (y < canvas->height)
-// 		free(canvas->pixels[y++]);
-// 	free(canvas->pixels);
-// 	canvas->pixels = NULL;
-// }
 
 static void	cleanup_mlx(t_program *prog)
 {
@@ -91,7 +69,6 @@ void	cleanup_program(t_program *prog)
 {
 	if (!prog)
 		return ;
-	// cleanup_canvas(&prog->canvas);
 	cleanup_mlx(prog);
 	cleanup_scene(&prog->scene);
 }

@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 22:04:04 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/12 14:00:02 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/12 15:01:08 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_canvas
 t_tuple		color(double r, double g, double b);
 t_canvas	*init_canvas(int x, int y);
 int			scale_color(float c);
+int			color_to_int(t_tuple color);
 void		canvas_to_ppm(t_canvas *canvas);
 void		write_pixel(t_canvas *canvas, int x, int y, t_tuple color);
 void		free_pixels(t_tuple **pixels);

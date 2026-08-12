@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_functions.c                                  :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 20:00:07 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/10 20:00:39 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/12 14:59:40 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,16 @@ int	clamp_color(int c)
 int	scale_color(float c)
 {
 	return (clamp_color((int)round(c * 255)));
+}
+
+int	color_to_int(t_tuple color)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = scale_color((float)color.x);
+	g = scale_color((float)color.y);
+	b = scale_color((float)color.z);
+	return (r << 24 | g << 16 | b << 8 | 255);
 }

@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/12 12:58:00 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/12 15:03:17 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ t_tuple	color_at(t_world world, t_ray ray)
 }
 
 //obj_to_world = object space to world space transformation
-
 t_ray	ray_for_pixel(t_camera camera, int x, int y)
 {
 	t_matrix	obj_to_world;
@@ -108,28 +107,6 @@ t_camera	camera_init(int h_size, int v_size, double fov)
 	camera.transform = init_id_matrix(4, 4);
 	find_camera_values(&camera);
 	return (camera);
-}
-
-// PHONG -------------------------------------------------------------
-int	clamp_channel(double v)
-{
-	if (v < 0.0)
-		return (0);
-	if (v > 1.0)
-		return (255);
-	return ((int)(v * 255.0));
-}
-
-int	color_to_int(t_tuple color)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	r = clamp_channel(color.x);
-	g = clamp_channel(color.y);
-	b = clamp_channel(color.z);
-	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
 void	render_minirt(t_program *prog)
