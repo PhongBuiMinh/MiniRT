@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/09 19:13:19 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/12 08:59:20 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	parse_color(char *str, t_color *color)
 			return (free_tokens(rgb), 0);
 		i++;
 	}
-	color->r = ft_atoi(rgb[0]);
-	color->g = ft_atoi(rgb[1]);
-	color->b = ft_atoi(rgb[2]);
+	color->r = (double)ft_atoi(rgb[0]) / 255.0;
+	color->g = (double)ft_atoi(rgb[1]) / 255.0;
+	color->b = (double)ft_atoi(rgb[2]) / 255.0;
 	free_tokens(rgb);
-	if (color->r < 0 || color->r > 255
-		|| color->g < 0 || color->g > 255
-		|| color->b < 0 || color->b > 255)
+	if (color->r < 0.0 || color->r > 1.0
+		|| color->g < 0.0 || color->g > 1.0
+		|| color->b < 0.0 || color->b > 1.0)
 		return (0);
 	return (1);
 }
