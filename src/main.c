@@ -23,9 +23,9 @@ int	main(int argc, char **argv)
 		fatal("Failed to parse scene file", &prog);
 	if (!build_world_from_scene(&prog.scene, &prog.world, &prog.camera))
 		fatal("Failed to build world/camera", &prog);
-	prog.canvas = canvas_new(prog.camera.h_size, prog.camera.v_size);
-	if (!prog.canvas.pixels)
-		fatal("Failed to allocate canvas", &prog);
+	// prog.canvas = canvas_new(prog.camera.h_size, prog.camera.v_size);
+	// if (!prog.canvas.pixels)
+	// 	fatal("Failed to allocate canvas", &prog);
 	render_minirt(&prog);
 	mlx_close_hook(prog.mlx, exit_minirt, &prog);
 	mlx_key_hook(prog.mlx, key_hook, &prog);

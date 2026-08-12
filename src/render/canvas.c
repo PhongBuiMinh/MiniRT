@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:35:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/03 17:01:01 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/12 13:21:41 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,16 @@ t_canvas	*init_canvas(int x, int y)
 		return (NULL);
 	canvas->pixels = init_pixels(x, y);
 	if (!canvas->pixels)
-		return (0);
+	{
+		free(canvas);
+		return (NULL);
+	}
 	canvas->width = x;
 	canvas->height = y;
 	return (canvas);
 }
 
 // WONT BE NEEEDED OTHER THAN FOR TESTING
-
 void	canvas_to_ppm(t_canvas *canvas)
 {
 	int	y;

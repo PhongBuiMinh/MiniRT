@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/10 22:38:17 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/12 12:58:00 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,4 +155,5 @@ void	render_minirt(t_program *prog)
 		}
 		y++;
 	}
+	free_canvas(rendered);
 }
