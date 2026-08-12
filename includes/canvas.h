@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 22:04:04 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/03 00:46:49 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/12 14:00:02 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int			scale_color(float c);
 void		canvas_to_ppm(t_canvas *canvas);
 void		write_pixel(t_canvas *canvas, int x, int y, t_tuple color);
 void		free_pixels(t_tuple **pixels);
+void		free_canvas(t_canvas *canvas);
 
 #endif

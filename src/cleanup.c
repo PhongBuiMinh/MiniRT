@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 22:13:11 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/12 13:37:44 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/12 13:59:32 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,24 @@ void	fatal(char *msg, t_program *prog)
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);
 	exit(EXIT_FAILURE);
+}
+
+void	free_canvas(t_canvas *canvas)
+{
+	int i;
+
+	if (!canvas)
+		return ;
+	if (!canvas->pixels)
+		return ;
+	i = 0;
+	while (i < canvas->height)
+	{
+		free(canvas->pixels[i]);
+		i++;
+	}
+	free(canvas->pixels);
+	free(canvas);
 }
 
 // static void	cleanup_canvas(t_canvas *canvas)

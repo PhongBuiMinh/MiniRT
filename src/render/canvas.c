@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:35:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/12 13:21:41 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/12 14:12:45 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,32 +119,31 @@ void	canvas_to_ppm(t_canvas *canvas)
 	}
 }
 
-// PHONG -------------------------------------------------------------
-t_canvas	canvas_new(int width, int height)
-{
-	t_canvas	canvas;
-	int			y;
+// t_canvas	canvas_new(int width, int height)
+// {
+// 	t_canvas	canvas;
+// 	int			y;
 
-	canvas.width = width;
-	canvas.height = height;
-	canvas.pixels = malloc(sizeof(t_tuple *) * height);
-	if (!canvas.pixels)
-		return (canvas.width = 0, canvas.height = 0, canvas);
-	y = -1;
-	while (++y < height)
-	{
-		canvas.pixels[y] = malloc(sizeof(t_tuple) * width);
-		if (!canvas.pixels[y])
-		{
-			while (--y >= 0)
-				free(canvas.pixels[y]);
-			free(canvas.pixels);
-			canvas.pixels = NULL;
-			canvas.width = 0;
-			canvas.height = 0;
-			return (canvas);
-		}
-		ft_bzero(canvas.pixels[y], sizeof(t_tuple) * width);
-	}
-	return (canvas);
-}
+// 	canvas.width = width;
+// 	canvas.height = height;
+// 	canvas.pixels = malloc(sizeof(t_tuple *) * height);
+// 	if (!canvas.pixels)
+// 		return (canvas.width = 0, canvas.height = 0, canvas);
+// 	y = -1;
+// 	while (++y < height)
+// 	{
+// 		canvas.pixels[y] = malloc(sizeof(t_tuple) * width);
+// 		if (!canvas.pixels[y])
+// 		{
+// 			while (--y >= 0)
+// 				free(canvas.pixels[y]);
+// 			free(canvas.pixels);
+// 			canvas.pixels = NULL;
+// 			canvas.width = 0;
+// 			canvas.height = 0;
+// 			return (canvas);
+// 		}
+// 		ft_bzero(canvas.pixels[y], sizeof(t_tuple) * width);
+// 	}
+// 	return (canvas);
+// }
