@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/11 01:03:40 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/20 18:23:19 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,6 @@ int	is_normalized_range(t_tuple dir)
 	if (dir.z < -1.0 || dir.z > 1.0)
 		return (0);
 	return (1);
-}
-
-void	normalize_tuple(t_tuple *v)
-{
-	double	length;
-
-	length = sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
-	if (length == 0.0)
-		return ;
-	v->x /= length;
-	v->y /= length;
-	v->z /= length;
 }
 
 t_matrix	build_rotation_from_y(const t_tuple *new_y)

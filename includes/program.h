@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:19:38 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/12 13:34:42 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/12 23:26:13 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_program
 	t_scene		scene;
 	t_world		world;
 	t_camera	camera;
-	// t_canvas	canvas;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 }	t_program;
@@ -35,6 +34,5 @@ void		key_hook(mlx_key_data_t keydata, void *param);
 void		fatal(char *msg, t_program *prog);
 void		cleanup_program(t_program *prog);
 void		render_minirt(t_program *prog);
-t_canvas	canvas_new(int width, int height);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 13:43:13 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/10 23:31:45 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/12 23:26:21 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		token_count(char **tokens);
 void	free_tokens(char **tokens);
 
 int		is_normalized_range(t_tuple dir);
-void	normalize_tuple(t_tuple *v);
 int		setup_objects(const char *path, t_scene *scene);
 
 int		is_valid_number(char *str);

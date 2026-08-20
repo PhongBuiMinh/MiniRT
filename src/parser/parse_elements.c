@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/12 08:59:20 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/12 22:21:38 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int	parse_camera(char **tokens, t_scene *scene)
 		return (0);
 	if (!is_normalized_range(dir))
 		return (0);
-	normalize_tuple(&dir);
+	dir.w = 0;
+	dir = normalize(dir);
 	if (!is_valid_number(tokens[3]))
 		return (0);
 	fov = ft_atof(tokens[3]);

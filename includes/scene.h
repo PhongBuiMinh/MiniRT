@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 05:42:40 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/10 14:22:44 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/12 23:25:53 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,6 @@ typedef enum e_obj_type
 	OBJ_PLANE,
 	OBJ_CYLINDER
 }	t_obj_type;
-
-// typedef struct s_scene_obj
-// {
-// 	t_obj_type	type;
-// 	t_tuple		pos;
-// 	t_tuple		orientation;
-// 	double		diameter;
-// 	double		height;
-// 	t_color		color;
-// }	t_scene_obj;
 
 typedef struct s_scene
 {
