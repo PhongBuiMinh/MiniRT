@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/20 19:07:43 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/20 20:39:10 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	parse_tuple(char *str, t_tuple *tuple)
 	tuple->x = ft_atof(coords[0]);
 	tuple->y = ft_atof(coords[1]);
 	tuple->z = ft_atof(coords[2]);
+	tuple->w = 1.0;
 	free_tokens(coords);
 	return (1);
 }
