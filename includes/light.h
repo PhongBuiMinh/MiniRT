@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:01:53 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/10 20:48:01 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/20 22:14:25 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,23 @@ typedef struct s_light
 	t_tuple	pos;
 }	t_light;
 
+typedef struct s_ambient_light
+{
+	t_tuple	color;
+	double	ratio;
+}	t_ambient_light;
+
 typedef struct s_phong
 {
-	t_object	*object;
-	t_light		light;
-	t_tuple		point;
-	t_tuple		eyev;
-	t_tuple		normalv;
-	t_tuple		over_point;
-	bool		in_shadow;
-	bool		inside_obj;
+	t_object		*object;
+	t_ambient_light	ambient;
+	t_light			light;
+	t_tuple			point;
+	t_tuple			eyev;
+	t_tuple			normalv;
+	t_tuple			over_point;
+	bool			in_shadow;
+	bool			inside_obj;
 }	t_phong;
 
 // ONLY MADE TO COMPLY WITH NORMINETTE, HENCE THE NAME

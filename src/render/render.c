@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/12 15:03:17 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/20 22:19:52 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_tuple	color_at(t_world world, t_ray ray)
 		return (color(0, 0, 0));
 	phong.in_shadow = is_shadowed(world, phong.over_point);
 	phong.light = world.light;
+	phong.ambient = world.ambient;
 	return (phong_lightning(phong));
 }
 
