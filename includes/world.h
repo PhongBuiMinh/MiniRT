@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:45:00 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/12 20:47:03 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/20 22:15:47 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ typedef struct s_camera	t_camera;
 
 typedef struct s_world
 {
-	t_light		light;
-	t_object	**objects;
-	int			object_cnt;
+	t_ambient_light	ambient;
+	t_light			light;
+	t_object		**objects;
+	int				object_cnt;
 }	t_world;
 
 int				build_world_from_scene(const t_scene *scene, t_world *world,

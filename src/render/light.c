@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:03:25 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/10 20:32:45 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/20 22:20:01 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ static void	init_phong_norm(t_phong phong, t_phong_norm *norm)
 	norm->effective_color = t_multiply(phong.object->material.color,
 			phong.light.intensity);
 	norm->lightv = normalize(t_substract(phong.light.pos, phong.point));
-	norm->ambient = t_scale(norm->effective_color,
-			phong.object->material.ambient);
+	// norm->ambient = t_scale(norm->effective_color,
+	// 		phong.object->material.ambient);
+	norm->ambient = t_scale(t_multiply(phong.object->material.color, phong.ambient.color), phong.ambient.ratio);
 	norm->light_dot_normal = dot(norm->lightv, phong.normalv);
 }
 
