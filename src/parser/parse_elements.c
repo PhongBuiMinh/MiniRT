@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/12 22:21:38 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/20 19:07:43 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,10 @@ int	parse_light(char **tokens, t_scene *scene)
 		return (0);
 	scene->pos = pos;
 	scene->intensity = color(
-			brightness,
-			brightness,
-			brightness
-			);
+		brightness * p_color.r,
+		brightness * p_color.g,
+		brightness * p_color.b
+	);
 	scene->has_light = 1;
 	return (1);
 }
