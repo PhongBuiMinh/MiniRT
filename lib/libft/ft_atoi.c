@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 22:43:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2025/04/04 23:28:06 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/22 18:22:47 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_atoi(const char *str)
 {
-	int	number;
-	int	minus;
+	long int	number;
+	int			minus;
 
 	minus = 1;
 	number = 0;
@@ -33,7 +33,12 @@ int	ft_atoi(const char *str)
 		number = number * 10 + (*str - '0');
 		str++;
 	}
-	return (number * minus);
+	number *= minus;
+	if (number > 2147483647)
+		return (2147483647);
+	else if (number < -2147483648)
+		return (-2147483648);
+	return (number);
 }
 
 // #include <stdio.h>
