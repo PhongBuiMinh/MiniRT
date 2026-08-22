@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/08/22 05:51:00 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/08/22 15:50:01 by fbui-min         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ else ifeq ($(OS_TYPE),Linux)
 endif
 
 SRC_DIR = src
-SRC     = main.c cleanup.c \
+SRC     = main.c fatal.c cleanup.c \
 		math/geometry.c \
 		math/helper_math.c \
 		math/matrices.c \

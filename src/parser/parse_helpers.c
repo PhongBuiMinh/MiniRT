@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/22 09:12:25 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 15:45:58 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	has_rt_extension(const char *path)
+{
+	size_t	len;
+
+	len = ft_strlen(path);
+	if (len < 3)
+		return (0);
+	return (ft_strcmp(path + len - 3, ".rt") == 0);
+}
 
 void	remove_comment(char *line)
 {
@@ -31,21 +41,6 @@ int	token_count(char **tokens)
 	while (tokens[count])
 		count++;
 	return (count);
-}
-
-void	free_tokens(char **tokens)
-{
-	int	i;
-
-	if (!tokens)
-		return ;
-	i = 0;
-	while (tokens[i])
-	{
-		free(tokens[i]);
-		i++;
-	}
-	free(tokens);
 }
 
 int	is_valid_direction(t_tuple *dir)
