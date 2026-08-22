@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 		return (ft_putstr_fd("Usage: ./miniRT <scene.rt>\n", 2), EXIT_FAILURE);
 	ft_bzero(&prog, sizeof(prog));
 	if (!parse_scene_file(argv[1], &prog.scene))
-		return (1);
+		fatal("Failed to parse scene file: missing element or object.", &prog);
 	if (!build_world_from_scene(&prog.scene, &prog.world, &prog.camera))
 		fatal("Failed to build world/camera", &prog);
 	render_minirt(&prog);
