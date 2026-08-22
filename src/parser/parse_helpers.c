@@ -6,11 +6,22 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/22 03:00:19 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 09:12:25 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	remove_comment(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && line[i] != '#')
+		i++;
+	if (line[i] == '#')
+		line[i] = '\0';
+}
 
 int	token_count(char **tokens)
 {

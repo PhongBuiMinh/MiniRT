@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/10 21:47:10 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 09:12:01 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	process_line(char *line, t_scene *scene)
 	char	**tokens;
 	int		result;
 
+	remove_comment(line);
 	trimmed = ft_strtrim(line, " \t\r\n");
 	if (!trimmed)
 		return (0);

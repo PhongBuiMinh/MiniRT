@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 13:43:13 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/22 03:03:05 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 09:12:47 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	free_tokens(char **tokens);
 int		is_valid_direction(t_tuple *dir);
 int		setup_objects(const char *path, t_scene *scene);
 
+void	remove_comment(char *line);
 int		is_valid_number(char *str);
 int		is_valid_integer(char *str);
 double	ft_atof(const char *str);

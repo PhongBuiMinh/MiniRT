@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 20:53:24 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/11 01:04:45 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 09:08:06 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ static int	is_object_token(const char *s)
 {
 	if (!s)
 		return (0);
-	if (s[0] == 's' && s[1] == 'p')
+	if (s[2] != ' ' && s[2] != '\t'
+		&& s[2] != '\n' && s[2] != '\0')
+		return (0);
+	if (ft_strncmp(s, "sp", 2) == 0)
 		return (1);
-	if (s[0] == 'p' && s[1] == 'l')
+	if (ft_strncmp(s, "pl", 2) == 0)
 		return (1);
-	if (s[0] == 'c' && s[1] == 'y')
+	if (ft_strncmp(s, "cy", 2) == 0)
 		return (1);
 	return (0);
 }
@@ -56,7 +59,8 @@ int	count_objects(const char *path, int *object_cnt)
 		tmp = line;
 		while (*tmp == ' ' || *tmp == '\t')
 			tmp++;
-		if (*tmp != '\0' && *tmp != '\n' && is_object_token(tmp))
+		if (*tmp != '\0' && *tmp != '\n' && *tmp != '#'
+			&& is_object_token(tmp))
 			(*object_cnt)++;
 		free(line);
 		line = ft_get_next_line(fd);
