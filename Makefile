@@ -6,7 +6,7 @@
 #    By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/08/22 15:50:01 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/08/22 15:59:36 by fbui-min         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ else ifeq ($(OS_TYPE),Linux)
 	MLX42_FLAG = -ldl -lglfw -pthread -lm
 endif
 
-SRC_DIR = src
+SRC_DIR = srcs
 SRC     = main.c fatal.c cleanup.c \
 		math/geometry.c \
 		math/helper_math.c \
@@ -70,7 +70,7 @@ SRC     = main.c fatal.c cleanup.c \
 		world/matrix_operations.c \
 		world/object_create.c
 
-OBJ_DIR = obj
+OBJ_DIR = objs
 OBJ     = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 all: $(NAME)
