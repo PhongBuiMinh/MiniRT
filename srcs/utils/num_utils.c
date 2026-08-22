@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   num_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 21:46:57 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/22 02:57:55 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 18:41:01 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,47 +62,4 @@ int	is_valid_integer(char *str)
 		i++;
 	}
 	return (1);
-}
-
-int	skip_sign(const char *str, int *sign)
-{
-	int	i;
-
-	i = 0;
-	*sign = 1;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			*sign = -1;
-		i++;
-	}
-	return (i);
-}
-
-double	ft_atof(const char *str)
-{
-	double	result;
-	double	fraction;
-	int		sign;
-	int		i;
-
-	result = 0.0;
-	fraction = 0.1;
-	i = skip_sign(str, &sign);
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10.0 + (str[i] - '0');
-		i++;
-	}
-	if (str[i] == '.')
-	{
-		i++;
-		while (str[i] && str[i] >= '0' && str[i] <= '9')
-		{
-			result += (str[i] - '0') * fraction;
-			fraction *= 0.1;
-			i++;
-		}
-	}
-	return (result * sign);
 }

@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/22 16:28:16 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 18:34:28 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <stdbool.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <float.h>
 # include "MLX42/MLX42.h"
 # include "libft.h"
 # include "tuple.h"

@@ -6,7 +6,7 @@
 #    By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/08/22 15:59:36 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/08/22 18:45:28 by fbui-min         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ else ifeq ($(OS_TYPE),Linux)
 endif
 
 SRC_DIR = srcs
-SRC     = main.c fatal.c cleanup.c \
+SRC     = main.c \
 		math/geometry.c \
 		math/helper_math.c \
 		math/matrices.c \
@@ -44,8 +44,6 @@ SRC     = main.c fatal.c cleanup.c \
 		parser/parse_elements.c \
 		parser/parse_helpers.c \
 		parser/parse_helpers2.c \
-		parser/num_utils.c \
-		parser/ft_get_next_line.c \
 		parser/parse_cylinder.c \
 		parser/parse_plane.c \
 		parser/parse_sphere.c \
@@ -68,7 +66,12 @@ SRC     = main.c fatal.c cleanup.c \
 		world/world.c \
 		world/rotations.c \
 		world/matrix_operations.c \
-		world/object_create.c
+		world/object_create.c \
+		utils/cleanup.c \
+		utils/fatal.c \
+		utils/ft_atof.c \
+		utils/ft_get_next_line.c \
+		utils/num_utils.c
 
 OBJ_DIR = objs
 OBJ     = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
