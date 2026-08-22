@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/20 23:42:17 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 03:01:15 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	parse_color(char *str, t_color *color)
 {
 	char	**rgb;
 	int		i;
+	int		value;
 
 	rgb = ft_split(str, ',');
 	if (!rgb)
@@ -25,7 +26,10 @@ int	parse_color(char *str, t_color *color)
 	i = 0;
 	while (rgb[i])
 	{
-		if (!is_valid_number(rgb[i]))
+		if (!is_valid_integer(rgb[i]))
+			return (free_tokens(rgb), 0);
+		value = ft_atoi(rgb[i]);
+		if (value < 0 || value > 255)
 			return (free_tokens(rgb), 0);
 		i++;
 	}
@@ -33,10 +37,6 @@ int	parse_color(char *str, t_color *color)
 	color->g = (double)ft_atoi(rgb[1]) / 255.0;
 	color->b = (double)ft_atoi(rgb[2]) / 255.0;
 	free_tokens(rgb);
-	if (color->r < 0.0 || color->r > 1.0
-		|| color->g < 0.0 || color->g > 1.0
-		|| color->b < 0.0 || color->b > 1.0)
-		return (0);
 	return (1);
 }
 
@@ -61,6 +61,7 @@ int	parse_ambient(char **tokens, t_scene *scene)
 	return (1);
 }
 
+// point W = 1; vector W = 0
 int	parse_tuple(char *str, t_tuple *tuple)
 {
 	char	**coords;
@@ -99,10 +100,8 @@ int	parse_camera(char **tokens, t_scene *scene)
 		return (0);
 	if (!parse_tuple(tokens[2], &dir))
 		return (0);
-	if (!is_normalized_range(dir))
+	if (!is_valid_direction(&dir))
 		return (0);
-	dir.w = 0;
-	dir = normalize(dir);
 	if (!is_valid_number(tokens[3]))
 		return (0);
 	fov = ft_atof(tokens[3]);

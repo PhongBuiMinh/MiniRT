@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_helpers2.c                                   :+:      :+:    :+:   */
+/*   num_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/28 21:46:57 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/10 20:46:45 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 02:57:55 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,24 @@ int	is_valid_number(char *str)
 		else if (!ft_isdigit(str[i]))
 			return (0);
 		if (dot_count > 1)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	is_valid_integer(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (!str[i])
+		return (0);
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
 			return (0);
 		i++;
 	}

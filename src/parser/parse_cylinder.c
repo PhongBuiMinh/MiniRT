@@ -6,19 +6,15 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 07:35:42 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/20 18:37:29 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 03:02:16 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// out[0] = diameter
-// out[1] = height
-// out[2] = r
-// out[3] = g
-// out[4] = b
+// out order: diameter height rgb
 static int	validate_cylinder(char **tokens, t_tuple *center,
-							t_tuple *axis, double out[5])
+				t_tuple *axis, double out[5])
 {
 	t_color	color;
 
@@ -28,10 +24,8 @@ static int	validate_cylinder(char **tokens, t_tuple *center,
 		return (0);
 	if (!parse_tuple(tokens[2], axis))
 		return (0);
-	axis->w = 0;
-	if (magnitude(*axis) == 0.0)
+	if (!is_valid_direction(axis))
 		return (0);
-	*axis = normalize(*axis);
 	if (!is_valid_number(tokens[3]) || !is_valid_number(tokens[4]))
 		return (0);
 	out[0] = ft_atof(tokens[3]);
@@ -51,39 +45,28 @@ static int	build_cylinder(const t_tuple *center, const t_tuple *axis,
 {
 	t_cylinder	*cy;
 	t_matrix	transform;
-	double		radius;
-	double		height;
 	t_color		color;
+	double		radius;
 
 	cy = (t_cylinder *)cylinder_create(0);
 	if (!cy)
 		return (0);
-
 	radius = data[0] / 2.0;
-	height = data[1];
-
-	cy->min = -height / 2.0;
-	cy->max = height / 2.0;
+	cy->min = -data[1] / 2.0;
+	cy->max = data[1] / 2.0;
 	cy->closed = true;
-
 	color.r = data[2];
 	color.g = data[3];
 	color.b = data[4];
-
 	transform = m_multiply(
 		translation(center->x, center->y, center->z),
 		m_multiply(
 			build_rotation_from_y(axis),
 			scaling(radius, 1.0, radius)));
-
 	set_transformation((t_object *)cy, transform);
 	set_object_color((t_object *)cy, color);
-
 	if (!scene_add_object(scene, (t_object *)cy))
-	{
-		free(cy);
-		return (0);
-	}
+		return (free(cy), 0);
 	return (1);
 }
 

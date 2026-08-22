@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 23:04:32 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/12 22:45:51 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 03:01:52 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ static int	validate_plane(char **tokens, t_tuple *point,
 		return (0);
 	if (!parse_tuple(tokens[2], normal))
 		return (0);
-	if (!is_normalized_range(*normal))
+	if (!is_valid_direction(normal))
 		return (0);
-	normal->w = 0;
-	*normal = normalize(*normal);
 	if (!parse_color(tokens[3], color))
 		return (0);
 	return (1);

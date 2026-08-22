@@ -29,13 +29,3 @@ int	main(int argc, char **argv)
 	mlx_loop(prog.mlx);
 	return (0);
 }
-
-// int	main(void)
-// {
-// 	mlx_t *mlx = mlx_init(400, 400, "test", true);
-// 	if (!mlx)
-// 		return (1);
-// 	mlx_loop(mlx);
-// 	mlx_terminate(mlx);
-// 	return (0);
-// }
