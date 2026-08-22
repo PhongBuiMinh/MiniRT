@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tuples.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 17:03:36 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/10 19:14:34 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/22 03:33:00 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,39 +65,4 @@ t_tuple	t_multiply(t_tuple a, t_tuple b)
 	new_tuple.z = a.z * b.z;
 	new_tuple.w = a.w * b.w;
 	return (new_tuple);
-}
-
-t_tuple	t_negate(t_tuple tuple)
-{
-	tuple.x = -tuple.x;
-	tuple.y = -tuple.y;
-	tuple.z = -tuple.z;
-	tuple.w = -tuple.w;
-	return (tuple);
-}
-
-t_tuple	t_scale(t_tuple tuple, double t_scale)
-{
-	tuple.x = tuple.x * t_scale;
-	tuple.y = tuple.y * t_scale;
-	tuple.z = tuple.z * t_scale;
-	tuple.w = tuple.w * t_scale;
-	return (tuple);
-}
-
-t_tuple	t_divide(t_tuple tuple, double divider)
-{
-	tuple.x = tuple.x / divider;
-	tuple.y = tuple.y / divider;
-	tuple.z = tuple.z / divider;
-	tuple.w = tuple.w / divider;
-	return (tuple);
-}
-
-void	t_print(t_tuple tuple)
-{
-	printf("x: %f, ", tuple.x);
-	printf("y: %f, ", tuple.y);
-	printf("z: %f, ", tuple.z);
-	printf("w: %f\n", tuple.w);
 }

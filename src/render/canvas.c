@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:35:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/12 14:12:45 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 03:27:39 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,70 +80,41 @@ t_canvas	*init_canvas(int x, int y)
 }
 
 // WONT BE NEEEDED OTHER THAN FOR TESTING
-void	canvas_to_ppm(t_canvas *canvas)
-{
-	int	y;
-	int	x;
-	int	line;
-
-	printf("P3\n%i %i\n255\n", canvas->width, canvas->height);
-	y = 0;
-	while (y < canvas->height)
-	{
-		x = 0;
-		line = 0;
-		while (x < canvas->width)
-		{
-			if (line + 4 > 70)
-			{
-				printf("\n");
-				line = 0;
-			}
-			line += printf("%i ", scale_color(canvas->pixels[y][x].x));
-			if (line + 4 > 70)
-			{
-				printf("\n");
-				line = 0;
-			}
-			line += printf("%i ", scale_color(canvas->pixels[y][x].y));
-			if (line + 4 > 70)
-			{
-				printf("\n");
-				line = 0;
-			}
-			line += printf("%i ", scale_color(canvas->pixels[y][x].z));
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-}
-
-// t_canvas	canvas_new(int width, int height)
+// void	canvas_to_ppm(t_canvas *canvas)
 // {
-// 	t_canvas	canvas;
-// 	int			y;
+// 	int	y;
+// 	int	x;
+// 	int	line;
 
-// 	canvas.width = width;
-// 	canvas.height = height;
-// 	canvas.pixels = malloc(sizeof(t_tuple *) * height);
-// 	if (!canvas.pixels)
-// 		return (canvas.width = 0, canvas.height = 0, canvas);
-// 	y = -1;
-// 	while (++y < height)
+// 	printf("P3\n%i %i\n255\n", canvas->width, canvas->height);
+// 	y = 0;
+// 	while (y < canvas->height)
 // 	{
-// 		canvas.pixels[y] = malloc(sizeof(t_tuple) * width);
-// 		if (!canvas.pixels[y])
+// 		x = 0;
+// 		line = 0;
+// 		while (x < canvas->width)
 // 		{
-// 			while (--y >= 0)
-// 				free(canvas.pixels[y]);
-// 			free(canvas.pixels);
-// 			canvas.pixels = NULL;
-// 			canvas.width = 0;
-// 			canvas.height = 0;
-// 			return (canvas);
+// 			if (line + 4 > 70)
+// 			{
+// 				printf("\n");
+// 				line = 0;
+// 			}
+// 			line += printf("%i ", scale_color(canvas->pixels[y][x].x));
+// 			if (line + 4 > 70)
+// 			{
+// 				printf("\n");
+// 				line = 0;
+// 			}
+// 			line += printf("%i ", scale_color(canvas->pixels[y][x].y));
+// 			if (line + 4 > 70)
+// 			{
+// 				printf("\n");
+// 				line = 0;
+// 			}
+// 			line += printf("%i ", scale_color(canvas->pixels[y][x].z));
+// 			x++;
 // 		}
-// 		ft_bzero(canvas.pixels[y], sizeof(t_tuple) * width);
+// 		printf("\n");
+// 		y++;
 // 	}
-// 	return (canvas);
 // }

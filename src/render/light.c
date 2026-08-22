@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:03:25 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/20 22:20:01 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/22 03:26:59 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,13 @@ static void	init_phong_norm(t_phong phong, t_phong_norm *norm)
 	norm->effective_color = t_multiply(phong.object->material.color,
 			phong.light.intensity);
 	norm->lightv = normalize(t_substract(phong.light.pos, phong.point));
-	// norm->ambient = t_scale(norm->effective_color,
-	// 		phong.object->material.ambient);
-	norm->ambient = t_scale(t_multiply(phong.object->material.color, phong.ambient.color), phong.ambient.ratio);
+	norm->ambient = t_scale(
+			t_multiply(phong.object->material.color, phong.ambient.color),
+			phong.ambient.ratio);
 	norm->light_dot_normal = dot(norm->lightv, phong.normalv);
 }
+// norm->ambient = t_scale(norm->effective_color, _line65
+// 		phong.object->material.ambient); _line66
 
 t_tuple	phong_lightning(t_phong phong)
 {

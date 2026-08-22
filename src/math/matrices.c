@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:32 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/02 20:22:28 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/22 03:15:15 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ t_matrix	m_init(int rows, int cols)
 	}
 	return (new_matrix);
 }
-
-// Still to be worked on
 
 t_matrix	m_multiply(t_matrix a, t_matrix b)
 {
@@ -85,7 +83,6 @@ int	m_equal(t_matrix matrix_a, t_matrix matrix_b)
 	}
 	return (1);
 }
-
 
 t_matrix	submatrix(t_matrix matrix, int row, int col)
 {
@@ -145,7 +142,6 @@ t_tuple	m_apply(t_matrix matrix, t_tuple tuple)
 	return (product_tuple);
 }
 
-
 // FOR TESTING
 
 //void	m_print(t_matrix matrix)
@@ -172,7 +168,6 @@ t_tuple	m_apply(t_matrix matrix, t_tuple tuple)
 //		x++;
 //	}
 //}
-
 
 /*
 static void	copy_submatrix_row(t_subcopy data, int src_row, int dst_row)

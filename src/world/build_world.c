@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_world.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 12:46:50 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/20 22:17:18 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/22 03:22:18 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ int	build_world_from_scene(const t_scene *scene,
 		return (0);
 	world->light.pos = scene->pos;
 	world->light.intensity = scene->intensity;
-	world->ambient.color = color(scene->ambient_color.r, scene->ambient_color.g, scene->ambient_color.b);
+	world->ambient.color = color(
+			scene->ambient_color.r,
+			scene->ambient_color.g,
+			scene->ambient_color.b);
 	world->ambient.ratio = scene->ambient_ratio;
 	world->objects = scene->objects;
 	world->object_cnt = scene->object_cnt;

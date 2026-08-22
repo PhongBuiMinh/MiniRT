@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+         #
+#    By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/08/12 19:52:30 by bpetrovi         ###   ########.fr        #
+#    Updated: 2026/08/22 03:59:59 by fbui-min         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC     = main.c cleanup.c \
 		math/helper_math.c \
 		math/matrices.c \
 		math/tuples.c \
+		math/tuple_operations.c \
 		parser/parse_elements.c \
 		parser/parse_helpers.c \
 		parser/parse_helpers2.c \
@@ -64,7 +65,10 @@ SRC     = main.c cleanup.c \
 		world/build_world.c \
 		world/objects.c \
 		world/transformations.c \
-		world/world.c
+		world/world.c \
+		world/rotations.c \
+		world/matrix_operations.c \
+		world/object_create.c
 
 OBJ_DIR = obj
 OBJ     = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

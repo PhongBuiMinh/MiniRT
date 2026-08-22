@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:55:37 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/06/09 22:29:51 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/22 03:25:05 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,3 @@ t_ray	r_transform(t_ray ray, t_matrix transformation)
 			ray.direction);
 	return (transformed_ray);
 }
-

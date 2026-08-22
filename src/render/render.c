@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/20 22:19:52 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/22 04:08:44 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,6 @@ t_canvas	*render_scene(t_camera camera, t_world world)
 		y++;
 	}
 	return (canvas);
-}
-
-//check and fix error handling
-t_tuple	color_at(t_world world, t_ray ray)
-{
-	t_intersections	xs;
-	t_intersection	h;
-	t_phong			phong;
-
-	xs = world_intersect(world, ray);
-	h = hit(xs);
-	free(xs.intersections);
-	if (hit_exists(h))
-		phong = phong_computations(h, ray);
-	else
-		return (color(0, 0, 0));
-	phong.in_shadow = is_shadowed(world, phong.over_point);
-	phong.light = world.light;
-	phong.ambient = world.ambient;
-	return (phong_lightning(phong));
 }
 
 //obj_to_world = object space to world space transformation

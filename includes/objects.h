@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:07:14 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/10 18:46:02 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/22 03:58:33 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_cylinder
 	bool		closed;
 }	t_cylinder;
 
+void		object_init(t_object *object);
 t_object	*sphere_create(int id);
 t_object	*plane_create(int id);
 t_object	*cylinder_create(int id);

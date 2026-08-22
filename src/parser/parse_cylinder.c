@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 07:35:42 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/22 03:02:16 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 03:20:19 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ static int	build_cylinder(const t_tuple *center, const t_tuple *axis,
 	color.g = data[3];
 	color.b = data[4];
 	transform = m_multiply(
-		translation(center->x, center->y, center->z),
-		m_multiply(
-			build_rotation_from_y(axis),
-			scaling(radius, 1.0, radius)));
+			translation(center->x, center->y, center->z),
+			m_multiply(
+				build_rotation_from_y(axis),
+				scaling(radius, 1.0, radius)));
 	set_transformation((t_object *)cy, transform);
 	set_object_color((t_object *)cy, color);
 	if (!scene_add_object(scene, (t_object *)cy))
@@ -70,7 +70,7 @@ static int	build_cylinder(const t_tuple *center, const t_tuple *axis,
 	return (1);
 }
 
-// cy <center_x,center_y,center_z> <axis_x,axis_y,axis_z> <diameter> <height> <r,g,b>
+// cy <cx,cy,cz> <ax,ay,az> <diameter> <height> <r,g,b>
 int	parse_cylinder(char **tokens, t_scene *scene)
 {
 	t_tuple	center;
