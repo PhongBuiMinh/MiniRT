@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_world.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 12:46:50 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/22 04:52:50 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 18:20:24 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static int	build_camera(const t_scene *s, t_camera *cam)
 		up = vector(0, 0, 1);
 	view = view_transform(from, to, up);
 	cam->transform = view;
+	cam->reverse_transform = inversion(view);
+	cam->origin = m_apply(cam->reverse_transform, point(0, 0, 0));
 	return (1);
 }
 

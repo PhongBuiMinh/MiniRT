@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:17:46 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/22 15:54:06 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 18:02:48 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 typedef struct s_camera
 {
 	t_matrix	transform;
+	t_matrix	reverse_transform;
+	t_tuple		origin;
 	int			h_size;
 	int			v_size;
 	double		pixel_size;

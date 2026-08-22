@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 20:06:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/10 20:18:21 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/22 17:29:15 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	intersect(t_object *object, t_ray ray, t_intersections *xs)
 
 	local_ray = r_transform(ray, inversion(object->transformation));
 	object->intersect(object, local_ray, xs);
-	xs_sort(xs);
 }
 
 void	intersect_plane(t_object *object, t_ray ray, t_intersections *xs)

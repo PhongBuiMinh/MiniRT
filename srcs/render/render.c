@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/22 04:08:44 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 18:03:49 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,19 @@ t_canvas	*render_scene(t_camera camera, t_world world)
 	return (canvas);
 }
 
-//obj_to_world = object space to world space transformation
+//camera.reverse_transform = object space to world space transformation
 t_ray	ray_for_pixel(t_camera camera, int x, int y)
 {
-	t_matrix	obj_to_world;
-	t_tuple		origin;
 	t_tuple		direction;
 	double		world_x;
 	double		world_y;
 
 	world_x = camera.half_width - (x + 0.5) * camera.pixel_size;
 	world_y = camera.half_height - (y + 0.5) * camera.pixel_size;
-	obj_to_world = inversion(camera.transform);
-	origin = m_apply(obj_to_world, point(0, 0, 0));
 	direction = normalize(t_substract(
-				m_apply(obj_to_world, point(world_x, world_y, -1)),
-				origin));
-	return (r_init(origin, direction));
+				m_apply(camera.reverse_transform, point(world_x, world_y, -1)),
+				camera.origin));
+	return (r_init(camera.origin, direction));
 }
 
 void	find_camera_values(t_camera *camera)
