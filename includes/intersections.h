@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 15:13:15 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/10 20:15:46 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/22 15:52:42 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_intersections
 	int				count;
 }	t_intersections;
 
-
 t_intersections	xs_init(void);
 t_intersection	intersection(double t, t_object *object);
 t_intersection	hit(t_intersections xs);
@@ -50,6 +49,5 @@ bool			xs_push(t_intersections *xs, t_intersection i);
 
 // 				NOT USED FOR NOW
 //bool			xs_append(t_intersections *dst, t_intersections src);
-
 
 #endif

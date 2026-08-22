@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrices.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/09 17:46:43 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/03 00:56:28 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/22 15:51:54 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef struct s_matrix
 	double	data[4][4];
 }	t_matrix;
 
-
 typedef struct s_subcopy
 {
 	t_matrix	matrix;
@@ -35,6 +34,5 @@ t_matrix	m_multiply(t_matrix a, t_matrix b);
 t_tuple		m_apply(t_matrix matrix, t_tuple tuple);
 int			m_equal(t_matrix matrix_a, t_matrix matrix_b);
 //void		m_print(t_matrix matrix);
-
 
 #endif

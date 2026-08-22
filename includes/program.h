@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   program.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 17:19:38 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/12 23:26:13 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 15:38:40 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void		init_mlx(t_program *prog);
 void		exit_minirt(void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
 void		fatal(char *msg, t_program *prog);
+void		fatal_line(char *line, int line_no, t_program *prog);
 void		cleanup_program(t_program *prog);
 void		render_minirt(t_program *prog);
 

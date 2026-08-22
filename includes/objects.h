@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:07:14 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/22 03:58:33 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 15:56:02 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef struct s_material
 typedef struct s_object
 {
 	t_tuple			(*normal_at)(t_tuple, struct s_object * self);
-	void			(*intersect)(struct s_object *self, t_ray, t_intersections *xs);
+	void			(*intersect)(struct s_object *self,
+			t_ray, t_intersections *xs);
 	t_matrix		transformation;
 	t_material		material;
 	int				id;
@@ -59,6 +60,5 @@ t_object	*cylinder_create(int id);
 t_material	material(void);
 void		free_objects(t_object **ptr, int nbr);
 void		set_transformation(t_object *object, t_matrix transformation);
-
 
 #endif

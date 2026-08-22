@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:17:46 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/09 16:35:15 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/22 15:54:06 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_camera
 	double		half_height;
 	double		fov;
 }	t_camera;
-
 
 t_camera	camera_init(int h_size, int v_size, double fov);
 t_ray		ray_for_pixel(t_camera camera, int x, int y);

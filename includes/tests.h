@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tests.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:17:56 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/09 19:58:05 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/22 15:54:22 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,5 @@ int	test_no_shadow_nothing_collinear(void);
 int	test_shadow_object_between_point_and_light(void);
 int	test_no_shadow_object_behind_light(void);
 int	test_no_shadow_object_behind_point(void);
-
 
 #endif
