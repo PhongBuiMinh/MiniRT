@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 12:46:50 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/22 03:22:18 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/22 04:52:50 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int	build_camera(const t_scene *s, t_camera *cam)
 	from = point(s->cam_pos.x, s->cam_pos.y, s->cam_pos.z);
 	to = t_add(from, vector(s->cam_dir.x, s->cam_dir.y, s->cam_dir.z));
 	up = vector(0, 1, 0);
+	if (fabs(s->cam_dir.y) > 0.999)
+		up = vector(0, 0, 1);
 	view = view_transform(from, to, up);
 	cam->transform = view;
 	return (1);
