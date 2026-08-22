@@ -1,0 +1,7 @@
+# Tests a sphere shadow cast onto a horizontal plane.
+# The camera sees the sphere, plane, and shadow.
+A 0.05 255,255,255
+C 10,7,-18 -0.42,-0.22,0.88 60
+L -6,10,-4 1.0 255,255,255
+pl 0,-3,0 0,1,0 135,135,135
+sp 0,0,3 5 220,55,45

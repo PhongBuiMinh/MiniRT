@@ -1,0 +1,5 @@
+# Tests sideways illumination of a sphere at the origin.
+A 0.04 255,255,255
+C 0,0,-14 0,0,1 55
+L -9,3,-5 1.0 255,255,255
+sp 0,0,0 6 210,55,50

@@ -1,0 +1,6 @@
+# Tests that lighting is calculated
+# at the translated sphere's actual world-space intersection points.
+A 0.04 255,255,255
+C 0,0,-16 0,0,1 55
+L -8,4,-5 1.0 255,255,255
+sp 4,0,3 6 60,130,230

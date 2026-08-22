@@ -6,7 +6,7 @@
 #    By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/08/22 03:59:59 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/08/22 05:51:00 by fbui-min         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ GREEN   = \033[0;32m
 RED     = \033[0;31m
 DEFAULT = \033[0m
 
-NAME    = minirt
+NAME    = miniRT
 CC      = cc
 CFLAGS  = -Wall -Wextra -Werror -g
 
