@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 21:23:47 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/23 16:03:49 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/23 18:31:28 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_canvas	*render_scene(t_camera camera, t_world world)
 	else
 		render_singlethread(canvas, &camera, &world, &error);
 	if (error)
-		return (free(canvas), NULL);
+		return (free_canvas(canvas), NULL);
 	return (canvas);
 }
 

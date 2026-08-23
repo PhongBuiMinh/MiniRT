@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 21:35:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/22 03:27:39 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 18:36:33 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ t_tuple	**init_pixels(int x, int y)
 	int		i;
 	int		d;
 
-	pixels = malloc((y + 1) * sizeof(t_tuple *));
+	pixels = ft_calloc((y + 1), sizeof(t_tuple *));
 	if (!pixels)
 		return (NULL);
-	pixels[y] = NULL;
 	i = 0;
 	while (i < y)
 	{
