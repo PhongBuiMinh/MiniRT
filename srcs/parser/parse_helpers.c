@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/22 15:45:58 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 18:46:10 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ t_matrix	build_rotation_from_y(const t_tuple *new_y)
 	new_x = cross(*new_y, new_z);
 	rot = init_id_matrix(4, 4);
 	rot.data[0][0] = new_x.x;
-	rot.data[0][1] = new_x.y;
-	rot.data[0][2] = new_x.z;
-	rot.data[1][0] = new_y->x;
+	rot.data[1][0] = new_x.y;
+	rot.data[2][0] = new_x.z;
+	rot.data[0][1] = new_y->x;
 	rot.data[1][1] = new_y->y;
-	rot.data[1][2] = new_y->z;
-	rot.data[2][0] = new_z.x;
-	rot.data[2][1] = new_z.y;
+	rot.data[2][1] = new_y->z;
+	rot.data[0][2] = new_z.x;
+	rot.data[1][2] = new_z.y;
 	rot.data[2][2] = new_z.z;
 	return (rot);
 }
