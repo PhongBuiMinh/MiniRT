@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 16:09:17 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/23 18:46:03 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/23 18:50:18 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define EPSILON 0.0001
 # define VECTOR 0
 # define POINT 1
-# define MULTITHREADING false
+# define MULTITHREADING true
 
 # define WIDTH 400
 # define HEIGHT 400

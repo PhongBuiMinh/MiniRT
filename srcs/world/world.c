@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:58:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/23 17:33:07 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 19:17:59 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	is_shadowed(t_world world, t_tuple point, bool *error)
 	distance = magnitude(v_light);
 	xs = world_intersect(world, r_init(point, normalize(v_light)));
 	if (xs.err)
-		return (*error = true, false);
+		return (*error = true, free(xs.intersections), false);
 	h = hit(xs);
 	free(xs.intersections);
 	if (hit_exists(h) && h.t < distance)

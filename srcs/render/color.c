@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 20:00:07 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/23 15:54:44 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/23 19:17:06 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_tuple	color_at(t_world *world, t_ray ray, bool *error)
 
 	xs = world_intersect(*world, ray);
 	if (xs.err)
-		return (*error = true, color(0, 0, 0));
+		return (*error = true, free(xs.intersections), color(0, 0, 0));
 	h = hit(xs);
 	free(xs.intersections);
 	if (hit_exists(h))

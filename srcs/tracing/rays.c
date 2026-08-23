@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/30 18:55:37 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/22 03:25:05 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 18:48:37 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_ray	r_init(t_tuple origin, t_tuple direction)
 	return (new_ray);
 }
 
-t_tuple	r_pos(t_ray ray, float time)
+t_tuple	r_pos(t_ray ray, double time)
 {
 	return (t_add(ray.origin, t_scale(ray.direction, time)));
 }

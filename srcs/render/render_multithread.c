@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/23 15:30:01 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/23 16:03:21 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/23 19:13:35 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,13 @@ void	*render_rows(void *arg)
 void	init_jobs(t_render_job *jobs, t_canvas *canvas,
 		t_camera *camera, t_world *world)
 {
-	int	threads_count;
 	int	rows_per_thread;
 	int	i;
 
-	threads_count = sysconf(_SC_NPROCESSORS_ONLN);
-	rows_per_thread = (camera->v_size + threads_count - 1)
-		/ threads_count;
+	rows_per_thread = (camera->v_size + world->thread_count - 1)
+		/ world->thread_count;
 	i = 0;
-	while (i < threads_count)
+	while (i < world->thread_count)
 	{
 		jobs[i].canvas = canvas;
 		jobs[i].camera = camera;
@@ -99,16 +97,19 @@ void	render_multithread(t_canvas *canvas, t_camera *camera,
 {
 	t_render_job	*jobs;
 	pthread_t		*threads;
-	int				threads_count;
 
-	threads_count = sysconf(_SC_NPROCESSORS_ONLN);
-	threads = malloc(sizeof(pthread_t) * threads_count);
-	jobs = malloc(sizeof(t_render_job) * threads_count);
+	world->thread_count = sysconf(_SC_NPROCESSORS_ONLN);
+	if (world->thread_count <= 0)
+		return (*error = true, (void)0);
+	threads = malloc(sizeof(pthread_t) * world->thread_count);
+	jobs = malloc(sizeof(t_render_job) * world->thread_count);
 	if (!threads || !jobs)
-		return (free(threads), free(jobs));
+		return (free(threads), free(jobs), *error = true, (void)0);
 	init_jobs(jobs, canvas, camera, world);
-	start_threads(threads, jobs, threads_count, error);
+	start_threads(threads, jobs, world->thread_count, error);
 	if (*error)
-		return ;
-	join_threads(threads, jobs, threads_count, error);
+		return (free(jobs), free(threads), *error = true, (void)0);
+	join_threads(threads, jobs, world->thread_count, error);
+	free(jobs);
+	free(threads);
 }
