@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 03:52:39 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/23 19:19:36 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/23 19:28:20 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ t_matrix	inversion(t_matrix matrix)
 
 	x = 0;
 	det = determinant(matrix);
+	if (det == 0)
+		return (matrix);
 	inverted_matrix.rows = matrix.rows;
 	inverted_matrix.cols = matrix.cols;
 	while (x < matrix.rows)

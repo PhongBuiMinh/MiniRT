@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/22 03:32:06 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/23 16:02:34 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/23 19:27:39 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_tuple	t_scale(t_tuple tuple, double t_scale)
 
 t_tuple	t_divide(t_tuple tuple, double divider)
 {
+	if (divider == 0)
+		return (tuple);
 	tuple.x = tuple.x / divider;
 	tuple.y = tuple.y / divider;
 	tuple.z = tuple.z / divider;
