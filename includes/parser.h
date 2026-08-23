@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/05 13:43:13 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/22 15:49:23 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 05:52:32 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "scene.h"
 
-int			parse_scene_file(const char *path, t_scene *scene);
+int			parse_scene_file(const char *path, t_program *prog);
 
 int			parse_color(char *str, t_color *color);
 int			parse_tuple(char *str, t_tuple *tuple);

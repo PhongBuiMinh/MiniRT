@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/22 15:39:10 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 05:57:19 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,14 @@ static int	process_line(char *line, t_scene *scene)
 	return (result);
 }
 
-int	parse_lines(int fd, t_scene *scene)
+static int	parse_lines(int fd, t_program *prog)
 {
+	t_scene *scene;
 	char	*line;
 	int		line_no;
 	int		success;
 
+	scene = &prog->scene;
 	success = 1;
 	line_no = 0;
 	line = ft_get_next_line(fd);
@@ -79,17 +81,19 @@ int	parse_lines(int fd, t_scene *scene)
 		line_no++;
 		success = process_line(line, scene);
 		if (!success)
-			fatal_line(line, line_no, NULL);
+			fatal_line(line, line_no, prog);
 		free(line);
 		line = ft_get_next_line(fd);
 	}
 	return (success);
 }
 
-int	parse_scene_file(const char *path, t_scene *scene)
+int	parse_scene_file(const char *path, t_program *prog)
 {
-	int	fd;
+	int		fd;
+	t_scene	*scene;
 
+	scene = &prog->scene;
 	ft_bzero(scene, sizeof(t_scene));
 	if (!has_rt_extension(path))
 		fatal("Scene file must have a .rt extension", NULL);
@@ -98,7 +102,7 @@ int	parse_scene_file(const char *path, t_scene *scene)
 		fatal("Cannot open scene file", NULL);
 	if (!setup_objects(path, scene))
 		return (close(fd), 0);
-	if (!parse_lines(fd, scene))
+	if (!parse_lines(fd, prog))
 		return (close(fd), 0);
 	close(fd);
 	return (validate_scene(scene));
