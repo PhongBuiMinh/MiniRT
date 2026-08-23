@@ -29,3 +29,9 @@ int	main(int argc, char **argv)
 	mlx_loop(prog.mlx);
 	return (0);
 }
+
+// valgrind
+//     --leak-check=full
+//     --show-leak-kinds=definite,indirect,possible
+//     --errors-for-leak-kinds=definite,indirect,possible
+//     ./miniRT scenes/01_sphere_origin.rt

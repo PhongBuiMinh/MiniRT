@@ -6,7 +6,7 @@
 #    By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/08/22 18:45:28 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/08/23 15:39:23 by fbui-min         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,3 +113,8 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+# git clone https://github.com/codam-coding-college/MLX42.git
+# cd MLX42
+# cmake -B build
+# cmake --build build -j4
