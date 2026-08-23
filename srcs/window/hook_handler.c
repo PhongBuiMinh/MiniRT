@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 19:10:49 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/10 20:34:40 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 14:57:03 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,8 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	prog = (t_program *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(prog->mlx);
+	{
+		cleanup_program(prog);
+		exit(EXIT_SUCCESS);
+	}
 }

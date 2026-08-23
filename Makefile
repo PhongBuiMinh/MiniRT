@@ -6,7 +6,7 @@
 #    By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/08/23 16:00:08 by bpetrovi         ###   ########.fr        #
+#    Updated: 2026/08/23 16:11:40 by bpetrovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,3 +115,8 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+# git clone https://github.com/codam-coding-college/MLX42.git
+# cd MLX42
+# cmake -B build
+# cmake --build build -j4

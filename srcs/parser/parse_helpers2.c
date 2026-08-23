@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 20:53:24 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/22 09:08:06 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 05:25:10 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ int	setup_objects(const char *path, t_scene *scene)
 	scene->objects = malloc(scene->object_cnt * sizeof(*scene->objects));
 	if (!scene->objects)
 		return (0);
+	ft_bzero(scene->objects, scene->object_cnt * sizeof(*scene->objects));
 	return (1);
 }

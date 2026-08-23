@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_next_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 21:32:43 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/10 21:33:21 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 14:33:54 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,22 @@
 static char	*gnl_append(char *line, char c, int *len)
 {
 	char	*tmp;
+	int		i;
 
-	tmp = realloc(line, *len + 2);
+	tmp = malloc(*len + 2);
 	if (!tmp)
+		return (free(line), NULL);
+	i = 0;
+	while (i < *len)
 	{
-		free(line);
-		return (NULL);
+		tmp[i] = line[i];
+		i++;
 	}
-	line = tmp;
-	line[(*len)++] = c;
-	return (line);
+	tmp[*len] = c;
+	tmp[*len + 1] = '\0';
+	free(line);
+	(*len)++;
+	return (tmp);
 }
 
 char	*ft_get_next_line(int fd)
@@ -36,7 +42,7 @@ char	*ft_get_next_line(int fd)
 
 	if (fd < 0)
 		return (NULL);
-	line = malloc(2);
+	line = malloc(1);
 	if (!line)
 		return (NULL);
 	len = 0;

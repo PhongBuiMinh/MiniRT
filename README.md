@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by fbui-min.*
+*This project has been created as part of the 42 curriculum by fbui-min, bpetrovi.*
 
 # miniRT
 
@@ -31,7 +31,7 @@ The implementation uses homogeneous coordinates: points use `w = 1` and vectors 
 - MLX42 and its required dependencies.
 - A Linux environment supported by the project setup.
 
-## Installation
+## Instructions
 
 Clone the repository and enter the project directory:
 
@@ -255,30 +255,6 @@ AI tools were used as a learning and review aid during development. They helped 
 
 All generated suggestions were reviewed, adapted to this codebase, compiled, and tested by the project authors. AI was not treated as a replacement for understanding the implementation; the author remains responsible for the submitted code.
 
-## Author
+## Authors
 
-Created as part of the 42 curriculum by `fbui-min`.
-
-
-grep -Rnw . -e "world_add_object"
-grep -Rnw --include="*.c" --include="*.h" . -e "world_add_object"
-
-git clone https://github.com/codam-coding-college/MLX42.git
-cd MLX42
-cmake -B build
-cmake --build build -j4
-
-(https://github.com/42Paris/minilibx-linux/actions/workflows/ci.yml/badge.svg)](https://github.com/42Paris/minilibx-linux/actions/workflows/ci.yml)
-
-https://github.com/codam-coding-college/MLX42
-
-A 3D object has three local directions:
-X → left/right
-Y → up/down
-Z → forward/back
-A rotation tells you where all three local axes end up.
-
-That's called an orthonormal basis:
-orthogonal = perpendicular
-normal = length 1
-Magnitude checks that the direction isn't zero; normalization removes its length so it can be used as a clean unit axis.
+Created as part of the 42 curriculum by `fbui-min` and `bpetrovi`.
