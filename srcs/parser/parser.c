@@ -6,7 +6,7 @@
 /*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 00:00:00 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/23 05:57:19 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 06:21:55 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	process_line(char *line, t_scene *scene)
 
 static int	parse_lines(int fd, t_program *prog)
 {
-	t_scene *scene;
+	t_scene	*scene;
 	char	*line;
 	int		line_no;
 	int		success;
