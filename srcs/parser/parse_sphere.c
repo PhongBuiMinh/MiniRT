@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_sphere.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 22:51:09 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/11 15:35:35 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 17:36:53 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,3 @@ int	parse_sphere(char **tokens, t_scene *scene)
 		return (0);
 	return (build_sphere(&center, radius, &color, scene));
 }
-
-// static int	build_sphere(const t_tuple *center, double radius,
-// 				const t_color *color, t_scene *scene)
-// {
-// 	t_object	*obj;
-// 	t_matrix	scale;
-// 	t_matrix	translate;
-// 	t_matrix	transform;
-// 	static int	next_id = 0;
-
-// 	obj = sphere_create(next_id++);
-// 	obj = sphere_create(0);
-// 	if (!obj)
-// 		return (0);
-
-// 	scale = scaling(radius, radius, radius);
-// 	translate = translation(center->x, center->y, center->z);
-// 	transform = m_multiply(translate, scale);
-// 	set_transformation(obj, transform);
-// 	set_object_color(obj, *color);
-// 	if (!scene_add_object(scene, obj))
-// 		return (free(obj), 0);
-// 	return (1);
-// }

@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:27:18 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/22 03:53:24 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 17:33:14 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// Still to be worked on
 t_matrix	init_id_matrix(int rows, int cols)
 {
 	t_matrix	indentity_matrix;

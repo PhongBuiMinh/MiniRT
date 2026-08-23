@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cylinder.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 07:35:42 by fbui-min          #+#    #+#             */
-/*   Updated: 2026/08/22 03:20:19 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 17:37:28 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// out order: diameter height rgb
+// out array order: diameter height rgb
 static int	validate_cylinder(char **tokens, t_tuple *center,
 				t_tuple *axis, double out[5])
 {

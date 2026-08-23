@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   normal_at.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 20:03:11 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/07/10 20:18:44 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/23 17:35:31 by fbui-min         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 // WORLD_P = POINT IN WORLD SPACE, AND LOCAL_P = POINT IN OBJECT SPACE
-
 t_tuple	normal_at(t_object *object, t_tuple world_p)
 {
 	t_tuple	local_p;
@@ -29,7 +28,6 @@ t_tuple	normal_at(t_object *object, t_tuple world_p)
 }
 
 // is_point = intersection point
-
 t_tuple	normal_at_sphere(t_tuple is_point, t_object *object)
 {
 	(void)object;
