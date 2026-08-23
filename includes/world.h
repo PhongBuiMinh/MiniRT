@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bpetrovi <bpetrovi@student.42heilbronn>    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 20:45:00 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/20 22:15:47 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/23 15:12:41 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ int				build_world_from_scene(const t_scene *scene, t_world *world,
 					t_camera *camera);
 t_world			world_default(void);
 t_intersections	world_intersect(t_world world, t_ray ray);
-bool			is_shadowed(t_world world, t_tuple point);
+bool			is_shadowed(t_world world, t_tuple point, bool *error);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 20:00:07 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/22 17:37:56 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/23 15:54:44 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,23 @@ int	color_to_int(t_tuple color)
 	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
-//check and fix error handling
-t_tuple	color_at(t_world world, t_ray ray)
+t_tuple	color_at(t_world *world, t_ray ray, bool *error)
 {
 	t_intersections	xs;
 	t_intersection	h;
 	t_phong			phong;
 
-	xs = world_intersect(world, ray);
+	xs = world_intersect(*world, ray);
+	if (xs.err)
+		return (*error = true, color(0, 0, 0));
 	h = hit(xs);
 	free(xs.intersections);
 	if (hit_exists(h))
 		phong = phong_computations(h, ray);
 	else
 		return (color(0, 0, 0));
-	phong.in_shadow = is_shadowed(world, phong.over_point);
-	phong.light = world.light;
-	phong.ambient = world.ambient;
+	phong.in_shadow = is_shadowed(*world, phong.over_point, error);
+	phong.light = world->light;
+	phong.ambient = world->ambient;
 	return (phong_lightning(phong));
 }

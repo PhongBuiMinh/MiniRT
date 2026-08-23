@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 22:17:46 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/22 18:02:48 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/23 15:59:41 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "objects.h"
 # include "light.h"
 # include "world.h"
+# include <pthread.h>
+# include <stdatomic.h>
 
 typedef struct s_camera
 {
@@ -30,9 +32,23 @@ typedef struct s_camera
 	double		fov;
 }	t_camera;
 
+typedef struct s_render_job
+{
+	t_camera	*camera;
+	t_world		*world;
+	t_canvas	*canvas;
+	bool		error;
+	int			start_y;
+	int			end_y;
+}	t_render_job;
+
 t_camera	camera_init(int h_size, int v_size, double fov);
-t_ray		ray_for_pixel(t_camera camera, int x, int y);
-t_tuple		color_at(t_world world, t_ray ray);
+t_ray		ray_for_pixel(t_camera *camera, int x, int y);
+t_tuple		color_at(t_world *world, t_ray ray, bool *error);
 t_canvas	*render_scene(t_camera camera, t_world world);
+t_camera	camera_init(int h_size, int v_size, double fov);
+void		find_camera_values(t_camera *camera);
+void		render_multithread(t_canvas *canvas, t_camera *camera,
+				t_world *world, bool *error);
 
 #endif

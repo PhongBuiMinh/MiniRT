@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:58:44 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/22 17:29:32 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/23 15:11:55 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 // check
 
-bool	is_shadowed(t_world world, t_tuple point)
+bool	is_shadowed(t_world world, t_tuple point, bool *error)
 {
 	t_intersections	xs;
 	t_intersection	h;
@@ -44,7 +44,7 @@ bool	is_shadowed(t_world world, t_tuple point)
 	distance = magnitude(v_light);
 	xs = world_intersect(world, r_init(point, normalize(v_light)));
 	if (xs.err)
-		return (false);
+		return (*error = true, false);
 	h = hit(xs);
 	free(xs.intersections);
 	if (hit_exists(h) && h.t < distance)
@@ -59,6 +59,8 @@ t_intersections	world_intersect(t_world world, t_ray ray)
 
 	i = 0;
 	xs = xs_init();
+	if (xs.err)
+		return (xs);
 	while (i < world.object_cnt)
 	{
 		intersect(world.objects[i], ray, &xs);

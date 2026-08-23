@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fbui-min <fbui-min@student.42.fr>          +#+  +:+       +#+         #
+#    By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/01 16:14:51 by fbui-min          #+#    #+#              #
-#    Updated: 2026/08/22 18:45:28 by fbui-min         ###   ########.fr        #
+#    Updated: 2026/08/23 16:00:08 by bpetrovi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,8 @@ SRC     = main.c \
 		render/color.c \
 		render/light.c \
 		render/render.c \
+		render/render_multithread.c \
+		render/camera.c \
 		tracing/hit.c \
 		tracing/intersect_helper.c \
 		tracing/intersect_manipulation.c \

@@ -6,7 +6,7 @@
 /*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/10 20:06:42 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/22 17:29:15 by bpetrovi         ###   ########.fr       */
+/*   Updated: 2026/08/23 15:09:27 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	intersect_sphere(t_object *object, t_ray ray, t_intersections *xs)
 	b = 2 * dot(ray.direction, sphere_to_ray);
 	c = dot(sphere_to_ray, sphere_to_ray) - 1;
 	d = b * b - 4 * a * c;
-	if (d < 0)
+	if (d < -EPSILON)
 		return ;
 	if (!xs_push(xs, intersection((-b - sqrt(d)) / (2 * a), object)))
 		return ;
