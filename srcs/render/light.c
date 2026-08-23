@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbui-min <fbui-min@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: bpetrovi <bpetrovi@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 21:03:25 by bpetrovi          #+#    #+#             */
-/*   Updated: 2026/08/22 03:26:59 by fbui-min         ###   ########.fr       */
+/*   Updated: 2026/08/23 16:55:52 by bpetrovi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ static void	calc_diffuse_specular(t_phong phong, t_phong_norm *norm)
 				phong.object->material.specular * norm->factor);
 	}
 }
+// Our ambient implementation:
+// norm->ambient = t_scale(norm->effective_color, _line65
+// 		phong.object->material.ambient); _line66
+// Including light color into the mix:
+// norm->ambient = t_scale(
+// t_multiply(norm->effective_color, phong.ambient.color),
+// phong.ambient.ratio);
 
 static void	init_phong_norm(t_phong phong, t_phong_norm *norm)
 {
@@ -63,12 +70,10 @@ static void	init_phong_norm(t_phong phong, t_phong_norm *norm)
 			phong.light.intensity);
 	norm->lightv = normalize(t_substract(phong.light.pos, phong.point));
 	norm->ambient = t_scale(
-			t_multiply(phong.object->material.color, phong.ambient.color),
+			t_multiply(norm->effective_color, phong.ambient.color),
 			phong.ambient.ratio);
 	norm->light_dot_normal = dot(norm->lightv, phong.normalv);
 }
-// norm->ambient = t_scale(norm->effective_color, _line65
-// 		phong.object->material.ambient); _line66
 
 t_tuple	phong_lightning(t_phong phong)
 {
